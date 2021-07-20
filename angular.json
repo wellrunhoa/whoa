@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "projects": {
+    "hop-ui": {
+      "projectType": "application",
+      "root": "apps/hop-ui",
+      "sourceRoot": "apps/hop-ui/src",
+      "prefix": "whoa",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/hop-ui",
+            "index": "apps/hop-ui/src/index.html",
+            "main": "apps/hop-ui/src/main.ts",
+            "polyfills": "apps/hop-ui/src/polyfills.ts",
+            "tsConfig": "apps/hop-ui/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/hop-ui/src/favicon.ico", "apps/hop-ui/src/assets", {"glob":"**/*","input":"./node_modules/@ant-design/icons-angular/src/inline-svg/","output":"/assets/"}],
+            "styles": ["apps/hop-ui/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/hop-ui/src/environments/environment.ts",
+                  "with": "apps/hop-ui/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "hop-ui:build:production"
+            },
+            "development": {
+              "browserTarget": "hop-ui:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "hop-ui:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/hop-ui/src/**/*.ts",
+              "apps/hop-ui/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/hop-ui"],
+          "options": {
+            "jestConfig": "apps/hop-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "hop-ui-e2e": {
+      "root": "apps/hop-ui-e2e",
+      "sourceRoot": "apps/hop-ui-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/hop-ui-e2e/cypress.json",
+            "tsConfig": "apps/hop-ui-e2e/tsconfig.e2e.json",
+            "devServerTarget": "hop-ui:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "hop-ui:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/hop-ui-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "hop-ui"
+}
