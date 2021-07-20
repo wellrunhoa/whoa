@@ -17,7 +17,15 @@
             "polyfills": "apps/hop-ui/src/polyfills.ts",
             "tsConfig": "apps/hop-ui/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/hop-ui/src/favicon.ico", "apps/hop-ui/src/assets", {"glob":"**/*","input":"./node_modules/@ant-design/icons-angular/src/inline-svg/","output":"/assets/"}],
+            "assets": [
+              "apps/hop-ui/src/favicon.ico",
+              "apps/hop-ui/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
+            ],
             "styles": ["apps/hop-ui/src/styles.scss"],
             "scripts": []
           },
@@ -75,10 +83,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/hop-ui/src/**/*.ts",
-              "apps/hop-ui/src/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/hop-ui/src/**/*.ts", "apps/hop-ui/src/**/*.html"]
           }
         },
         "test": {
