@@ -14,7 +14,21 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@whoa/web/auth/data-access": ["libs/web/auth/data-access/src/index.ts"],
+      "@whoa/web/auth/feature/login": ["libs/web/auth/feature/login/src/index.ts"],
+      "@whoa/web/auth/feature/shell": ["libs/web/auth/feature/shell/src/index.ts"],
+      "@whoa/web/auth/ui/login-form": ["libs/web/auth/ui/login-form/src/index.ts"],
+      "@whoa/web/auth/utils": ["libs/web/auth/utils/src/index.ts"],
+      "@whoa/web/core": ["libs/web/core/src/index.ts"],
+      "@whoa/web/hop/feature/hop-home": ["libs/web/hop/feature/hop-home/src/index.ts"],
+      "@whoa/web/hop/feature/hop-shell": ["libs/web/hop/feature/hop-shell/src/index.ts"],
+      "@whoa/web/settings/data-access": ["libs/web/settings/data-access/src/index.ts"],
+      "@whoa/web/settings/feature": ["libs/web/settings/feature/src/index.ts"],
+      "@whoa/web/shared/ui/icons-provider": ["libs/web/shared/ui/icons-provider/src/index.ts"],
+      "@whoa/web/shared/ui/layout": ["libs/web/shared/ui/layout/src/index.ts"],
+      "@whoa/web/shared/ui/zorro-provider": ["libs/web/shared/ui/zorro-provider/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

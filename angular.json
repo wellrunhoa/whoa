@@ -121,6 +121,328 @@
           }
         }
       }
+    },
+    "web-auth-data-access": {
+      "projectType": "library",
+      "root": "libs/web/auth/data-access",
+      "sourceRoot": "libs/web/auth/data-access/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/auth/data-access"],
+          "options": {
+            "jestConfig": "libs/web/auth/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/auth/data-access/src/**/*.ts",
+              "libs/web/auth/data-access/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-auth-feature-login": {
+      "projectType": "library",
+      "root": "libs/web/auth/feature/login",
+      "sourceRoot": "libs/web/auth/feature/login/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/auth/feature/login"],
+          "options": {
+            "jestConfig": "libs/web/auth/feature/login/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/auth/feature/login/src/**/*.ts",
+              "libs/web/auth/feature/login/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-auth-feature-shell": {
+      "projectType": "library",
+      "root": "libs/web/auth/feature/shell",
+      "sourceRoot": "libs/web/auth/feature/shell/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/auth/feature/shell"],
+          "options": {
+            "jestConfig": "libs/web/auth/feature/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/auth/feature/shell/src/**/*.ts",
+              "libs/web/auth/feature/shell/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-auth-ui-login-form": {
+      "projectType": "library",
+      "root": "libs/web/auth/ui/login-form",
+      "sourceRoot": "libs/web/auth/ui/login-form/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/auth/ui/login-form"],
+          "options": {
+            "jestConfig": "libs/web/auth/ui/login-form/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/auth/ui/login-form/src/**/*.ts",
+              "libs/web/auth/ui/login-form/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-auth-utils": {
+      "projectType": "library",
+      "root": "libs/web/auth/utils",
+      "sourceRoot": "libs/web/auth/utils/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/auth/utils"],
+          "options": {
+            "jestConfig": "libs/web/auth/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/auth/utils/src/**/*.ts",
+              "libs/web/auth/utils/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-core": {
+      "projectType": "library",
+      "root": "libs/web/core",
+      "sourceRoot": "libs/web/core/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/core"],
+          "options": {
+            "jestConfig": "libs/web/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/core/src/**/*.ts", "libs/web/core/src/**/*.html"]
+          }
+        }
+      }
+    },
+    "web-hop-feature-hop-home": {
+      "projectType": "library",
+      "root": "libs/web/hop/feature/hop-home",
+      "sourceRoot": "libs/web/hop/feature/hop-home/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/hop/feature/hop-home"],
+          "options": {
+            "jestConfig": "libs/web/hop/feature/hop-home/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/hop/feature/hop-home/src/**/*.ts",
+              "libs/web/hop/feature/hop-home/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-hop-feature-hop-shell": {
+      "projectType": "library",
+      "root": "libs/web/hop/feature/hop-shell",
+      "sourceRoot": "libs/web/hop/feature/hop-shell/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/hop/feature/hop-shell"],
+          "options": {
+            "jestConfig": "libs/web/hop/feature/hop-shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/hop/feature/hop-shell/src/**/*.ts",
+              "libs/web/hop/feature/hop-shell/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-settings-data-access": {
+      "projectType": "library",
+      "root": "libs/web/settings/data-access",
+      "sourceRoot": "libs/web/settings/data-access/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/settings/data-access"],
+          "options": {
+            "jestConfig": "libs/web/settings/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/settings/data-access/src/**/*.ts",
+              "libs/web/settings/data-access/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-settings-feature": {
+      "projectType": "library",
+      "root": "libs/web/settings/feature",
+      "sourceRoot": "libs/web/settings/feature/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/settings/feature"],
+          "options": {
+            "jestConfig": "libs/web/settings/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/settings/feature/src/**/*.ts",
+              "libs/web/settings/feature/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-shared-ui-icons-provider": {
+      "projectType": "library",
+      "root": "libs/web/shared/ui/icons-provider",
+      "sourceRoot": "libs/web/shared/ui/icons-provider/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/shared/ui/icons-provider"],
+          "options": {
+            "jestConfig": "libs/web/shared/ui/icons-provider/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/shared/ui/icons-provider/src/**/*.ts",
+              "libs/web/shared/ui/icons-provider/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-shared-ui-layout": {
+      "projectType": "library",
+      "root": "libs/web/shared/ui/layout",
+      "sourceRoot": "libs/web/shared/ui/layout/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/shared/ui/layout"],
+          "options": {
+            "jestConfig": "libs/web/shared/ui/layout/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/shared/ui/layout/src/**/*.ts",
+              "libs/web/shared/ui/layout/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-shared-ui-zorro-provider": {
+      "projectType": "library",
+      "root": "libs/web/shared/ui/zorro-provider",
+      "sourceRoot": "libs/web/shared/ui/zorro-provider/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/shared/ui/zorro-provider"],
+          "options": {
+            "jestConfig": "libs/web/shared/ui/zorro-provider/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/shared/ui/zorro-provider/src/**/*.ts",
+              "libs/web/shared/ui/zorro-provider/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -1,0 +1,55 @@
+<!-- <nz-layout class="app-layout">
+  <nz-sider
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="settings.layout.collapsed"
+    [nzTrigger]="null"
+  >
+    <div class="sidebar-logo">
+      <img src="assets/whoa.png" alt="Well-run HOA" />
+      <h1>Well-run HOA</h1>
+    </div>
+    <whoa-nav-bar></whoa-nav-bar>
+  </nz-sider>
+  <nz-layout>
+    <whoa-top-bar></whoa-top-bar>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout> -->
+
+<layout-default [options]="options" [content]="contentTpl" [asideUser]="asideUserTpl">
+  <layout-default-header-item direction="left" hidden="pc">
+    <div layout-default-header-item-trigger (click)="searchToggleStatus = !searchToggleStatus">
+      <i nz-icon nzType="search"></i>
+    </div>
+  </layout-default-header-item>
+  <layout-default-header-item direction="right">
+    <whoa-header-user></whoa-header-user>
+  </layout-default-header-item>
+  <ng-template #asideUserTpl>
+    <div nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu" class="alain-default__aside-user">
+      <nz-avatar class="alain-default__aside-user-avatar" [nzSrc]="user.avatar"></nz-avatar>
+      <div class="alain-default__aside-user-info">
+        <strong>{{ user.name }}</strong>
+        <p class="mb0">{{ user.email }}</p>
+      </div>
+    </div>
+    <nz-dropdown-menu #userMenu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item routerLink="/pro/account/center">{{ 'menu.account.center' | i18n }}</li>
+        <li nz-menu-item routerLink="/pro/account/settings">{{ 'menu.account.settings' | i18n }}</li>
+      </ul>
+    </nz-dropdown-menu>
+  </ng-template>
+  <ng-template #contentTpl>
+    <nz-spin *ngIf="isFetching" class="fetching" nzSpinning></nz-spin>
+    <router-outlet></router-outlet>
+    <nz-back-top></nz-back-top>
+  </ng-template>
+</layout-default>

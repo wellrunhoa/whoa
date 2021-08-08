@@ -1,0 +1,58 @@
+{
+  "app": {
+    "name": "Home Owners Portal",
+    "description": "Portal for Home owners to request services, paying HOA etc"
+  },
+  "menu": [
+    {
+      "text": "Main",
+      "group": true,
+      "children": [
+        {
+          "text": "Dashboard",
+          "i18n": "menu.dashboard",
+          "icon": "anticon-dashboard",
+          "link": "/dashboard"
+        },
+        {
+          "text": "Service Request",
+          "icon": "anticon-form",
+          "link": "/service-request"
+        },
+        {
+          "text": "Reservations",
+          "icon": "anticon-schedule",
+          "link": "/reservations"
+        },
+        {
+          "text": "Payments",
+          "icon": "anticon-dollar",
+          "link": "/payments"
+        },
+        {
+          "text": "Documents",
+          "icon": "anticon-inbox",
+          "link": "/documents"
+        },
+        {
+          "text": "Directory",
+          "icon": "anticon-contacts",
+          "link": "/directory"
+        }
+      ]
+    },
+    {
+      "text": "Account",
+      "i18n": "menu.account",
+      "group": true,
+      "children": [
+        {
+          "text": "Settings",
+          "link": "/pro/account/settings",
+          "i18n": "menu.account.settings",
+          "icon": "anticon-user"
+        }
+      ]
+    }
+  ]
+}

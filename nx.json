@@ -33,6 +33,45 @@
     "hop-ui-e2e": {
       "tags": [],
       "implicitDependencies": ["hop-ui"]
+    },
+    "web-auth-data-access": {
+      "tags": ["type:data-access"]
+    },
+    "web-auth-feature-login": {
+      "tags": ["type:feature"]
+    },
+    "web-auth-feature-shell": {
+      "tags": ["type:feature"]
+    },
+    "web-auth-ui-login-form": {
+      "tags": ["type:ui"]
+    },
+    "web-auth-utils": {
+      "tags": ["type:utils"]
+    },
+    "web-core": {
+      "tags": ["type:ui"]
+    },
+    "web-hop-feature-hop-home": {
+      "tags": ["type:feature"]
+    },
+    "web-hop-feature-hop-shell": {
+      "tags": ["scope:hop-ui"]
+    },
+    "web-settings-data-access": {
+      "tags": ["type:data-access"]
+    },
+    "web-settings-feature": {
+      "tags": ["type:feature"]
+    },
+    "web-shared-ui-icons-provider": {
+      "tags": ["scope:shared-ui"]
+    },
+    "web-shared-ui-layout": {
+      "tags": ["type:ui"]
+    },
+    "web-shared-ui-zorro-provider": {
+      "tags": ["type:ui"]
     }
   }
 }

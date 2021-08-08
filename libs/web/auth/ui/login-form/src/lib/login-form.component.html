@@ -1,0 +1,30 @@
+<div class="desc">Login to your account</div>
+<form nz-form [formGroup]="form"  role="form">
+    <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter Email">
+        <nz-input-group nzSize="large" nzPrefixIcon="user">
+            <input nz-input formControlName="userName" placeholder="Email" />
+        </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter password">
+        <nz-input-group nzSize="large" nzPrefixIcon="lock">
+            <input nz-input type="password" formControlName="password" placeholder="Password" />
+        </nz-input-group>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-col [nzSpan]="12">
+            <label nz-checkbox formControlName="remember">Remember me</label>
+        </nz-col>
+        <nz-col [nzSpan]="12" class="text-right">
+            <a class="forgot" routerLink="/auth/register">Forgot your password?</a>
+        </nz-col>
+    </nz-form-item>
+    <nz-form-item>
+        <button nz-button type="button" nzType="primary" nzSize="large" [nzLoading]="loading" nzBlock (click)="login()">
+            Login
+        </button>
+    </nz-form-item>
+</form>
