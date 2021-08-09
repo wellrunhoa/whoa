@@ -39,7 +39,7 @@ There are also many [community plugins](https://nx.dev/community) you could add.
 
 ## Generate an application
 
-Run `ng g @nrwl/angular:app my-app` to generate an application.
+Run `nx g @nrwl/angular:app my-app` to generate an application.
 
 > You can use any of the plugins above to generate applications as well.
 
@@ -47,33 +47,55 @@ When using Nx, you can create multiple applications and libraries in the same wo
 
 ## Generate a library
 
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
-
+Run `nx g @nrwl/angular:lib my-lib` to generate a library.
 > You can also use any of the plugins above to generate libraries as well.
 
 Libraries are shareable across libraries and applications. They can be imported from `@whoa/mylib`.
 
-## Development server
+Feature Lib: all business logic, interaction with services etc goes here. Run below command to generate feature module 
+nx g @nrwl/angular:lib shell --style=less --directory=web/auth/feature --tags=type:feature --simpleModuleName=true --flat
+nx g @nrwl/angular:lib login --style=less --directory=web/auth/feature --tags=type:feature --simpleModuleName=true --flat
 
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+UI lib: All dumb components goes here. These components has UI renderning logic and takes input & output paramers. Run below command to generate UI coponents
+nx g @nrwl/angular:lib login-form --style=less --directory=web/auth/ui --tags=type:ui --simpleModuleName=true --flat
+
+Data-access lib: all services and backend interaction goes here.  Run below command to generate data-access lib
+nx g @nrwl/angular:lib data-access --style=less --directory=web/auth --tags=type:data-access --simpleModuleName=true --flat
+
+Utils lib: guards, interceptors and any utility class goes here. Run below command to generate utils lib
+nx g @nrwl/angular:lib utils --style=less --directory=web/auth --tags=type:utils --simpleModuleName=true --flat
 
 ## Code scaffolding
 
-Run `ng g component my-component --project=my-app` to generate a new component.
+Run `nx g component my-component --project=my-app` to generate a new component.
+
+To generate component
+nx g @nrwl/angular:component login --project=web-auth-feature-login --style=less --flat --export
+nx g @nrwl/angular:component login-form --project=web-auth-ui-login-form --style=less --flat --export
+
+To generate guard
+nx g @nrwl/angular:guard auth --implements=CanActivate --project=web-auth-utils 
+
+To generate service
+nx g service services/auth --project=web-auth-data-access
+
+## Development server
+
+Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
 ## Build
 
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## Running unit tests
 
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
 
 Run `nx affected:test` to execute the unit tests affected by a change.
 
 ## Running end-to-end tests
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+Run `nx e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
 
 Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
 
