@@ -15,8 +15,8 @@ export class LoginFormComponent {
   
   constructor(fb: FormBuilder, private router: Router) {
     this.form = fb.group({
-      userName: [null, [Validators.required]], //, Validators.pattern(/^(user)$/)
-      password: [null, [Validators.required]], //, Validators.pattern(/^(password)$/)
+      userName: ['user', [Validators.required]], //, Validators.pattern(/^(user)$/)
+      password: ['password', [Validators.required]], //, Validators.pattern(/^(password)$/)
       remember: [true]
     });
   }
