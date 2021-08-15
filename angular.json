@@ -1,6 +1,98 @@
 {
   "version": 1,
   "projects": {
+    "api-passport-feature": {
+      "root": "libs/api/passport/feature",
+      "sourceRoot": "libs/api/passport/feature/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/api/passport/feature/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/passport/feature"],
+          "options": {
+            "jestConfig": "libs/api/passport/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "api-shared-feature": {
+      "root": "libs/api/shared/feature",
+      "sourceRoot": "libs/api/shared/feature/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/api/shared/feature/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/shared/feature"],
+          "options": {
+            "jestConfig": "libs/api/shared/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "apis": {
+      "root": "apps/apis",
+      "sourceRoot": "apps/apis/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/apis",
+            "main": "apps/apis/src/main.ts",
+            "tsConfig": "apps/apis/tsconfig.app.json",
+            "assets": ["apps/apis/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/apis/src/environments/environment.ts",
+                  "with": "apps/apis/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "apis:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/apis/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/apis"],
+          "options": {
+            "jestConfig": "apps/apis/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "hop-ui": {
       "projectType": "application",
       "root": "apps/hop-ui",
@@ -72,7 +164,10 @@
               "browserTarget": "hop-ui:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "proxyConfig": "apps/hop-ui/proxy.conf.json"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

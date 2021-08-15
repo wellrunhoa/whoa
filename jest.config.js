@@ -21,6 +21,9 @@ module.exports = {
     '<rootDir>/libs/web/hop/feature/hop-home',
     '<rootDir>/libs/web/hop-shell/feature/hop-shell',
     '<rootDir>/libs/web/auth/utils',
-    '<rootDir>/libs/web/core'
+    '<rootDir>/libs/web/core',
+    '<rootDir>/apps/apis',
+    '<rootDir>/libs/api/passport/feature',
+    '<rootDir>/libs/api/shared/feature'
   ]
 };
