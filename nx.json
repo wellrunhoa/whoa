@@ -27,6 +27,15 @@
     ]
   },
   "projects": {
+    "api-passport-feature": {
+      "tags": []
+    },
+    "api-shared-feature": {
+      "tags": []
+    },
+    "apis": {
+      "tags": []
+    },
     "hop-ui": {
       "tags": []
     },

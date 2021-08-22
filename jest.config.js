@@ -28,5 +28,8 @@ module.exports = {
     '<rootDir>/libs/web/service-req/data-access',
     '<rootDir>/libs/web/service-req/utils',
     '<rootDir>/libs/web/service-req/data-access/model'
+    '<rootDir>/apps/apis',
+    '<rootDir>/libs/api/passport/feature',
+    '<rootDir>/libs/api/shared/feature'
   ]
 };

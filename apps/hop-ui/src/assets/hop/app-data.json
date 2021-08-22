@@ -50,7 +50,7 @@
           "text": "Settings",
           "link": "/pro/account/settings",
           "i18n": "menu.account.settings",
-          "icon": "anticon-user"
+          "icon": "anticon-setting"
         }
       ]
     }
