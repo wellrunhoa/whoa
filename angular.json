@@ -55,7 +55,7 @@
             "outputPath": "dist/apps/apis",
             "main": "apps/apis/src/main.ts",
             "tsConfig": "apps/apis/tsconfig.app.json",
-            "assets": ["apps/apis/src/assets"]
+            "assets": ["apps/apis/src/assets", "apps/apis/src/environments/.env.defaults"]
           },
           "configurations": {
             "production": {

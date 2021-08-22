@@ -3,7 +3,7 @@ import { ApiPassportModule } from "@whoa/api/passport/feature";
 import { ApiSharedModule } from "@whoa/api/shared/feature";
 
 @Module({
-  imports: [ApiPassportModule, ApiSharedModule],
+  imports: [ApiSharedModule, ApiPassportModule],
   controllers: [],
   providers: []
 })

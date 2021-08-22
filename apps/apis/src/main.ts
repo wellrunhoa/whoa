@@ -4,30 +4,23 @@
  */
 
 import { Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { HttpExceptionFilter } from "@whoa/api/shared/feature";
 import { AppModule } from './app/app.module';
+import { AppInitializer } from '@whoa/api/shared/feature';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalFilters(new HttpExceptionFilter());
+  await AppInitializer.initialize(app);
 
-  const options = new DocumentBuilder()
-    .setTitle('WHOA APIs')
-    .setDescription('Well-run HOA API')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .build();
+  const configService = app.get(ConfigService);
+  const globalPrefix = configService.get<string>('application.contextPath');
+  const port = configService.get<number>('application.port');
+  const host = configService.get<string>('application.host');
+  Logger.log("globalPrefix:"+globalPrefix)
 
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api/docs', app, document);
-
-  const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3000;
   await app.listen(port, () => {
-    Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
+    Logger.log('Listening at http://' + host + ':' + port + '/' + globalPrefix);
   });
 }
 
