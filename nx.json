@@ -58,6 +58,24 @@
     "web-hop-feature-hop-shell": {
       "tags": ["scope:hop-ui"]
     },
+    "web-service-req-data-access": {
+      "tags": ["type:data-access"]
+    },
+    "web-service-req-data-access-model": {
+      "tags": ["type:data-access"]
+    },
+    "web-service-req-feature-service-request": {
+      "tags": ["type:feature"]
+    },
+    "web-service-req-feature-shell": {
+      "tags": ["type:feature"]
+    },
+    "web-service-req-ui-service-request-form": {
+      "tags": ["type:ui"]
+    },
+    "web-service-req-utils": {
+      "tags": ["type:utils"]
+    },
     "web-settings-data-access": {
       "tags": ["type:data-access"]
     },

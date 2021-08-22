@@ -319,6 +319,156 @@
         }
       }
     },
+    "web-service-req-data-access": {
+      "projectType": "library",
+      "root": "libs/web/service-req/data-access",
+      "sourceRoot": "libs/web/service-req/data-access/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/service-req/data-access"],
+          "options": {
+            "jestConfig": "libs/web/service-req/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/service-req/data-access/src/**/*.ts",
+              "libs/web/service-req/data-access/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-service-req-data-access-model": {
+      "projectType": "library",
+      "root": "libs/web/service-req/data-access/model",
+      "sourceRoot": "libs/web/service-req/data-access/model/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/service-req/data-access/model"],
+          "options": {
+            "jestConfig": "libs/web/service-req/data-access/model/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/service-req/data-access/model/src/**/*.ts",
+              "libs/web/service-req/data-access/model/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-service-req-feature-service-request": {
+      "projectType": "library",
+      "root": "libs/web/service-req/feature/service-request",
+      "sourceRoot": "libs/web/service-req/feature/service-request/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/service-req/feature/service-request"],
+          "options": {
+            "jestConfig": "libs/web/service-req/feature/service-request/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/service-req/feature/service-request/src/**/*.ts",
+              "libs/web/service-req/feature/service-request/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-service-req-feature-shell": {
+      "projectType": "library",
+      "root": "libs/web/service-req/feature/shell",
+      "sourceRoot": "libs/web/service-req/feature/shell/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/service-req/feature/shell"],
+          "options": {
+            "jestConfig": "libs/web/service-req/feature/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/service-req/feature/shell/src/**/*.ts",
+              "libs/web/service-req/feature/shell/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-service-req-ui-service-request-form": {
+      "projectType": "library",
+      "root": "libs/web/service-req/ui/service-request-form",
+      "sourceRoot": "libs/web/service-req/ui/service-request-form/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/service-req/ui/service-request-form"],
+          "options": {
+            "jestConfig": "libs/web/service-req/ui/service-request-form/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/service-req/ui/service-request-form/src/**/*.ts",
+              "libs/web/service-req/ui/service-request-form/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-service-req-utils": {
+      "projectType": "library",
+      "root": "libs/web/service-req/utils",
+      "sourceRoot": "libs/web/service-req/utils/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/service-req/utils"],
+          "options": {
+            "jestConfig": "libs/web/service-req/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/service-req/utils/src/**/*.ts",
+              "libs/web/service-req/utils/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "web-settings-data-access": {
       "projectType": "library",
       "root": "libs/web/settings/data-access",

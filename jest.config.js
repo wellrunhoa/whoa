@@ -21,6 +21,12 @@ module.exports = {
     '<rootDir>/libs/web/hop/feature/hop-home',
     '<rootDir>/libs/web/hop-shell/feature/hop-shell',
     '<rootDir>/libs/web/auth/utils',
-    '<rootDir>/libs/web/core'
+    '<rootDir>/libs/web/core',
+    '<rootDir>/libs/web/service-req/feature/shell',
+    '<rootDir>/libs/web/service-req/feature/service-request',
+    '<rootDir>/libs/web/service-req/ui/service-request-form',
+    '<rootDir>/libs/web/service-req/data-access',
+    '<rootDir>/libs/web/service-req/utils',
+    '<rootDir>/libs/web/service-req/data-access/model'
   ]
 };

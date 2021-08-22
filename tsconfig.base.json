@@ -23,6 +23,18 @@
       "@whoa/web/core": ["libs/web/core/src/index.ts"],
       "@whoa/web/hop/feature/hop-home": ["libs/web/hop/feature/hop-home/src/index.ts"],
       "@whoa/web/hop/feature/hop-shell": ["libs/web/hop/feature/hop-shell/src/index.ts"],
+      "@whoa/web/service-req/data-access": ["libs/web/service-req/data-access/src/index.ts"],
+      "@whoa/web/service-req/data-access/model": [
+        "libs/web/service-req/data-access/model/src/index.ts"
+      ],
+      "@whoa/web/service-req/feature/service-request": [
+        "libs/web/service-req/feature/service-request/src/index.ts"
+      ],
+      "@whoa/web/service-req/feature/shell": ["libs/web/service-req/feature/shell/src/index.ts"],
+      "@whoa/web/service-req/ui/service-request-form": [
+        "libs/web/service-req/ui/service-request-form/src/index.ts"
+      ],
+      "@whoa/web/service-req/utils": ["libs/web/service-req/utils/src/index.ts"],
       "@whoa/web/settings/data-access": ["libs/web/settings/data-access/src/index.ts"],
       "@whoa/web/settings/feature": ["libs/web/settings/feature/src/index.ts"],
       "@whoa/web/shared/ui/icons-provider": ["libs/web/shared/ui/icons-provider/src/index.ts"],
