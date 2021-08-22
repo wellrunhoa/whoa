@@ -1,0 +1,57 @@
+<div class="desc">Service Request</div>
+<form nz-form [formGroup]="form" role="form">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Property Address</nz-form-label>
+    <nz-form-control nzErrorTip="Street Address">
+      <input nz-input formControlName="propStreetAddress" placeholder="propStreetAddress" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    
+        
+            <nz-form-label [nzSpan]="7" nzRequired nzNoColon></nz-form-label>
+            <nz-form-control nzErrorTip="City">
+                <input nz-input formControlName="propCity" placeholder="City" />
+            </nz-form-control>
+            <nz-form-control nzErrorTip="State">
+            <nz-form-label inputmode="input" nzRequired nzNoColon></nz-form-label>
+            <nz-select title="State" formControlName="propState" nzAllowClear nzPlaceHolder="State" nzSize="small">
+                <nz-option
+                *ngFor="let option of stateList"
+                [nzValue]="option.value"
+                [nzLabel]="option.label"
+                ></nz-option>
+            </nz-select>
+            </nz-form-control>
+            <nz-form-label nzRequired nzNoColon ></nz-form-label>
+            <nz-form-control nzErrorTip="Zip" >
+                <input nz-input formControlName="propZip" placeholder="Zip" />
+            </nz-form-control>
+    
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Service Type</nz-form-label>
+    <nz-form-control nzErrorTip="Service Type">
+      <input nz-input formControlName="requestedService" placeholder="requestedService" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Additional Comments</nz-form-label>
+    <nz-form-control nzErrorTip="Comments">
+      <input nz-input formControlName="comments" placeholder="comments" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <button
+      nz-button
+      type="button"
+      nzType="primary"
+      nzSize="large"
+      [nzLoading]="loading"
+      nzBlock
+      (click)="serviceReq()"
+    >
+      Submit
+    </button>
+  </nz-form-item>
+</form>
