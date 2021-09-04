@@ -10,13 +10,6 @@ export default registerAs('application', (): ApplicationConfig => {
   return {
     name,
     description,
-    version,
-    host: getEnv('HOST', 'localhost'),
-    port: getEnvNumber("PORT", 3000),
-    contextPath: getEnv('CONTEXT_PATH', 'api'),
-    swaggerPath: getEnv('SWAGGER_URI', 'api/docs'),
-    table: {
-      page_row_count: 20
-    }
+    version
   };
 });

@@ -14,10 +14,11 @@ async function bootstrap() {
   await AppInitializer.initialize(app);
 
   const configService = app.get(ConfigService);
-  const globalPrefix = configService.get<string>('application.contextPath');
-  const port = configService.get<number>('application.port');
-  const host = configService.get<string>('application.host');
-  Logger.log("globalPrefix:"+globalPrefix)
+  const globalPrefix = configService.get<string>('environment.contextPath');
+  const port = configService.get<number>('environment.port');
+  const host = configService.get<string>('environment.host');
+  
+  Logger.log("globalPrefix: "+globalPrefix)
 
   await app.listen(port, () => {
     Logger.log('Listening at http://' + host + ':' + port + '/' + globalPrefix);

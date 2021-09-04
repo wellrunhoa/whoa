@@ -1,2 +1,2 @@
 export * from './lib/api-passport.module';
-export * from './lib/public-decorator';
+export * from './lib/unsecured-decorator';

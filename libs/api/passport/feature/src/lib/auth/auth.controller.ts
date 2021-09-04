@@ -1,16 +1,16 @@
 import { Body, Controller, Get, Post, Request } from '@nestjs/common';
 import { AuthService } from '../auth/auth.service';
-import { Public } from '../public-decorator';
-import { User } from '../users/entities/user.entity';
+import { Unsecured } from '../unsecured-decorator';
+import { AuthLoginDTO } from './dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Public()
+  @Unsecured()
   @Post('login')
-  async login(@Body() user: User) {
-    return this.authService.login(user);
+  async login(@Body() credentials: AuthLoginDTO) {
+    return this.authService.login(credentials);
   }
 
   @Get('profile')

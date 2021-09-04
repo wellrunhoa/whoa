@@ -2,11 +2,12 @@ import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
-//import { PassportController } from './passport.controller';
 import { UsersModule } from './users/users.module';
+import { ApiSharedModule } from '@whoa/api/shared/feature';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [AuthModule, UsersModule],
+  imports: [AuthModule, UsersModule, ApiSharedModule, TypeOrmModule],
   controllers: [],
   providers: [
     {
@@ -14,6 +15,6 @@ import { UsersModule } from './users/users.module';
       useClass: JwtAuthGuard
     }
   ],
-  exports: []
+  exports: [TypeOrmModule]
 })
 export class ApiPassportModule {}

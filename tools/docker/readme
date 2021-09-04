@@ -1,0 +1,8 @@
+Install Docker Desktop 
+Install Docker Compose
+Run "npm run db:start"
+In browser go to localhost:8080
+Add server
+ Name: localhost
+ Host name/address: host.docker.internal
+ username: whoa_user

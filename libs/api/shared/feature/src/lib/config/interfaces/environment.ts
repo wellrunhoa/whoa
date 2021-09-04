@@ -7,12 +7,14 @@ export interface EnvironmentConfig {
   // Port number
   port: number;
   //JWT secret
-  jwt_secret: string;
+  jwtSecret: string;
 
-  // Whether the development environment
-  isDevelopment: boolean;
+  enableSwagger: boolean;
   // Whether the production environment
   isProduction: boolean;
-  // Whether the UAT environment
-  isUat: boolean;
+  contextPath: string;
+  swaggerPath: string;
+  table: {
+    page_row_count: number;
+  };
 }

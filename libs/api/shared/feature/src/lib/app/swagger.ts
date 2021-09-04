@@ -31,7 +31,7 @@ export class Swagger {
 
     const document = SwaggerModule.createDocument(app, options);
 
-    SwaggerModule.setup(config.get<string>('application.swaggerPath'), app, document, {
+    SwaggerModule.setup(config.get<string>('environment.swaggerPath'), app, document, {
       customSiteTitle: config.get<string>('application.name'),
       swaggerOptions: {
         docExpansion: 'none',

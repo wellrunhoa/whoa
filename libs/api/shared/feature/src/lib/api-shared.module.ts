@@ -1,11 +1,12 @@
 import { MailerModule } from '@nestjs-modules/mailer';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { WinstonModule } from "@payk/nestjs-winston";
+import { WinstonModule } from '@payk/nestjs-winston';
 import { ApiException } from './api-exception.model';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { join } from 'path';
-import { logConfig } from './config/winston';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import logConfig from './config/winston';
 import validationSchema from './config/env-schema';
 import loadConfig from './config/load-config';
 
@@ -13,6 +14,7 @@ import loadConfig from './config/load-config';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      cache: true,
       expandVariables: true,
       envFilePath: [
         `environments/.env.${process.env.APP_ENV || 'local'}`,
@@ -23,18 +25,23 @@ import loadConfig from './config/load-config';
     }),
     MailerModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => configService.get('mailer'),
+      useFactory: async (configService: ConfigService) => configService.get('mailer'),
       inject: [ConfigService]
     }),
     WinstonModule.forRootAsync({
       useFactory: logConfig,
-      inject: [],
+      inject: []
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => configService.get('database')
     }),
     ApiException,
     HttpExceptionFilter
   ],
   controllers: [],
   providers: [],
-  exports: [ApiException, HttpExceptionFilter]
+  exports: [ApiException, HttpExceptionFilter, TypeOrmModule]
 })
 export class ApiSharedModule {}

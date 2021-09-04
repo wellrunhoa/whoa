@@ -1,53 +1,86 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './entities/user.entity';
+import { CreateUserDTO } from './dto/create-user.dto';
+import { UpdateUserDTO } from './dto/update-user.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
+import { ConfigService } from '@nestjs/config';
+import { UserDTO } from './dto/user.dto';
 
 @Injectable()
 export class UsersService {
-  private readonly users: User[];
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+    private readonly config: ConfigService
+  ) {}
 
-  constructor() {
-    this.users = [
-      {
-        userId: 1,
-        username: 'john',
-        password: 'changeme',
-      },
-      {
-        userId: 2,
-        username: 'chris',
-        password: 'secret',
-      },
-      {
-        userId: 3,
-        username: 'maria',
-        password: 'guess',
-      },
-    ];
-  }
-  
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  async create(userDto: CreateUserDTO): Promise<UserDTO> {
+    const user = CreateUserDTO.MODEL_CONVERTER.toModel(userDto);
+    const plaintextPassword = userDto.password;
+
+    // Hash password with bcrypt
+    const hashedPassword = await bcrypt.hash(
+      plaintextPassword,
+      this.config.get<number>('BCRYPT_SALT_ROUNDS')
+    );
+
+    user.hashedPassword = hashedPassword;
+
+    // Create new user record
+    const newUser = await this.userRepository.save(user);
+
+    return CreateUserDTO.MODEL_CONVERTER.toDTO(newUser);
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async getById(id: string): Promise<UserDTO | undefined> {
+    const user = await this.userRepository.findOne(id);
+
+    if (!user) {
+      throw new NotFoundException(`No user with id ${id}`);
+    }
+
+    return UserDTO.MODEL_CONVERTER.toDTO(user);
   }
 
-  async findById(id: number) {
-    return `This action updates a #${id} user`;
+  async getByEmail(email: string): Promise<UserDTO | undefined> {
+    const user = await this.userRepository.findOne({ email });
+    if (user) {
+      return UserDTO.MODEL_CONVERTER.toDTO(user);
+    }
+    throw new NotFoundException(`No User with email ${email}`);
   }
 
-  async findByUsername(username: string): Promise<User | undefined> {
-    return this.users.find(user => user.username === username);
+  async validateUser(email: string, givenPassword: string): Promise<UserDTO | undefined> {
+    const user = await this.userRepository.findOne({ email });
+
+    if (user) {
+      const passwordsMatch = await bcrypt.compare(givenPassword, user.hashedPassword);
+
+      if (passwordsMatch) {
+        return UserDTO.MODEL_CONVERTER.toDTO(user);
+      }
+    }
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDTO): Promise<UserDTO> {
+    // TODO: Consider user repository update() method
+
+    const user = await this.userRepository.findOne(id);
+
+    if (user) {
+      const updatedUser = UpdateUserDTO.MODEL_CONVERTER.toModel(updateUserDto);
+
+      const savedUser = await this.userRepository.save(user);
+
+      return savedUser;
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async all(): Promise<UserDTO[]> {
+    const users = await this.userRepository.find();
+
+    return users.map((user) => UserDTO.MODEL_CONVERTER.toDTO(user));
   }
 }
