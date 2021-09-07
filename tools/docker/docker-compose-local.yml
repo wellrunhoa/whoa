@@ -8,9 +8,9 @@ services:
     volumes:
     - c:/dev/tools/postgres-data/:/data/postgres
     env_file:
-    - local.env
+    - .env.docker
     networks:
-    - postgres
+    - whoa-network
  
   pgadmin:
     container_name: pgadmin
@@ -22,9 +22,9 @@ services:
     volumes:
     - c:/dev/tools/pgadmin-data:/root/.pgadmin
     env_file:
-    - local.env
+    - .env.docker
     networks:
-    - postgres
+    - whoa-network
     depends_on:
     - postgres
 
@@ -36,12 +36,12 @@ services:
     ports:
     - "8090:8080"
     env_file:
-    - local.env
+    - .env.docker
     networks:
-    - postgres
+    - whoa-network
     depends_on:
     - postgres
 
 networks:
-  postgres:
+  whoa-network:
     driver: bridge
