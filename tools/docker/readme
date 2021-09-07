@@ -1,8 +1,12 @@
 Install Docker Desktop 
 Install Docker Compose
+Get docker images
+    docker pull postgres
+    docker pull dpage/pgadmin4
+    docker pull quay.io/keycloak/keycloak:latest
 Run "npm run db:start"
 In browser go to localhost:8080
 Add server
- Name: localhost
- Host name/address: host.docker.internal
- username: whoa_user
+    Name: localhost
+    Host name/address: host.docker.internal
+    username/pwd: whoa_user
