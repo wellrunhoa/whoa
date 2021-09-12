@@ -27,13 +27,19 @@
     ]
   },
   "projects": {
+    "api-hoa-board-feature": {
+      "tags": []
+    },
+    "api-hoa-property-feature": {
+      "tags": []
+    },
     "api-passport-feature": {
       "tags": []
     },
     "api-shared-feature": {
       "tags": []
     },
-    "apis": {
+    "whoa-apis": {
       "tags": []
     },
     "hop-ui": {

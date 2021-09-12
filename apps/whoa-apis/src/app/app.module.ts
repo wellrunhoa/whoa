@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ApiPassportModule } from "@whoa/api/passport/feature";
 import { ApiSharedModule } from "@whoa/api/shared/feature";
+import { ApiHoaBoardModule } from "@whoa/api/hoa-board/feature";
 
 @Module({
-  imports: [ApiSharedModule, ApiPassportModule],
+  imports: [ApiSharedModule, ApiHoaBoardModule],
   controllers: [],
   providers: []
 })

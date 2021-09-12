@@ -1,6 +1,48 @@
 {
   "version": 1,
   "projects": {
+    "api-hoa-board-feature": {
+      "root": "libs/api/hoa-board/feature",
+      "sourceRoot": "libs/api/hoa-board/feature/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/api/hoa-board/feature/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/hoa-board/feature"],
+          "options": {
+            "jestConfig": "libs/api/hoa-board/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "api-hoa-property-feature": {
+      "root": "libs/api/hoa-property/feature",
+      "sourceRoot": "libs/api/hoa-property/feature/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/api/hoa-property/feature/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/hoa-property/feature"],
+          "options": {
+            "jestConfig": "libs/api/hoa-property/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "api-passport-feature": {
       "root": "libs/api/passport/feature",
       "sourceRoot": "libs/api/passport/feature/src",
@@ -43,19 +85,23 @@
         }
       }
     },
-    "apis": {
-      "root": "apps/apis",
-      "sourceRoot": "apps/apis/src",
+    "whoa-apis": {
+      "root": "apps/whoa-apis",
+      "sourceRoot": "apps/whoa-apis/src",
       "projectType": "application",
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/apps/apis",
-            "main": "apps/apis/src/main.ts",
-            "tsConfig": "apps/apis/tsconfig.app.json",
-            "assets": ["apps/apis/src/assets", "apps/apis/src/environments/.env.defaults", "apps/apis/src/db/migrations"]
+            "outputPath": "dist/apps/whoa-apis",
+            "main": "apps/whoa-apis/src/main.ts",
+            "tsConfig": "apps/whoa-apis/tsconfig.app.json",
+            "assets": [
+              "apps/whoa-apis/src/assets",
+              "apps/whoa-apis/src/environments/.env.defaults",
+              "apps/whoa-apis/src/db/migrations"
+            ]
           },
           "configurations": {
             "production": {
@@ -64,8 +110,8 @@
               "inspect": false,
               "fileReplacements": [
                 {
-                  "replace": "apps/apis/src/environments/environment.ts",
-                  "with": "apps/apis/src/environments/environment.prod.ts"
+                  "replace": "apps/whoa-apis/src/environments/environment.ts",
+                  "with": "apps/whoa-apis/src/environments/environment.prod.ts"
                 }
               ]
             }
@@ -74,20 +120,20 @@
         "serve": {
           "builder": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "apis:build"
+            "buildTarget": "whoa-apis:build"
           }
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/apis/**/*.ts"]
+            "lintFilePatterns": ["apps/whoa-apis/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/apis"],
+          "outputs": ["coverage/apps/whoa-apis"],
           "options": {
-            "jestConfig": "apps/apis/jest.config.js",
+            "jestConfig": "apps/whoa-apis/jest.config.js",
             "passWithNoTests": true
           }
         }

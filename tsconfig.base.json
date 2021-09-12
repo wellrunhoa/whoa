@@ -16,6 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@whoa/api/hoa-board/feature": ["libs/api/hoa-board/feature/src/index.ts"],
+      "@whoa/api/hoa-property/feature": ["libs/api/hoa-property/feature/src/index.ts"],
       "@whoa/api/passport/feature": ["libs/api/passport/feature/src/index.ts"],
       "@whoa/api/shared/feature": ["libs/api/shared/feature/src/index.ts"],
       "@whoa/web/auth/data-access": ["libs/web/auth/data-access/src/index.ts"],

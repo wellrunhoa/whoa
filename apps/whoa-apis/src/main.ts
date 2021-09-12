@@ -17,8 +17,6 @@ async function bootstrap() {
   const globalPrefix = configService.get<string>('environment.contextPath');
   const port = configService.get<number>('environment.port');
   const host = configService.get<string>('environment.host');
-  
-  Logger.log("globalPrefix: "+globalPrefix)
 
   await app.listen(port, () => {
     Logger.log('Listening at http://' + host + ':' + port + '/' + globalPrefix);

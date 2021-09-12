@@ -27,9 +27,9 @@ module.exports = {
     '<rootDir>/libs/web/service-req/ui/service-request-form',
     '<rootDir>/libs/web/service-req/data-access',
     '<rootDir>/libs/web/service-req/utils',
-    '<rootDir>/libs/web/service-req/data-access/model'
-    '<rootDir>/apps/apis',
+    '<rootDir>/libs/web/service-req/data-access/model',
+    '<rootDir>/apps/whoa-apis',
     '<rootDir>/libs/api/passport/feature',
-    '<rootDir>/libs/api/shared/feature'
+    '<rootDir>/libs/api/shared/feature',"<rootDir>/libs/api/hoa-board/feature","<rootDir>/libs/api/hoa-property/feature"
   ]
 };

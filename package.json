@@ -7,8 +7,8 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
     "nx": "nx",
     "start-hop-ui": "ng serve",
-    "start-apis": "nx serve apis",
-    "start": "npm-run-all --parallel start-hop-ui",
+    "start-apis": "nx serve whoa-apis",
+    "start": "npm-run-all --parallel start-hop-ui start-apis",
     "build": "ng build --generatePackageJson",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
@@ -36,8 +36,8 @@
     "db:migration:revert": "npm run typeorm -- migration:revert",
     "db:schema:drop": "npm run typeorm -- schema:drop",
     "db:schema:sync": "npm run typeorm -- schema:sync",
-    "db:start": "docker-compose -f ./tools/docker/docker-compose-local.yml -p whoa-db up -d",
-    "db:stop": "docker-compose -f ./tools/docker/docker-compose-local.yml -p whoa-db stop"
+    "start:docker": "docker-compose -f ./tools/docker/docker-compose-local.yml -p whoa-db up -d",
+    "stop:docker": "docker-compose -f ./tools/docker/docker-compose-local.yml -p whoa-db stop"
   },
   "private": true,
   "dependencies": {
@@ -67,6 +67,8 @@
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "joi": "^17.4.2",
+    "keycloak-connect": "^15.0.2",
+    "nest-keycloak-connect": "^1.7.5",
     "ng-zorro-antd": "^12.0.1",
     "nodemailer": "^6.6.3",
     "passport": "^0.4.1",
