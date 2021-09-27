@@ -1,4 +1,4 @@
-import { BaseEntity } from '@whoa/api/shared/feature';
+import { BaseEntity } from '@whoa/api/core/feature';
 import { Entity, Column, OneToMany } from 'typeorm';
 import { HoaBoardMember } from './hoa-board-member';
 

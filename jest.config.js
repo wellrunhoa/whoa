@@ -1,5 +1,8 @@
+const { getJestProjects } = require('@nrwl/jest');
+
 module.exports = {
   projects: [
+    ...getJestProjects(),
     '<rootDir>/apps/hop-ui',
     '<rootDir>/libs/web/hop-shell/feature',
     '<rootDir>/libs/web/hop-shell/ui/layout',
@@ -30,6 +33,8 @@ module.exports = {
     '<rootDir>/libs/web/service-req/data-access/model',
     '<rootDir>/apps/whoa-apis',
     '<rootDir>/libs/api/passport/feature',
-    '<rootDir>/libs/api/shared/feature',"<rootDir>/libs/api/hoa-board/feature","<rootDir>/libs/api/hoa-property/feature"
+    '<rootDir>/libs/api/core/feature',
+    '<rootDir>/libs/api/hoa-board/feature',
+    '<rootDir>/libs/api/hoa-property/feature'
   ]
 };

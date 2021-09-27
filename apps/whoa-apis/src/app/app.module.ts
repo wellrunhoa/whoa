@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ApiSharedModule } from "@whoa/api/shared/feature";
-import { ApiHoaBoardModule } from "@whoa/api/hoa-board/feature";
+import { ApiCoreModule } from '@whoa/api/core/feature';
+import { ApiHoaBoardModule } from '@whoa/api/hoa-board/feature';
+import { ApiDocumentsModule } from "@whoa/api/documents/feature";
 
 @Module({
-  imports: [ApiSharedModule, ApiHoaBoardModule],
+  imports: [ApiCoreModule, ApiHoaBoardModule, ApiDocumentsModule],
   controllers: [],
   providers: []
 })
