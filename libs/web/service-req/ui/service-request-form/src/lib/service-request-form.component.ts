@@ -68,6 +68,7 @@ export class ServiceRequestFormComponent {
     // When the type and size meet the requirements, upload directly; if return false, then you need to call the upload method manually
     return true;
   }
+  
   // Method to get the path when the file upload is finished     	 
   getFileUrl( info: NzUploadChangeParam ): void {
     const status = info.file.status;
