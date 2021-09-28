@@ -16,10 +16,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@whoa/api/core/feature": ["libs/api/core/feature/src/index.ts"],
+      "@whoa/api/documents/feature": ["libs/api/documents/feature/src/index.ts"],
       "@whoa/api/hoa-board/feature": ["libs/api/hoa-board/feature/src/index.ts"],
       "@whoa/api/hoa-property/feature": ["libs/api/hoa-property/feature/src/index.ts"],
       "@whoa/api/passport/feature": ["libs/api/passport/feature/src/index.ts"],
-      "@whoa/api/shared/feature": ["libs/api/shared/feature/src/index.ts"],
       "@whoa/web/auth/data-access": ["libs/web/auth/data-access/src/index.ts"],
       "@whoa/web/auth/feature/login": ["libs/web/auth/feature/login/src/index.ts"],
       "@whoa/web/auth/feature/shell": ["libs/web/auth/feature/shell/src/index.ts"],

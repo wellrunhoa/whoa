@@ -27,19 +27,16 @@
     ]
   },
   "projects": {
+    "api-core-feature": {
+      "tags": []
+    },
+    "api-documents-feature": {
+      "tags": []
+    },
     "api-hoa-board-feature": {
       "tags": []
     },
     "api-hoa-property-feature": {
-      "tags": []
-    },
-    "api-passport-feature": {
-      "tags": []
-    },
-    "api-shared-feature": {
-      "tags": []
-    },
-    "whoa-apis": {
       "tags": []
     },
     "hop-ui": {
@@ -105,6 +102,9 @@
     },
     "web-shared-ui-zorro-provider": {
       "tags": ["type:ui"]
+    },
+    "whoa-apis": {
+      "tags": []
     }
   }
 }
