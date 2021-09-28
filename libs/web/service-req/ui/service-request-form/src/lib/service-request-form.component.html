@@ -42,6 +42,21 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
+    <nz-upload 
+        nzAccept="application/pdf,image/jpeg,image/jpg,image/png"
+        [(nzFileList)]="fileList"
+        [nzAction]="UPLOAD_FILE"
+        [nzShowButton]="fileList.length < 1"
+        [nzBeforeUpload]="beforeUpload"
+        (nzChange)="getFileUrl($event)" >
+        Attachments: 
+        <button nz-button>
+            <i nz-icon nzType="upload"></i>
+            <span>upload files</span>            
+        </button>
+</nz-upload>
+</nz-form-item>
+  <nz-form-item>
     <button
       nz-button
       type="button"
