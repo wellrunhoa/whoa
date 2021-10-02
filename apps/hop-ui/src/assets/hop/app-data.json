@@ -27,7 +27,7 @@
         {
           "text": "Payments",
           "icon": "anticon-dollar",
-          "link": "/payments"
+          "link": "/payment"
         },
         {
           "text": "Documents",
