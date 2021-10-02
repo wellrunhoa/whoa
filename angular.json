@@ -420,6 +420,106 @@
         }
       }
     },
+    "web-payment-data-access": {
+      "projectType": "library",
+      "root": "libs/web/payment/data-access",
+      "sourceRoot": "libs/web/payment/data-access/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/payment/data-access"],
+          "options": {
+            "jestConfig": "libs/web/payment/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/payment/data-access/src/**/*.ts",
+              "libs/web/payment/data-access/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-payment-feature-payment": {
+      "projectType": "library",
+      "root": "libs/web/payment/feature/payment",
+      "sourceRoot": "libs/web/payment/feature/payment/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/payment/feature/payment"],
+          "options": {
+            "jestConfig": "libs/web/payment/feature/payment/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/payment/feature/payment/src/**/*.ts",
+              "libs/web/payment/feature/payment/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-payment-feature-shell": {
+      "projectType": "library",
+      "root": "libs/web/payment/feature/shell",
+      "sourceRoot": "libs/web/payment/feature/shell/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/payment/feature/shell"],
+          "options": {
+            "jestConfig": "libs/web/payment/feature/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/payment/feature/shell/src/**/*.ts",
+              "libs/web/payment/feature/shell/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-payment-ui-payment-form": {
+      "projectType": "library",
+      "root": "libs/web/payment/ui/payment-form",
+      "sourceRoot": "libs/web/payment/ui/payment-form/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/payment/ui/payment-form"],
+          "options": {
+            "jestConfig": "libs/web/payment/ui/payment-form/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/payment/ui/payment-form/src/**/*.ts",
+              "libs/web/payment/ui/payment-form/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "web-service-req-data-access": {
       "projectType": "library",
       "root": "libs/web/service-req/data-access",

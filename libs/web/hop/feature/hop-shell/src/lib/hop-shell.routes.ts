@@ -20,5 +20,11 @@ export const HopShellRoutes: Route[] = [
     component: BasicLayoutComponent,
     loadChildren: () => import('@whoa/web/service-req/feature/shell').then((m) => m.ServiceRequestShellModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'payment',
+    component: BasicLayoutComponent,
+    loadChildren: () => import('@whoa/web/payment/feature/shell').then((m) => m.PaymentShellModule),
+    canActivate: [AuthGuard]
   }
 ];

@@ -70,6 +70,18 @@
     "web-hop-feature-hop-shell": {
       "tags": ["scope:hop-ui"]
     },
+    "web-payment-data-access": {
+      "tags": ["type:data-access"]
+    },
+    "web-payment-feature-payment": {
+      "tags": ["type:feature"]
+    },
+    "web-payment-feature-shell": {
+      "tags": ["type:feature"]
+    },
+    "web-payment-ui-payment-form": {
+      "tags": ["type:ui"]
+    },
     "web-service-req-data-access": {
       "tags": ["type:data-access"]
     },

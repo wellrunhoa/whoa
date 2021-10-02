@@ -29,6 +29,10 @@
       "@whoa/web/core": ["libs/web/core/src/index.ts"],
       "@whoa/web/hop/feature/hop-home": ["libs/web/hop/feature/hop-home/src/index.ts"],
       "@whoa/web/hop/feature/hop-shell": ["libs/web/hop/feature/hop-shell/src/index.ts"],
+      "@whoa/web/payment/data-access": ["libs/web/payment/data-access/src/index.ts"],
+      "@whoa/web/payment/feature/payment": ["libs/web/payment/feature/payment/src/index.ts"],
+      "@whoa/web/payment/feature/shell": ["libs/web/payment/feature/shell/src/index.ts"],
+      "@whoa/web/payment/ui/payment-form": ["libs/web/payment/ui/payment-form/src/index.ts"],
       "@whoa/web/service-req/data-access": ["libs/web/service-req/data-access/src/index.ts"],
       "@whoa/web/service-req/data-access/model": [
         "libs/web/service-req/data-access/model/src/index.ts"
