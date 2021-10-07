@@ -1,1 +1,14 @@
-<p>payment-form works!</p>
+<div class="desc">Payment</div>
+<form nz-form [formGroup]="form" role="form">
+    <nz-card style="width:300px;" nzTitle="Choose Payment Method" [nzExtra]="extraTemplate">
+        <nz-tabset>
+            <nz-tab nzTitle="Tab 1">
+                <p>Pay by eCheck</p>
+            </nz-tab>
+            <nz-tab nzTitle="Tab 2">
+                <p>Pay by Credit Card</p>
+            </nz-tab>
+        </nz-tabset>
+    </nz-card>
+   
+</form>
