@@ -18,9 +18,9 @@ export class LoginComponent {
   ) {}
 
   submit(authenticate: any) {
-    this.authService.login(authenticate).subscribe(user => {
-      this.settingService.setUser(user);
-    });
+    // this.authService.login(authenticate).subscribe(user => {
+    //   this.settingService.setUser(user);
+    // });
     
     this.router.navigate([`/dashboard`]);
   }

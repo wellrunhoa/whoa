@@ -319,17 +319,17 @@
         }
       }
     },
-    "web-auth-utils": {
+    "web-core-data-access": {
       "projectType": "library",
-      "root": "libs/web/auth/utils",
-      "sourceRoot": "libs/web/auth/utils/src",
+      "root": "libs/web/core/data-access",
+      "sourceRoot": "libs/web/core/data-access/src",
       "prefix": "whoa",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/web/auth/utils"],
+          "outputs": ["coverage/libs/web/core/data-access"],
           "options": {
-            "jestConfig": "libs/web/auth/utils/jest.config.js",
+            "jestConfig": "libs/web/core/data-access/jest.config.js",
             "passWithNoTests": true
           }
         },
@@ -337,34 +337,36 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/web/auth/utils/src/**/*.ts",
-              "libs/web/auth/utils/src/**/*.html"
+              "libs/web/core/data-access/src/**/*.ts",
+              "libs/web/core/data-access/src/**/*.html"
             ]
           },
           "outputs": ["{options.outputFile}"]
         }
       }
     },
-    "web-core": {
+    "web-core-ui-layout": {
       "projectType": "library",
-      "root": "libs/web/core",
-      "sourceRoot": "libs/web/core/src",
+      "root": "libs/web/core/ui/layout",
+      "sourceRoot": "libs/web/core/ui/layout/src",
       "prefix": "whoa",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/web/core"],
+          "outputs": ["coverage/libs/web/core/ui/layout"],
           "options": {
-            "jestConfig": "libs/web/core/jest.config.js",
+            "jestConfig": "libs/web/core/ui/layout/jest.config.js",
             "passWithNoTests": true
           }
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/web/core/src/**/*.ts", "libs/web/core/src/**/*.html"]
-          },
-          "outputs": ["{options.outputFile}"]
+            "lintFilePatterns": [
+              "libs/web/core/ui/layout/src/**/*.ts",
+              "libs/web/core/ui/layout/src/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -826,11 +828,7 @@
                 }
               }
             ],
-            "assets": [
-              "apps/whoa-apis/src/assets",
-              "apps/whoa-apis/src/environments/.env.defaults",
-              "apps/whoa-apis/src/db/migrations"
-            ]
+            "assets": ["apps/whoa-apis/src/assets", "apps/whoa-apis/src/environments/.env.defaults"]
           },
           "configurations": {
             "production": {

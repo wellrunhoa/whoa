@@ -3,6 +3,18 @@
     "name": "Home Owners Portal",
     "description": "Portal for Home owners to request services, paying HOA etc"
   },
+  "auth": {
+    "authServer": {
+      "issuer": "http://localhost:8090/auth/realms/WHOA",
+      "clientId": "whoa-public-client"
+    },
+    "authzServer": {
+      "clientId": "whoa-client"
+    },
+    "resourceServer": {
+      "allowedUrls": ["http://localhost:9091/"]
+    }
+  },
   "menu": [
     {
       "text": "Main",

@@ -1,20 +1,17 @@
-import { ModelConverter } from '@whoa/api/core/feature';
-import { Exclude } from 'class-transformer';
-import { HoaBoardMember } from '../entities';
+import { HoaBoardMember } from "@prisma/client";
+import { HoaBoardDTO } from "./hoa-board.dto";
 
-export class HoaBoardMemberDTO implements Readonly<HoaBoardMemberDTO> {
-  @Exclude()
-  public static MODEL_CONVERTER = new ModelConverter<HoaBoardMemberDTO, HoaBoardMember>(
-    HoaBoardMemberDTO,
-    HoaBoardMember
-  );
-
+export class HoaBoardMemberDTO implements Readonly<HoaBoardMember> {
+  id: string;
   firstName: string;
-
   middleName: string;
-
   lastName: string;
-
   email: string;
   phone: string;
+  hoaBoardId: string;
+  hoaBoard: HoaBoardDTO;
+  createdAt: Date;
+  createdBy: string;
+  updatedAt: Date;
+  updatedBy: string;
 }

@@ -1,16 +1,27 @@
 import { getEnv, getEnvBoolean, getEnvNumber } from './utils';
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { registerAs } from '@nestjs/config';
 
 export default registerAs('database', () => {
   return {
-    type: 'postgres',
-
+    //type: 'postgres',
+    type: 'postgresql',
     host: getEnv('POSTGRES_HOST'),
     port: getEnvNumber('POSTGRES_PORT'),
     username: getEnv('POSTGRES_USER'),
     password: getEnv('POSTGRES_PASSWORD'),
-    database: getEnv('POSTGRES_DATABASE'),
+    name: getEnv('POSTGRES_DATABASE'),
+    url:
+      'postgresql://' +
+      getEnv('POSTGRES_USER') +
+      ':' +
+      getEnv('POSTGRES_PASSWORD') +
+      '@' +
+      getEnv('POSTGRES_HOST') +
+      ':' +
+      getEnvNumber('POSTGRES_PORT') +
+      '/' +
+      getEnv('POSTGRES_DATABASE') +
+      '?schema=public',
 
     // We are using migrations, synchronize should be set to false.
     synchronize: false,
@@ -23,7 +34,6 @@ export default registerAs('database', () => {
 
     logging: getEnvBoolean('TYPEORM_LOGGING', false),
     logger: 'file',
-    namingStrategy: new SnakeNamingStrategy(),
     ...JSON.parse(getEnv('TYPEORM_DRIVER_EXTRA'))
   };
 });

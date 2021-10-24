@@ -58,10 +58,10 @@
     "web-auth-ui-login-form": {
       "tags": ["type:ui"]
     },
-    "web-auth-utils": {
-      "tags": ["type:utils"]
+    "web-core-data-access": {
+      "tags": ["type:data-access"]
     },
-    "web-core": {
+    "web-core-ui-layout": {
       "tags": ["type:ui"]
     },
     "web-hop-feature-hop-home": {

@@ -1,17 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MulterModule } from '@nestjs/platform-express';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiCoreModule, FileHelper } from '@whoa/api/core/feature';
 import { diskStorage } from 'multer';
 import { DocumentController } from './controllers/document.controller';
-import { Document } from './entities/document.entity';
 import { DocumentService } from './services/document.service';
 
 @Module({
   imports: [
     ApiCoreModule,
-    TypeOrmModule.forFeature([Document]),
     MulterModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({

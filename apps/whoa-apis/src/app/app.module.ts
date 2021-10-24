@@ -4,7 +4,7 @@ import { ApiHoaBoardModule } from '@whoa/api/hoa-board/feature';
 import { ApiDocumentsModule } from "@whoa/api/documents/feature";
 
 @Module({
-  imports: [ApiCoreModule, ApiHoaBoardModule, ApiDocumentsModule],
+  imports: [ApiCoreModule, ApiDocumentsModule],
   controllers: [],
   providers: []
 })

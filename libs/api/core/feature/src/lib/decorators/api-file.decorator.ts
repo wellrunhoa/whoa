@@ -10,7 +10,7 @@ import {
   ApiUnauthorizedResponse
 } from '@nestjs/swagger';
 import { ApiValidateErrorResponse } from '.';
-import { ApiPublicError } from '../api-public-error.model';
+import { ApiPublicError } from '../models/api-public-error.model';
 import { fileMimetypeFilter } from '../files/file-mimetype-filter';
 
 export function ApiFile(

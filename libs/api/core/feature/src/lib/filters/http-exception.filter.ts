@@ -2,7 +2,7 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
-import { ApiPublicError } from '../api-public-error.model';
+import { ApiPublicError } from '../models/api-public-error.model';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {

@@ -1,19 +1,18 @@
 import { MailerModule } from '@nestjs-modules/mailer';
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { WinstonModule } from '@payk/nestjs-winston';
-import { ApiPublicError } from './api-public-error.model';
+import { ApiPublicError } from './models/api-public-error.model';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { join } from 'path';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { KeycloakConnectModule, ResourceGuard, RoleGuard, AuthGuard } from 'nest-keycloak-connect';
 import { APP_GUARD } from '@nestjs/core';
 import { ParseFile } from './files/parse-file.pipe';
-import { CustomEntitySubscriber } from './utils/custom-entity.subscriber';
-import { RequestContextModule } from 'nestjs-request-context';
+import { RequestContextMiddleware } from './context/request-context.middleware';
 import logConfig from './config/winston';
 import validationSchema from './config/env-schema';
 import loadConfig from './config/load-config';
+import { PrismaService } from './prisma/prisma.service';
 
 @Module({
   imports: [
@@ -37,17 +36,11 @@ import loadConfig from './config/load-config';
       useFactory: logConfig,
       inject: []
     }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => configService.get('database')
-    }),
     KeycloakConnectModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => configService.get('keycloak')
     }),
-    RequestContextModule,
     ApiPublicError,
     HttpExceptionFilter
   ],
@@ -88,8 +81,13 @@ import loadConfig from './config/load-config';
       useClass: RoleGuard
     },
     ParseFile,
-    CustomEntitySubscriber
+    RequestContextMiddleware,
+    PrismaService
   ],
-  exports: [ApiPublicError, HttpExceptionFilter, TypeOrmModule]
+  exports: [PrismaService, ApiPublicError, HttpExceptionFilter, RequestContextMiddleware]
 })
-export class ApiCoreModule {}
+export class ApiCoreModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(RequestContextMiddleware).forRoutes("*");
+  }
+}

@@ -41,6 +41,8 @@ services:
     - whoa-network
     depends_on:
     - postgres
+    volumes:
+    - C:/dev/workspace/whoa/kc-theme:/opt/jboss/keycloak/themes/whoa
 
 networks:
   whoa-network:

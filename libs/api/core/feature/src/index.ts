@@ -1,5 +1,5 @@
 export * from './lib/api-core.module';
-export * from './lib/api-public-error.model';
+export * from './lib/models/api-public-error.model';
 export * from './lib/filters/http-exception.filter';
 export * from './lib/config/interfaces';
 export * from './lib/app';
@@ -11,4 +11,5 @@ export * from './lib/validation/validation-exception.factory';
 export * from './lib/files/parse-file.pipe';
 export * from './lib/files/file-mimetype-filter';
 export * from './lib/files/file-helper';
-export * from './lib/user.model';
+export * from './lib/models/user.model';
+export * from './lib/prisma/prisma.service';

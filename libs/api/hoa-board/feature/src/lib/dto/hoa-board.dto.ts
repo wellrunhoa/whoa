@@ -1,24 +1,26 @@
-import { ModelConverter, IsNotEmpty, MinLength } from '@whoa/api/core/feature';
-import { Exclude } from 'class-transformer';
-import { HoaBoard } from '../entities';
+import { HoaBoard } from '@prisma/client';
+import { IsNotEmpty, MinLength } from '@whoa/api/core/feature';
 import { HoaBoardMemberDTO } from './hoa-board-member.dto';
 
-export class HoaBoardDTO implements Readonly<HoaBoardDTO> {
-  @Exclude()
-  public static MODEL_CONVERTER = new ModelConverter<HoaBoardDTO, HoaBoard>(HoaBoardDTO, HoaBoard);
+export class HoaBoardDTO implements Readonly<HoaBoard> {
+  id: string;
 
   //@IsNotEmpty()
   @MinLength(3)
   name: string;
 
   @IsNotEmpty()
-  address_line1: string;
-
-  address_line2: string;
-
+  addressLine1: string;
+  addressLine2: string;
   city: string;
-
   state: string;
+  zipCode: string;
   imageUrl: string;
-  members: HoaBoardMemberDTO[];
+
+  members?: HoaBoardMemberDTO[];
+
+  createdAt: Date;
+  createdBy: string;
+  updatedAt: Date;
+  updatedBy: string;
 }

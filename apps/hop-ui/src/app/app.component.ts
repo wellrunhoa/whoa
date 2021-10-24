@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from '@whoa/web/auth/data-access';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { filter } from 'rxjs/operators';
 
@@ -14,9 +15,11 @@ export class AppComponent implements OnInit {
     el: ElementRef,
     renderer: Renderer2,
     private router: Router,
-    private modalSrv: NzModalService
+    private modalSrv: NzModalService,
+    authService: AuthService
   ) {
     //renderer.setAttribute(el.nativeElement, 'ng-zorro-version', VERSION_ZORRO.full);
+    authService.runInitialLoginSequence().then();
   }
 
   ngOnInit(): void {

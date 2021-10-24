@@ -1,4 +1,7 @@
 import { ConfigModule } from '@nestjs/config';
+import { RequestContext } from 'nestjs-request-context';
+import { createRequest, createResponse } from 'node-mocks-http';
+import { User } from "./libs/api/core/feature/src/lib/user.model";
 import validationSchema from './libs/api/core/feature/src/lib/config/env-schema';
 import dbConfiguration from './libs/api/core/feature/src/lib/config/database';
 
@@ -24,4 +27,12 @@ const config = {
 };
 
 console.log(config);
+
+RequestContext.currentContext = new RequestContext(
+  createRequest(),
+  createResponse()
+);
+RequestContext.currentContext.req.user =  { email: 'a@a.com', sid: '2322' } as User;
+console.log(RequestContext.currentContext.req.user);
+
 export default config;

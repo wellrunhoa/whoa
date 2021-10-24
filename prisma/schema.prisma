@@ -1,0 +1,59 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Document {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  documentTitle String   @map("document_title") @db.VarChar(50)
+  documentType  String   @map("document_type") @db.VarChar(50)
+  documentPath  String   @map("document_path") @db.VarChar(1000)
+  createdAt     DateTime @default(now()) @map("created_at")
+  createdBy     String   @map("created_by") @db.VarChar(100)
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  updatedBy     String   @map("updated_by") @db.VarChar(100)
+
+  @@index([documentTitle])
+  @@map("document")
+}
+
+model HoaBoard {
+  id           String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String           @map("name") @db.VarChar(150)
+  addressLine1 String           @map("address_line1") @db.VarChar(50)
+  addressLine2 String?          @map("address_line2") @db.VarChar(50)
+  city         String           @map("city") @db.VarChar(50)
+  state        String           @map("state") @db.VarChar(50)
+  zipCode      String           @map("zip_code") @db.VarChar(15)
+  imageUrl     String?          @map("image_url") @db.VarChar(500)
+  members      HoaBoardMember[]
+  createdAt    DateTime         @default(now()) @map("created_at")
+  createdBy    String           @map("created_by") @db.VarChar(100)
+  updatedAt    DateTime         @updatedAt @map("updated_at")
+  updatedBy    String           @map("updated_by") @db.VarChar(100)
+
+  @@index([name])
+  @@index([city, state, zipCode])
+  @@map("hoa_board")
+}
+
+model HoaBoardMember {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  firstName  String   @map("first_name") @db.VarChar(50)
+  middleName String?  @map("middle_name") @db.VarChar(50)
+  lastName   String   @map("last_name") @db.VarChar(50)
+  email      String?  @map("email") @db.VarChar(100)
+  phone      String?  @map("phone") @db.VarChar(15)
+  hoaBoard   HoaBoard? @relation(fields: [hoaBoardId], references: [id])
+  hoaBoardId String   @map("hoaBoardId") @db.Uuid
+  createdAt  DateTime @default(now()) @map("created_at")
+  createdBy  String   @map("created_by") @db.VarChar(100)
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  updatedBy  String   @map("updated_by") @db.VarChar(100)
+
+  @@map("hoa_board_member")
+}
