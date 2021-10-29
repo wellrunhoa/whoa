@@ -1,8 +1,12 @@
 export interface Payment {
-    propStreetAddress: string;
-    propCity: string;
-    propState: string;
-    propZip: string;
-    requestedService: string;
-    comments: string;
+    amount: string;
+    routingNumber: string;
+    accountNumber: string;
+    accountType: string;
+    accountHolderFirstName: string;
+    accountHolderLastName: string;
+    accountHolderAddress: string;
+    accountHolderCity: string;
+    accountHolderState: string;
+    accountHolderZip: string;
 }

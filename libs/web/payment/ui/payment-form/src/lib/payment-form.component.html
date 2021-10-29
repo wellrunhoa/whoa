@@ -1,9 +1,49 @@
 <div class="desc">Payment</div>
 <form nz-form [formGroup]="form" role="form">
-    <nz-card style="width:300px;" nzTitle="Choose Payment Method" [nzExtra]="extraTemplate">
+    <nz-card style="width:900px;" nzTitle="Choose Payment Method">
         <nz-tabset>
             <nz-tab nzTitle="Tab 1">
                 <p>Pay by eCheck</p>
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="7" nzRequired>Amount </nz-form-label>
+                    <nz-form-control nzErrorTip="Amount">
+                      <input nz-input formControlName="amount" placeholder="amount" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-control nzErrorTip="AccountType">
+                    <nz-form-label inputmode="input" nzRequired nzNoColon>Bank Account Type</nz-form-label>
+                    <nz-select title="accountType" formControlName="accountType" nzAllowClear nzPlaceHolder="AccountType" nzSize="small">
+                        <nz-option
+                        *ngFor="let option of accountType"
+                        [nzValue]="option.value"
+                        [nzLabel]="option.label"
+                        ></nz-option>
+                    </nz-select>
+                    </nz-form-control>
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="7" nzRequired>Bank Routing Number </nz-form-label>
+                    <nz-form-control nzErrorTip="RoutingNumber">
+                      <input nz-input formControlName="routingNumber" placeholder="routingNumber" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="7" nzRequired>Bank Account Number </nz-form-label>
+                    <nz-form-control nzErrorTip="accountNumber">
+                      <input nz-input formControlName="accountNumber" placeholder="accountNumber" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                <button
+                    nz-button
+                    type="button"
+                    nzType="primary"
+                    nzSize="large"
+                    nzBlock
+                    (click)="submitPayment()"
+                >
+                    Submit
+                </button>
+                </nz-form-item>
             </nz-tab>
             <nz-tab nzTitle="Tab 2">
                 <p>Pay by Credit Card</p>
