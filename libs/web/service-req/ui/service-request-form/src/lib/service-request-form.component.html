@@ -1,72 +1,91 @@
-<div class="desc">Service Request</div>
-<form nz-form [formGroup]="form" role="form">
-  <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>Property Address</nz-form-label>
-    <nz-form-control nzErrorTip="Street Address">
-      <input nz-input formControlName="propStreetAddress" placeholder="propStreetAddress" />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    
-        
-            <nz-form-label [nzSpan]="7" nzRequired nzNoColon></nz-form-label>
-            <nz-form-control nzErrorTip="City">
-                <input nz-input formControlName="propCity" placeholder="City" />
-            </nz-form-control>
-            <nz-form-control nzErrorTip="State">
-            <nz-form-label inputmode="input" nzRequired nzNoColon></nz-form-label>
-            <nz-select title="State" formControlName="propState" nzAllowClear nzPlaceHolder="State" nzSize="small">
-                <nz-option
-                *ngFor="let option of stateList"
-                [nzValue]="option.value"
-                [nzLabel]="option.label"
-                ></nz-option>
-            </nz-select>
-            </nz-form-control>
-            <nz-form-label nzRequired nzNoColon ></nz-form-label>
-            <nz-form-control nzErrorTip="Zip" >
-                <input nz-input formControlName="propZip" placeholder="Zip" />
-            </nz-form-control>
-    
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>Service Type</nz-form-label>
-    <nz-form-control nzErrorTip="Service Type">
-      <input nz-input formControlName="requestedService" placeholder="requestedService" />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>Additional Comments</nz-form-label>
-    <nz-form-control nzErrorTip="Comments">
-      <input nz-input formControlName="comments" placeholder="comments" />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-upload 
-        nzAccept="application/pdf,image/jpeg,image/jpg,image/png"
-        [(nzFileList)]="fileList"
-        [nzAction]="UPLOAD_FILE"
-        [nzShowButton]="fileList.length < 1"
-        [nzBeforeUpload]="beforeUpload"
-        (nzChange)="getFileUrl($event)" >
-        Attachments: 
-        <button nz-button>
-            <i nz-icon nzType="upload"></i>
-            <span>upload files</span>            
-        </button>
-</nz-upload>
-</nz-form-item>
-  <nz-form-item>
-    <button
-      nz-button
-      type="button"
-      nzType="primary"
-      nzSize="large"
-      [nzLoading]="loading" 
-      nzBlock
-      (click)="serviceReq()"
-    >
-      Submit
-    </button>
-  </nz-form-item>
-</form>
+<div class="alain-default__content-title">
+  <h1>
+    Service Request
+    <small>Submit change requests along with any supporting documentation</small>
+  </h1>
+</div>
+<nz-row [nzGutter]="24">
+  <nz-col [nzSpan]="24">
+    <nz-card>
+      <form nz-form [formGroup]="form" role="form">
+        <nz-row [nzGutter]="64">
+          <nz-col [nzSpan]="16">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Property Address</nz-form-label>
+              <nz-form-control [nzSpan]="12" nzErrorTip="Street Address">
+                <input nz-input formControlName="propStreetAddress" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSpan]="7" nzRequired nzNoColon>City</nz-form-label>
+              <nz-form-control [nzSpan]="12" nzErrorTip="City">
+                <input nz-input formControlName="propCity" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSpan]="7" inputmode="input" nzRequired nzNoColon
+                >State</nz-form-label
+              >
+              <nz-form-control [nzSpan]="12" nzErrorTip="State">
+                <nz-select title="State" formControlName="propState" nzAllowClear>
+                  <nz-option
+                    *ngFor="let option of stateList"
+                    [nzValue]="option.value"
+                    [nzLabel]="option.label"
+                  ></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Zip</nz-form-label>
+              <nz-form-control [nzSpan]="12" nzErrorTip="Zip">
+                <input nz-input formControlName="propZip" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Service Type</nz-form-label>
+              <nz-form-control [nzSpan]="12" nzErrorTip="Service Type">
+                <input nz-input formControlName="requestedService" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Additional Comments</nz-form-label>
+              <nz-form-control [nzSpan]="12" nzErrorTip="Comments">
+                <textarea rows="4" nz-input formControlName="comments"></textarea>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Attachments</nz-form-label>
+              <nz-upload
+                nzAccept="application/pdf,image/jpeg,image/jpg,image/png"
+                [(nzFileList)]="fileList"
+                [nzAction]="UPLOAD_FILE"
+                [nzShowButton]="fileList.length < 1"
+                [nzBeforeUpload]="beforeUpload"
+                (nzChange)="getFileUrl($event)"
+              >
+                <button nz-button>
+                  <i nz-icon nzType="upload"></i>
+                  <span>upload files</span>
+                </button>
+              </nz-upload>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                <button
+                  nz-button
+                  nzType="primary"
+                  [nzLoading]="loading"
+                  nzBlock
+                  (click)="serviceReq()"
+                >
+                  Submit
+                </button>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+        </nz-row>
+      </form>
+    </nz-card>
+  </nz-col>
+</nz-row>
