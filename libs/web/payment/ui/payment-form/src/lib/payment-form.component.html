@@ -1,54 +1,115 @@
-<div class="desc">Payment</div>
-<form nz-form [formGroup]="form" role="form">
-    <nz-card style="width:900px;" nzTitle="Choose Payment Method">
-        <nz-tabset>
-            <nz-tab nzTitle="Tab 1">
-                <p>Pay by eCheck</p>
-                <nz-form-item>
-                    <nz-form-label [nzSpan]="7" nzRequired>Amount </nz-form-label>
-                    <nz-form-control nzErrorTip="Amount">
-                      <input nz-input formControlName="amount" placeholder="amount" />
-                    </nz-form-control>
-                </nz-form-item>
-                <nz-form-control nzErrorTip="AccountType">
-                    <nz-form-label inputmode="input" nzRequired nzNoColon>Bank Account Type</nz-form-label>
-                    <nz-select title="accountType" formControlName="accountType" nzAllowClear nzPlaceHolder="AccountType" nzSize="small">
-                        <nz-option
-                        *ngFor="let option of accountType"
-                        [nzValue]="option.value"
-                        [nzLabel]="option.label"
-                        ></nz-option>
-                    </nz-select>
-                    </nz-form-control>
-                <nz-form-item>
-                    <nz-form-label [nzSpan]="7" nzRequired>Bank Routing Number </nz-form-label>
-                    <nz-form-control nzErrorTip="RoutingNumber">
-                      <input nz-input formControlName="routingNumber" placeholder="routingNumber" />
-                    </nz-form-control>
-                </nz-form-item>
-                <nz-form-item>
-                    <nz-form-label [nzSpan]="7" nzRequired>Bank Account Number </nz-form-label>
-                    <nz-form-control nzErrorTip="accountNumber">
-                      <input nz-input formControlName="accountNumber" placeholder="accountNumber" />
-                    </nz-form-control>
-                </nz-form-item>
-                <nz-form-item>
-                <button
-                    nz-button
-                    type="button"
-                    nzType="primary"
-                    nzSize="large"
-                    nzBlock
-                    (click)="submitPayment()"
-                >
-                    Submit
-                </button>
-                </nz-form-item>
-            </nz-tab>
-            <nz-tab nzTitle="Tab 2">
-                <p>Pay by Credit Card</p>
-            </nz-tab>
-        </nz-tabset>
-    </nz-card>
-   
-</form>
+<div class="alain-default__content-title">
+    <h1>
+        Payments
+        <small>Setup payment to pay your HOA dues</small>
+    </h1>
+</div>
+<nz-row [nzGutter]="24">
+    <nz-col [nzSpan]="24">
+        <nz-card>
+            <form nz-form [formGroup]="form" role="form">
+                <nz-card nzTitle="Choose Payment Method">
+                    <nz-tabset>
+                        <nz-row [nzGutter]="64">
+                            <nz-col [nzSpan]="16">
+                                <nz-tab nzTitle="Pay by eCheck">
+                                    <nz-form-item>
+                                        <nz-form-label [nzSpan]="4" nzRequired>Amount </nz-form-label>
+                                        <nz-form-control [nzSpan]="4" nzErrorTip="Amount">
+                                            <input nz-input formControlName="amount" placeholder="amount" />
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <nz-form-label [nzSpan]="4" inputmode="input" nzRequired nzNoColon>Bank Account
+                                            Type
+                                        </nz-form-label>
+                                        <nz-form-control [nzSpan]="4" nzErrorTip="AccountType">
+                                            <nz-select title="accountType" formControlName="accountType" nzAllowClear
+                                                nzPlaceHolder="AccountType" nzSize="small">
+                                                <nz-option *ngFor="let option of accountType" [nzValue]="option.value"
+                                                    [nzLabel]="option.label">
+                                                </nz-option>
+                                            </nz-select>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <nz-form-label [nzSpan]="4" nzRequired>Bank Routing Number </nz-form-label>
+                                        <nz-form-control [nzSpan]="4" nzErrorTip="RoutingNumber">
+                                            <input nz-input formControlName="routingNumber"
+                                                placeholder="routingNumber" />
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <nz-form-label [nzSpan]="4" nzRequired>Bank Account Number </nz-form-label>
+                                        <nz-form-control [nzSpan]="4" nzErrorTip="accountNumber">
+                                            <input nz-input formControlName="accountNumber"
+                                                placeholder="accountNumber" />
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <nz-form-control [nzOffset]="4" [nzSpan]="4">
+                                        <button nz-button type="button" nzType="primary" nzSize="large" nzBlock
+                                            (click)="submitPayment()">
+                                            Submit
+                                        </button>
+                                    </nz-form-control>
+                                    </nz-form-item>
+                                </nz-tab>
+                                <nz-tab nzTitle="Pay by Credit Card">
+                                    <nz-form-item>
+                                        <nz-form-label [nzSpan]="4" nzRequired>Amount </nz-form-label>
+                                        <nz-form-control [nzSpan]="4" nzErrorTip="amount">
+                                            <input nz-input formControlName="amount" placeholder="amount" />
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <nz-form-label [nzSpan]="4" inputmode="input" nzRequired nzNoColon>Card
+                                            Type
+                                        </nz-form-label>
+                                        <nz-form-control [nzSpan]="4" nzErrorTip="cardType">
+                                            <nz-select title="cardType" formControlName="cardType" nzAllowClear
+                                                nzPlaceHolder="CardType" nzSize="small">
+                                                <nz-option *ngFor="let option of cardType" [nzValue]="option.value"
+                                                    [nzLabel]="option.label">
+                                                </nz-option>
+                                            </nz-select>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <nz-form-label [nzSpan]="4" nzRequired>Card Number </nz-form-label>
+                                        <nz-form-control [nzSpan]="4" nzErrorTip="cardNumber">
+                                            <input nz-input formControlName="cardNumber"
+                                                placeholder="cardNumber" />
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <nz-form-label [nzSpan]="4" nzRequired>Expiration </nz-form-label>
+                                        <nz-form-control [nzSpan]="2" nzErrorTip="expDate">
+                                            <nz-date-picker formControlName="expDate" nzFormat="mm/yyyy" nzMode="month" dateWheels="mm - MMMM  YYY" min="today" 
+                                            max="until" placeholder="expDate"></nz-date-picker>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <nz-form-label [nzSpan]="4" nzRequired>CVV </nz-form-label>
+                                        <nz-form-control [nzSpan]="4" nzErrorTip="cardCode">
+                                            <input nz-input formControlName="cardCode"
+                                                placeholder="cardCode" />
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                    <nz-form-item>
+                                        <nz-form-control [nzOffset]="4" [nzSpan]="4">
+                                        <button nz-button type="button" nzType="primary" nzSize="large" nzBlock
+                                            (click)="submitPayment()">
+                                            Submit
+                                        </button>
+                                    </nz-form-control>
+                                    </nz-form-item>
+                                </nz-tab>
+                            </nz-col>
+                        </nz-row>
+                    </nz-tabset>
+                </nz-card>
+            </form>
+        </nz-card>
+    </nz-col>
+</nz-row>

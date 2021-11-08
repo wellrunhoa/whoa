@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output  } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataAccessModule } from '@whoa/web/payment/data-access';
@@ -22,6 +22,12 @@ export class PaymentFormComponent {
     { label: 'Savings', value: 'Savings' }
   ];
 
+  cardType = [
+    { label: 'VS', value: 'visa' },
+    { label: 'MC', value: 'Mastercard' },
+    { label: 'AX', value: 'American Express' },
+    { label: 'DS', value: 'Discover' }
+  ];
   constructor(fb: FormBuilder, private router: Router, private msg: NzMessageService, private message: NzModalService) {
 
     this.form = fb.group({
@@ -35,12 +41,16 @@ export class PaymentFormComponent {
       accountHolderCity: [null, [Validators.required]],
       accountHolderState: [null, [Validators.required]],
       accountHolderZip: [null, [Validators.required]],
+      cardNumber: [null, [Validators.required]],
+      cardType: [null, [Validators.required]],
+      expDate: [null, [Validators.required]],
+      cardCode: [null, [Validators.required]],
       remember: [true]
     });
 
-   }
+  }
 
-   submitPayment(): void {
+  submitPayment(): void {
     const propamountStreetAddress = this.form.controls.amount;
     const routingNumber = this.form.controls.routingNumber;
     const accountNumber = this.form.controls.accountNumber;
@@ -51,8 +61,11 @@ export class PaymentFormComponent {
     const accountHolderCity = this.form.controls.accountHolderCity;
     const accountHolderState = this.form.controls.accountHolderState;
     const accountHolderZip = this.form.controls.accountHolderZip;
-
-
+    const cardNumber = this.form.controls.cardNumber;
+    const cardType = this.form.controls.cardType;
+    const expDate = this.form.controls.expDate;
+    const cardCode = this.form.controls.cardCode;
+    
     this.form.markAsDirty();
     this.form.updateValueAndValidity();
 
@@ -63,6 +76,6 @@ export class PaymentFormComponent {
     this.submitForm.emit(this.form.value as DataAccessModule);
   }
 
-  
+
 
 }
