@@ -14,4 +14,7 @@ export interface Payment {
     accountHolderCity: string;
     accountHolderState: string;
     accountHolderZip: string;
+    paymentId: string;
+    paymentDay: string;
+    paymentSubmittedDate: string
 }

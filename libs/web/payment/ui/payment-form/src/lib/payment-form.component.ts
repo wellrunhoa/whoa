@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataAccessModule } from '@whoa/web/payment/data-access';
+import { Payment } from '@whoa/web/payment/data-access';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -14,7 +14,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 })
 export class PaymentFormComponent {
 
-  @Output() submitForm = new EventEmitter<DataAccessModule>();
+  @Output() submitForm = new EventEmitter<Payment>();
   form: FormGroup;
 
   accountType = [
@@ -28,6 +28,10 @@ export class PaymentFormComponent {
     { label: 'AX', value: 'American Express' },
     { label: 'DS', value: 'Discover' }
   ];
+
+  editCache: { [key: string]: { edit: boolean; data: Payment } } = {};
+  listOfData: Payment[] = [];
+
   constructor(fb: FormBuilder, private router: Router, private msg: NzMessageService, private message: NzModalService) {
 
     this.form = fb.group({
@@ -73,9 +77,62 @@ export class PaymentFormComponent {
       return;
     }
 
-    this.submitForm.emit(this.form.value as DataAccessModule);
+    this.submitForm.emit(this.form.value as Payment);
   }
 
+  startEdit(id: string): void {
+    this.editCache[id].edit = true;
+  }
 
+  cancelEdit(id: string): void {
+    const index = this.listOfData.findIndex(item => item.paymentId.toString() === id);
+    this.editCache[id] = {
+      data: { ...this.listOfData[index] },
+      edit: false
+    };
+  }
 
+  saveEdit(id: string): void {
+    const index = this.listOfData.findIndex(item => item.paymentId.toString() === id);
+    Object.assign(this.listOfData[index], this.editCache[id].data);
+    this.editCache[id].edit = false;
+  }
+
+  updateEditCache(): void {
+    this.listOfData.forEach(item => {
+      this.editCache[item.paymentId.toString()] = {
+        edit: false,
+        data: { ...item }
+      };
+    });
+  }
+
+  ngOnInit(): void {
+    const data = [];
+    for (let i = 0; i < 5; i++) {
+      data.push({
+        paymentId: `${i}`,
+        paymentSubmittedDate: `Edrward ${i}`,
+        paymentDay: '23',
+        paymentType: `London Park no. ${i}`,
+        routingNumber: '', 
+        accountNumber: '',
+        accountType: '',
+        cardNumber: '',
+        expDate: '',
+        cardCode: '',
+        cardType: '',
+        accountHolderFirstName: '',
+        accountHolderLastName: '',
+        accountHolderAddress: '',
+        accountHolderCity: '',
+        accountHolderState: '',
+        accountHolderZip: '',
+        amount: ''
+      });
+    }
+    this.listOfData = data;
+    this.updateEditCache();
+  }
+  
 }

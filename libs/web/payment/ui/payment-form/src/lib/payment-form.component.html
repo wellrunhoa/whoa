@@ -48,11 +48,11 @@
                                     </nz-form-item>
                                     <nz-form-item>
                                         <nz-form-control [nzOffset]="4" [nzSpan]="4">
-                                        <button nz-button type="button" nzType="primary" nzSize="large" nzBlock
-                                            (click)="submitPayment()">
-                                            Submit
-                                        </button>
-                                    </nz-form-control>
+                                            <button nz-button type="button" nzType="primary" nzSize="large" nzBlock
+                                                (click)="submitPayment()">
+                                                Submit
+                                            </button>
+                                        </nz-form-control>
                                     </nz-form-item>
                                 </nz-tab>
                                 <nz-tab nzTitle="Pay by Credit Card">
@@ -78,31 +78,30 @@
                                     <nz-form-item>
                                         <nz-form-label [nzSpan]="4" nzRequired>Card Number </nz-form-label>
                                         <nz-form-control [nzSpan]="4" nzErrorTip="cardNumber">
-                                            <input nz-input formControlName="cardNumber"
-                                                placeholder="cardNumber" />
+                                            <input nz-input formControlName="cardNumber" placeholder="cardNumber" />
                                         </nz-form-control>
                                     </nz-form-item>
                                     <nz-form-item>
                                         <nz-form-label [nzSpan]="4" nzRequired>Expiration </nz-form-label>
                                         <nz-form-control [nzSpan]="2" nzErrorTip="expDate">
-                                            <nz-date-picker formControlName="expDate" nzFormat="mm/yyyy" nzMode="month" dateWheels="mm - MMMM  YYY" min="today" 
-                                            max="until" placeholder="expDate"></nz-date-picker>
+                                            <nz-date-picker formControlName="expDate" nzFormat="mm/yyyy" nzMode="month"
+                                                dateWheels="mm - MMMM  YYY" min="today" max="until"
+                                                placeholder="expDate"></nz-date-picker>
                                         </nz-form-control>
                                     </nz-form-item>
                                     <nz-form-item>
                                         <nz-form-label [nzSpan]="4" nzRequired>CVV </nz-form-label>
                                         <nz-form-control [nzSpan]="4" nzErrorTip="cardCode">
-                                            <input nz-input formControlName="cardCode"
-                                                placeholder="cardCode" />
+                                            <input nz-input formControlName="cardCode" placeholder="cardCode" />
                                         </nz-form-control>
                                     </nz-form-item>
                                     <nz-form-item>
                                         <nz-form-control [nzOffset]="4" [nzSpan]="4">
-                                        <button nz-button type="button" nzType="primary" nzSize="large" nzBlock
-                                            (click)="submitPayment()">
-                                            Submit
-                                        </button>
-                                    </nz-form-control>
+                                            <button nz-button type="button" nzType="primary" nzSize="large" nzBlock
+                                                (click)="submitPayment()">
+                                                Submit
+                                            </button>
+                                        </nz-form-control>
                                     </nz-form-item>
                                 </nz-tab>
                             </nz-col>
@@ -112,4 +111,46 @@
             </form>
         </nz-card>
     </nz-col>
+</nz-row>
+
+<nz-row [nzGutter]="24">
+    <nz-col [nzSpan]="24">
+<nz-card>
+    <form nz-form [formGroup]="form" role="form">
+        <nz-card nzTitle="Recurring Payments">
+            <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed">
+                <thead>
+                    <tr>
+                        <th nzWidth="25%">Payment Submitted Date</th>
+                        <th nzWidth="15%">Pay Date</th>
+                        <th nzWidth="40%">Payment Type</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of editRowTable.data">
+                        <ng-container *ngIf="!editCache[data.paymentId].edit; else editTemplate">
+                            <td>{{ data.paymentSubmittedDate }}</td>
+                            <td>{{ data.paymentDay }}</td>
+                            <td>{{ data.paymentType }}</td>
+                            <td><a (click)="startEdit(data.paymentId)">Edit</a></td>
+                        </ng-container>
+                        <ng-template #editTemplate>
+                            <td><input type="text" nz-input [(ngModel)]="editCache[data.paymentId].data.paymentSubmittedDate" /></td>
+                            <td><input type="text" nz-input [(ngModel)]="editCache[data.paymentId].data.paymentDay" /></td>
+                            <td><input type="text" nz-input [(ngModel)]="editCache[data.paymentId].data.paymentType" />
+                            </td>
+                            <td>
+                                <a (click)="saveEdit(data.paymentId)" class="save">Save</a>
+                                <a nz-popconfirm nzPopconfirmTitle="Sure to cancel?"
+                                    (nzOnConfirm)="cancelEdit(data.paymentId)">Cancel</a>
+                            </td>
+                        </ng-template>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </nz-card>
+    </form>
+</nz-card>
+</nz-col>
 </nz-row>
