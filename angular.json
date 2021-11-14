@@ -1,6 +1,28 @@
 {
   "version": 1,
   "projects": {
+    "api-amenities-feature": {
+      "root": "libs/api/amenities/feature",
+      "sourceRoot": "libs/api/amenities/feature/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/amenities/feature/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/amenities/feature"],
+          "options": {
+            "jestConfig": "libs/api/amenities/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "api-core-feature": {
       "root": "libs/api/core/feature",
       "sourceRoot": "libs/api/core/feature/src",
@@ -522,6 +544,131 @@
         }
       }
     },
+    "web-reservations-data-access": {
+      "projectType": "library",
+      "root": "libs/web/reservations/data-access",
+      "sourceRoot": "libs/web/reservations/data-access/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/reservations/data-access"],
+          "options": {
+            "jestConfig": "libs/web/reservations/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/reservations/data-access/src/**/*.ts",
+              "libs/web/reservations/data-access/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-reservations-feature-reservation": {
+      "projectType": "library",
+      "root": "libs/web/reservations/feature/reservation",
+      "sourceRoot": "libs/web/reservations/feature/reservation/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/reservations/feature/reservation"],
+          "options": {
+            "jestConfig": "libs/web/reservations/feature/reservation/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/reservations/feature/reservation/src/**/*.ts",
+              "libs/web/reservations/feature/reservation/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-reservations-feature-shell": {
+      "projectType": "library",
+      "root": "libs/web/reservations/feature/shell",
+      "sourceRoot": "libs/web/reservations/feature/shell/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/reservations/feature/shell"],
+          "options": {
+            "jestConfig": "libs/web/reservations/feature/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/reservations/feature/shell/src/**/*.ts",
+              "libs/web/reservations/feature/shell/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-reservations-ui-reservation-form": {
+      "projectType": "library",
+      "root": "libs/web/reservations/ui/reservation-form",
+      "sourceRoot": "libs/web/reservations/ui/reservation-form/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/reservations/ui/reservation-form"],
+          "options": {
+            "jestConfig": "libs/web/reservations/ui/reservation-form/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/reservations/ui/reservation-form/src/**/*.ts",
+              "libs/web/reservations/ui/reservation-form/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-reservations-ui-reservation-list": {
+      "projectType": "library",
+      "root": "libs/web/reservations/ui/reservation-list",
+      "sourceRoot": "libs/web/reservations/ui/reservation-list/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/reservations/ui/reservation-list"],
+          "options": {
+            "jestConfig": "libs/web/reservations/ui/reservation-list/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/reservations/ui/reservation-list/src/**/*.ts",
+              "libs/web/reservations/ui/reservation-list/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "web-service-req-data-access": {
       "projectType": "library",
       "root": "libs/web/service-req/data-access",
@@ -727,6 +874,31 @@
             ]
           },
           "outputs": ["{options.outputFile}"]
+        }
+      }
+    },
+    "web-shared-data-access": {
+      "projectType": "library",
+      "root": "libs/web/shared/data-access",
+      "sourceRoot": "libs/web/shared/data-access/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/shared/data-access"],
+          "options": {
+            "jestConfig": "libs/web/shared/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/shared/data-access/src/**/*.ts",
+              "libs/web/shared/data-access/src/**/*.html"
+            ]
+          }
         }
       }
     },

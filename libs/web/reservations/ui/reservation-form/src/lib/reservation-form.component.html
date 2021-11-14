@@ -1,0 +1,31 @@
+<nz-steps [nzCurrent]="current">
+  <nz-step nzTitle="Reservation Details" nzIcon="form"></nz-step>
+  <nz-step nzTitle="Pay" nzIcon="dollar"></nz-step>
+</nz-steps>
+<div class="steps-content">
+  <nz-row [nzGutter]="24">
+    <nz-col [nzSpan]="24">
+      <nz-card nzType="inner" [nzBorderless]="true">
+        <ng-container [formGroup]="reservationForm">
+          <whoa-reservation-detail-form *ngIf="current === 0" formGroupName="details" [amenities]="amenities"></whoa-reservation-detail-form>
+          <whoa-reservation-payment-form *ngIf="current === 1" formGroupName="payment"></whoa-reservation-payment-form>
+        </ng-container>
+      </nz-card>
+    </nz-col>
+  </nz-row>
+</div>
+<div class="steps-action">
+  <nz-row [nzGutter]="24">
+    <nz-col [nzSpan]="17" nzOffset="7">
+      <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+        <span>Previous</span>
+      </button>
+      <button nz-button nzType="primary" (click)="next()" *ngIf="current < 1">
+        <span>Next</span>
+      </button>
+      <button nz-button nzType="primary" (click)="done()" *ngIf="current === 1">
+        <span>Done</span>
+      </button>
+    </nz-col>
+  </nz-row>
+</div>

@@ -27,6 +27,9 @@
     ]
   },
   "projects": {
+    "api-amenities-feature": {
+      "tags": []
+    },
     "api-core-feature": {
       "tags": []
     },
@@ -82,6 +85,21 @@
     "web-payment-ui-payment-form": {
       "tags": ["type:ui"]
     },
+    "web-reservations-data-access": {
+      "tags": ["type:data-access"]
+    },
+    "web-reservations-feature-reservation": {
+      "tags": ["type:feature"]
+    },
+    "web-reservations-feature-shell": {
+      "tags": ["type:feature"]
+    },
+    "web-reservations-ui-reservation-form": {
+      "tags": ["type:ui"]
+    },
+    "web-reservations-ui-reservation-list": {
+      "tags": ["type:ui"]
+    },
     "web-service-req-data-access": {
       "tags": ["type:data-access"]
     },
@@ -105,6 +123,9 @@
     },
     "web-settings-feature": {
       "tags": ["type:feature"]
+    },
+    "web-shared-data-access": {
+      "tags": ["type:data-access"]
     },
     "web-shared-ui-icons-provider": {
       "tags": ["scope:shared-ui"]

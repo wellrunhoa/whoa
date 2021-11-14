@@ -46,7 +46,6 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot,
     permissions: KeycloakResourcePermission[]
   ): boolean {
-    console.log('permissions: ', permissions);
     const requiredPermissions = route.data.permissions;
     if (!requiredPermissions || requiredPermissions.length === 0) {
       return true;

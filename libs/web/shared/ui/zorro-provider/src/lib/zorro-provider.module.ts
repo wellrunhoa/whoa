@@ -36,6 +36,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 const SHARED_ZORRO_MODULES = [
   NzButtonModule,
@@ -71,7 +72,8 @@ const SHARED_ZORRO_MODULES = [
   NzPopconfirmModule,
   NzUploadModule,
   NzPageHeaderModule,
-  NzStepsModule
+  NzStepsModule,
+  NzSpaceModule
 ];
 
 @NgModule({

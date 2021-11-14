@@ -28,6 +28,13 @@ export const HopShellRoutes: Route[] = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'reservations',
+    component: BasicLayoutComponent,
+    loadChildren: () =>
+      import('@whoa/web/reservations/feature/shell').then((m) => m.ReservationsShellModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'payment',
     component: BasicLayoutComponent,
     loadChildren: () => import('@whoa/web/payment/feature/shell').then((m) => m.PaymentShellModule),

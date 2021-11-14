@@ -17,8 +17,8 @@ export class AuthDataAccessModule {
           provide: OAuthModuleConfig,
           useFactory: (configService: AuthConfigService) => configService.resourceServerConfig,
           deps: [AuthConfigService]
-        }
-        //{ provide: HTTP_INTERCEPTORS, useClass: DefaultOAuthInterceptor, multi: true },
+        },
+        { provide: HTTP_INTERCEPTORS, useClass: DefaultOAuthInterceptor, multi: true },
       ]
     };
   }

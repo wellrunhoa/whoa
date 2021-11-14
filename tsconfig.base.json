@@ -16,6 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@whoa/api/amenities/feature": ["libs/api/amenities/feature/src/index.ts"],
       "@whoa/api/core/feature": ["libs/api/core/feature/src/index.ts"],
       "@whoa/api/documents/feature": ["libs/api/documents/feature/src/index.ts"],
       "@whoa/api/hoa-board/feature": ["libs/api/hoa-board/feature/src/index.ts"],
@@ -33,6 +34,17 @@
       "@whoa/web/payment/feature/payment": ["libs/web/payment/feature/payment/src/index.ts"],
       "@whoa/web/payment/feature/shell": ["libs/web/payment/feature/shell/src/index.ts"],
       "@whoa/web/payment/ui/payment-form": ["libs/web/payment/ui/payment-form/src/index.ts"],
+      "@whoa/web/reservations/data-access": ["libs/web/reservations/data-access/src/index.ts"],
+      "@whoa/web/reservations/feature/reservation": [
+        "libs/web/reservations/feature/reservation/src/index.ts"
+      ],
+      "@whoa/web/reservations/feature/shell": ["libs/web/reservations/feature/shell/src/index.ts"],
+      "@whoa/web/reservations/ui/reservation-form": [
+        "libs/web/reservations/ui/reservation-form/src/index.ts"
+      ],
+      "@whoa/web/reservations/ui/reservation-list": [
+        "libs/web/reservations/ui/reservation-list/src/index.ts"
+      ],
       "@whoa/web/service-req/data-access": ["libs/web/service-req/data-access/src/index.ts"],
       "@whoa/web/service-req/data-access/model": [
         "libs/web/service-req/data-access/model/src/index.ts"
@@ -47,6 +59,7 @@
       "@whoa/web/service-req/utils": ["libs/web/service-req/utils/src/index.ts"],
       "@whoa/web/settings/data-access": ["libs/web/settings/data-access/src/index.ts"],
       "@whoa/web/settings/feature": ["libs/web/settings/feature/src/index.ts"],
+      "@whoa/web/shared/data-access": ["libs/web/shared/data-access/src/index.ts"],
       "@whoa/web/shared/ui/icons-provider": ["libs/web/shared/ui/icons-provider/src/index.ts"],
       "@whoa/web/shared/ui/layout": ["libs/web/shared/ui/layout/src/index.ts"],
       "@whoa/web/shared/ui/zorro-provider": ["libs/web/shared/ui/zorro-provider/src/index.ts"]

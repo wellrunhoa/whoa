@@ -1,0 +1,12 @@
+<nz-card nzTitle="Upcoming" >
+  <nz-card nzType="inner" nzTitle="Clubhouse" [nzActions]="[actionEdit, actionDelete]">
+    12/01/2021
+    5:00PM to 9:00PM
+  </nz-card>
+  <ng-template #actionEdit>
+    <i nz-icon nzType="edit"></i>
+  </ng-template>
+  <ng-template #actionDelete>
+    <i nz-icon nzType="delete"></i>
+  </ng-template>
+</nz-card>

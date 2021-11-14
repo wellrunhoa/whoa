@@ -56,7 +56,6 @@ const APPINIT_PROVIDES = [
     ...GLOBAL_THIRD_MODULES
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: en_US },
     { provide: NZ_I18N, useValue: zorroLang },
     { provide: NZ_DATE_LOCALE, useValue: zorroLang }, //??
     { provide: DELON_LOCALE, useValue: delonLang },

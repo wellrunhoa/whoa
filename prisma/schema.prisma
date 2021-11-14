@@ -17,43 +17,111 @@ model Document {
   updatedAt     DateTime @updatedAt @map("updated_at")
   updatedBy     String   @map("updated_by") @db.VarChar(100)
 
-  @@index([documentTitle])
+  @@index([documentTitle, documentType])
   @@map("document")
 }
 
 model HoaBoard {
-  id           String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name         String           @map("name") @db.VarChar(150)
-  addressLine1 String           @map("address_line1") @db.VarChar(50)
-  addressLine2 String?          @map("address_line2") @db.VarChar(50)
-  city         String           @map("city") @db.VarChar(50)
-  state        String           @map("state") @db.VarChar(50)
-  zipCode      String           @map("zip_code") @db.VarChar(15)
-  imageUrl     String?          @map("image_url") @db.VarChar(500)
-  members      HoaBoardMember[]
-  createdAt    DateTime         @default(now()) @map("created_at")
-  createdBy    String           @map("created_by") @db.VarChar(100)
-  updatedAt    DateTime         @updatedAt @map("updated_at")
-  updatedBy    String           @map("updated_by") @db.VarChar(100)
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String   @map("name") @db.VarChar(150)
+  addressLine1 String   @map("address_line1") @db.VarChar(50)
+  addressLine2 String?  @map("address_line2") @db.VarChar(50)
+  city         String   @map("city") @db.VarChar(50)
+  state        String   @map("state") @db.VarChar(50)
+  zipCode      String   @map("zip_code") @db.VarChar(15)
+  createdAt    DateTime @default(now()) @map("created_at")
+  createdBy    String   @map("created_by") @db.VarChar(100)
+  updatedAt    DateTime @updatedAt @map("updated_at")
+  updatedBy    String   @map("updated_by") @db.VarChar(100)
 
+  communities Community[]
+  members     HoaBoardMember[]
   @@index([name])
   @@index([city, state, zipCode])
   @@map("hoa_board")
 }
 
 model HoaBoardMember {
-  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  firstName  String   @map("first_name") @db.VarChar(50)
-  middleName String?  @map("middle_name") @db.VarChar(50)
-  lastName   String   @map("last_name") @db.VarChar(50)
-  email      String?  @map("email") @db.VarChar(100)
-  phone      String?  @map("phone") @db.VarChar(15)
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  firstName  String    @map("first_name") @db.VarChar(50)
+  middleName String?   @map("middle_name") @db.VarChar(50)
+  lastName   String    @map("last_name") @db.VarChar(50)
+  email      String?   @map("email") @db.VarChar(100)
+  phone      String?   @map("phone") @db.VarChar(15)
   hoaBoard   HoaBoard? @relation(fields: [hoaBoardId], references: [id])
-  hoaBoardId String   @map("hoaBoardId") @db.Uuid
-  createdAt  DateTime @default(now()) @map("created_at")
-  createdBy  String   @map("created_by") @db.VarChar(100)
-  updatedAt  DateTime @updatedAt @map("updated_at")
-  updatedBy  String   @map("updated_by") @db.VarChar(100)
+  hoaBoardId String    @map("hoaBoardId") @db.Uuid
+  createdAt  DateTime  @default(now()) @map("created_at")
+  createdBy  String    @map("created_by") @db.VarChar(100)
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  updatedBy  String    @map("updated_by") @db.VarChar(100)
 
   @@map("hoa_board_member")
+}
+
+model Community {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String    @map("name") @db.VarChar(150)
+  addressLine1 String    @map("address_line1") @db.VarChar(50)
+  addressLine2 String?   @map("address_line2") @db.VarChar(50)
+  city         String    @map("city") @db.VarChar(50)
+  state        String    @map("state") @db.VarChar(50)
+  zipCode      String    @map("zip_code") @db.VarChar(15)
+  imageUrl     String?   @map("image_url") @db.VarChar(500)
+  hoaBoard     HoaBoard? @relation(fields: [hoaBoardId], references: [id])
+  hoaBoardId   String?   @map("hoaBoardId") @db.Uuid
+  createdAt    DateTime  @default(now()) @map("created_at")
+  createdBy    String    @map("created_by") @db.VarChar(100)
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  updatedBy    String    @map("updated_by") @db.VarChar(100)
+
+  amenities CommunityAmenity[]
+  @@index([name])
+  @@index([city, state, zipCode])
+  @@map("community")
+}
+
+model Amenity {
+  id                 String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  amenityName        String   @map("amenity_name") @db.VarChar(50)
+  reservationAllowed String   @map("reservation_allowed") @db.VarChar(1)
+  createdAt          DateTime @default(now()) @map("created_at")
+  createdBy          String   @map("created_by") @db.VarChar(100)
+  updatedAt          DateTime @updatedAt @map("updated_at")
+  updatedBy          String   @map("updated_by") @db.VarChar(100)
+
+  communityAmenities CommunityAmenity[]
+  @@index([amenityName])
+  @@map("amenity")
+}
+
+model CommunityAmenity {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  community   Community @relation(fields: [communityId], references: [id])
+  communityId String    @map("communityId") @db.Uuid
+  amenity     Amenity   @relation(fields: [amenityId], references: [id])
+  amenityId   String    @map("amenityId") @db.Uuid
+  createdAt   DateTime  @default(now()) @map("created_at")
+  createdBy   String    @map("created_by") @db.VarChar(100)
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  updatedBy   String    @map("updated_by") @db.VarChar(100)
+
+  reservations Reservation[]
+  @@index([communityId, amenityId])
+  @@map("community_amenity")
+}
+
+model Reservation {
+  id                 String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  community          CommunityAmenity @relation(fields: [communityAmenityId], references: [id])
+  communityAmenityId String           @map("communityAmenityId") @db.Uuid
+  startTime          DateTime         @map("start_time")
+  endTime            DateTime         @map("end_time")
+  paymentToken       String           @map("payment_token") @db.VarChar(200)
+  createdAt          DateTime         @default(now()) @map("created_at")
+  createdBy          String           @map("created_by") @db.VarChar(100)
+  updatedAt          DateTime         @updatedAt @map("updated_at")
+  updatedBy          String           @map("updated_by") @db.VarChar(100)
+
+  @@index([communityAmenityId])
+  @@map("reservation")
 }

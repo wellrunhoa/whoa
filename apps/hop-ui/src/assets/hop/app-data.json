@@ -12,7 +12,8 @@
       "clientId": "whoa-client"
     },
     "resourceServer": {
-      "allowedUrls": ["http://localhost:9091/"]
+      "allowedUrls": ["api/"],
+      "sendAccessToken": true
     }
   },
   "menu": [

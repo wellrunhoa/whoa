@@ -15,7 +15,6 @@ export class HoaBoardDTO implements Readonly<HoaBoard> {
   city: string;
   state: string;
   zipCode: string;
-  imageUrl: string;
 
   members?: HoaBoardMemberDTO[];
 

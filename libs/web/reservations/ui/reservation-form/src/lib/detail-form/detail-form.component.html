@@ -1,0 +1,27 @@
+<form nz-form role="form" [formGroup]="detailForm">
+  <nz-row>
+    <nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Select Amenity</nz-form-label>
+        <nz-form-control [nzSpan]="10" >
+          <nz-select nzShowSearch nzAllowClear formControlName="amenity" >
+            <nz-option *ngFor="let a of amenities | async" [nzValue]="a.id" [nzLabel]="a.amenityName"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Reservation Date</nz-form-label>
+        <nz-form-control [nzSpan]="10">
+          <nz-date-picker [nzFormat]="dateFormat" formControlName="reservationDate"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Time</nz-form-label>
+        <nz-form-control [nzSpan]="10">
+          <nz-time-picker nzFormat="HH:mm" formControlName="startTime" nzPlaceHolder="Start Time"></nz-time-picker> - 
+          <nz-time-picker nzFormat="HH:mm" formControlName="endTime" nzPlaceHolder="End Time"></nz-time-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+  </nz-row>
+</form>

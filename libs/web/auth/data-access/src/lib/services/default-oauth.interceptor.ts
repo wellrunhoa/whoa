@@ -18,18 +18,20 @@ export class DefaultOAuthInterceptor implements HttpInterceptor {
   }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const url = req.url.toLowerCase();
+    
+    if(url.indexOf('assets/') != -1) return next.handle(req);
+
     if(!this.moduleConfig) {
       this.moduleConfig = AppInjector.get(AuthConfigService).resourceServerConfig;
     }
-    const url = req.url.toLowerCase();
-
+    
     if (!this.moduleConfig) return next.handle(req);
     if (!this.moduleConfig.resourceServer) return next.handle(req);
     if (!this.moduleConfig.resourceServer.allowedUrls) return next.handle(req);
     if (!this.checkUrl(url)) return next.handle(req);
 
     const sendAccessToken = this.moduleConfig.resourceServer.sendAccessToken;
-
     if (sendAccessToken) {
       const token = AppInjector.get(OAuthStorage).getItem('access_token');
       const header = 'Bearer ' + token;
