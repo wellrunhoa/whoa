@@ -78,6 +78,7 @@ model Community {
   @@index([name])
   @@index([city, state, zipCode])
   @@map("community")
+  Property Property[]
 }
 
 model Amenity {
@@ -124,4 +125,86 @@ model Reservation {
 
   @@index([communityAmenityId])
   @@map("reservation")
+}
+
+model PaymentSource {
+  id                     String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  paymentType            String   @map("payment_type") @db.VarChar(50) //ach or credit
+  accountType            String   @map("account_type") @db.VarChar(50) //checkings or saving
+  accountNumber          String   @map("account_number") @db.VarChar(50) //both account number
+  routingNumber          String   @map("routing_number") @db.VarChar(50)
+  accountHolderFirstname String   @map("account_holder_firstname") @db.VarChar(50)
+  accountHolderLastname  String   @map("account_holder_lastname") @db.VarChar(50)
+  createdAt              DateTime @default(now()) @map("created_at")
+  createdBy              String   @map("created_by") @db.VarChar(100)
+  updatedAt              DateTime @updatedAt @map("updated_at")
+  updatedBy              String   @map("updated_by") @db.VarChar(100)
+
+  Payment Payment[]
+  @@map("payment_source")
+}
+
+model Payment {
+  id              String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  paymentSource   PaymentSource @relation(fields: [paymentSourceId], references: [id])
+  paymentSourceId String        @map("paymentSourceId") @db.Uuid
+  paymentAmount   Decimal       @map("payment_amount") @db.Decimal
+  paymentStatus   String        @map("payment_status") @db.VarChar(50) //processed or scheduled or declined
+  createdAt       DateTime      @default(now()) @map("created_at")
+  createdBy       String        @map("created_by") @db.VarChar(100)
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+  updatedBy       String        @map("updated_by") @db.VarChar(100)
+
+  @@map("payment")
+}
+
+model Property {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  community    Community @relation(fields: [communityId], references: [id])
+  communityId  String    @map("communityId") @db.Uuid
+  addressLine1 String    @map("address_line1") @db.VarChar(50)
+  addressLine2 String?   @map("address_line2") @db.VarChar(50)
+  city         String    @map("city") @db.VarChar(50)
+  state        String    @map("state") @db.VarChar(50)
+  zipCode      String    @map("zip_code") @db.VarChar(15)
+  createdAt    DateTime  @default(now()) @map("created_at")
+  createdBy    String    @map("created_by") @db.VarChar(100)
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  updatedBy    String    @map("updated_by") @db.VarChar(100)
+
+  PropertyOwner PropertyOwner[]
+  @@index([city, state, zipCode])
+  @@map("property")
+}
+
+model Proprietor {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  firstName  String   @map("first_name") @db.VarChar(50)
+  middleName String?  @map("middle_name") @db.VarChar(50)
+  lastName   String   @map("last_name") @db.VarChar(50)
+  email      String?  @map("email") @db.VarChar(100)
+  phone      String?  @map("phone") @db.VarChar(15)
+  userId     String?  @map("userId") @db.VarChar(100)
+  createdAt  DateTime @default(now()) @map("created_at")
+  createdBy  String   @map("created_by") @db.VarChar(100)
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  updatedBy  String   @map("updated_by") @db.VarChar(100)
+
+  PropertyOwner PropertyOwner[]
+  @@map("proprietor")
+}
+
+model PropertyOwner {
+  id           String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  proprietor   Proprietor @relation(fields: [proprietorId], references: [id])
+  proprietorId String     @map("proprietorId") @db.Uuid
+  property     Property   @relation(fields: [propertyId], references: [id])
+  propertyId   String     @map("propertyId") @db.Uuid
+  createdAt    DateTime   @default(now()) @map("created_at")
+  createdBy    String     @map("created_by") @db.VarChar(100)
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+  updatedBy    String     @map("updated_by") @db.VarChar(100)
+
+  @@index([proprietorId, propertyId])
+  @@map("property_owner")
 }
