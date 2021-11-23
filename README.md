@@ -79,6 +79,24 @@ nx g @nrwl/angular:guard auth --implements=CanActivate --project=web-auth-utils
 To generate service
 nx g service services/auth --project=web-auth-data-access
 
+## API
+nx g @nrwl/nest:library shared/feature --directory=api
+
+nx g @nrwl/nest:library hoa-board/feature --directory=api
+nx g @nrwl/nest:library hoa-property/feature --directory=api
+
+nx g @nrwl/nest:service hoa-board --project=api-hoa-board-feature --directory=lib --flat
+nx g @nrwl/nest:controller hoa-board --project=api-hoa-board-feature --directory=lib --flat
+
+nx g @nrwl/nest:library documents/feature --directory=api
+
+nx g @nrwl/nest:service document --project=api-documents-feature --directory=lib --flat
+nx g @nrwl/nest:controller document --project=api-documents-feature --directory=lib --flat
+
+nx g @nrwl/nest:library amenities/feature --directory=api
+nx g @nrwl/nest:service amenities --project=api-amenities-feature --directory=lib --flat
+nx g @nrwl/nest:controller amenities --project=api-amenities-feature --directory=lib --flat
+
 ## Development server
 
 Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
