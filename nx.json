@@ -42,6 +42,9 @@
     "api-hoa-property-feature": {
       "tags": []
     },
+    "api-payments-feature": {
+      "tags": []
+    },
     "hop-ui": {
       "tags": []
     },

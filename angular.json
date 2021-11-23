@@ -111,6 +111,28 @@
         }
       }
     },
+    "api-payments-feature": {
+      "root": "libs/api/payments/feature",
+      "sourceRoot": "libs/api/payments/feature/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/payments/feature/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/payments/feature"],
+          "options": {
+            "jestConfig": "libs/api/payments/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "hop-ui": {
       "projectType": "application",
       "root": "apps/hop-ui",

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { map, BehaviorSubject, Observable } from 'rxjs';
 import {Payment} from '../model/Payment';
 
 @Injectable({
@@ -8,13 +8,13 @@ import {Payment} from '../model/Payment';
 })
 export class PaymentService {
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private http: HttpClient) {}
   setupPayment(payment : Payment) {
 
   }
 
-  getScheduledPayments(payment : Payment) {
-
+  getScheduledPayments(proprietorId: string): Observable<Payment[]> {
+    return this.http.get<Payment[]>(`api/payments/scheduledPayments/${proprietorId}`).pipe(map(res => res));
   }
 }
 
