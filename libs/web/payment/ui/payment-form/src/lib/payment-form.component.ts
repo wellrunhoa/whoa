@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Payment } from '@whoa/web/payment/data-access';
+import { Payment, PaymentService } from '@whoa/web/payment/data-access';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'whoa-payment-form',
@@ -31,8 +32,9 @@ export class PaymentFormComponent {
 
   editCache: { [key: string]: { edit: boolean; data: Payment } } = {};
   listOfData: Payment[] = [];
+  //listOfData!: Observable<Payment[]>;
 
-  constructor(fb: FormBuilder, private router: Router, private msg: NzMessageService, private message: NzModalService) {
+  constructor(fb: FormBuilder, private router: Router, private msg: NzMessageService, private message: NzModalService, private paymentService: PaymentService) {
 
     this.form = fb.group({
       amount: [null, [Validators.required]], //, Validators.pattern(/^(user)$/)
@@ -108,30 +110,30 @@ export class PaymentFormComponent {
   }
 
   ngOnInit(): void {
-    const data = [];
-    for (let i = 0; i < 5; i++) {
-      data.push({
-        paymentId: `${i}`,
-        paymentSubmittedDate: `Edrward ${i}`,
-        paymentDay: '23',
-        paymentType: `London Park no. ${i}`,
-        routingNumber: '', 
-        accountNumber: '',
-        accountType: '',
-        cardNumber: '',
-        expDate: '',
-        cardCode: '',
-        cardType: '',
-        accountHolderFirstName: '',
-        accountHolderLastName: '',
-        accountHolderAddress: '',
-        accountHolderCity: '',
-        accountHolderState: '',
-        accountHolderZip: '',
-        amount: ''
-      });
-    }
-    this.listOfData = data;
+    // const data = [];
+    // for (let i = 0; i < 5; i++) {
+    //   data.push({
+    //     paymentId: `${i}`,
+    //     paymentSubmittedDate: `Edrward ${i}`,
+    //     paymentDay: '23',
+    //     paymentType: `London Park no. ${i}`,
+    //     routingNumber: '', 
+    //     accountNumber: '',
+    //     accountType: '',
+    //     cardNumber: '',
+    //     expDate: '',
+    //     cardCode: '',
+    //     cardType: '',
+    //     accountHolderFirstName: '',
+    //     accountHolderLastName: '',
+    //     accountHolderAddress: '',
+    //     accountHolderCity: '',
+    //     accountHolderState: '',
+    //     accountHolderZip: '',
+    //     amount: ''
+    //   });
+    // }
+    this.paymentService.getScheduledPayments('').subscribe(listOfData => this.listOfData = listOfData);;
     this.updateEditCache();
   }
   
