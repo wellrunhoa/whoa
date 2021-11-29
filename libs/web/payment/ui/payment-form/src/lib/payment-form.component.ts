@@ -32,7 +32,7 @@ export class PaymentFormComponent {
 
   editCache: { [key: string]: { edit: boolean; data: Payment } } = {};
   listOfData: Payment[] = [];
-  //listOfData!: Observable<Payment[]>;
+  //scheduledPayments!: Observable<Payment[]>;
 
   constructor(fb: FormBuilder, private router: Router, private msg: NzMessageService, private message: NzModalService, private paymentService: PaymentService) {
 
@@ -71,7 +71,7 @@ export class PaymentFormComponent {
     const cardType = this.form.controls.cardType;
     const expDate = this.form.controls.expDate;
     const cardCode = this.form.controls.cardCode;
-    
+
     this.form.markAsDirty();
     this.form.updateValueAndValidity();
 
@@ -133,8 +133,8 @@ export class PaymentFormComponent {
     //     amount: ''
     //   });
     // }
-    this.paymentService.getScheduledPayments('').subscribe(listOfData => this.listOfData = listOfData);;
-    this.updateEditCache();
+    this.paymentService.getScheduledPayments('6e504840-6a9b-4bf9-9343-5b891a5212df').subscribe(listOfData => { console.log(listOfData); this.listOfData = listOfData; this.updateEditCache(); }); //FIXME: this.listOfData = this.paymentService.getScheduledPayments('')
+
   }
-  
+
 }

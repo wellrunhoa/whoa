@@ -152,6 +152,7 @@ model Payment {
   paymentSourceId String        @map("paymentSourceId") @db.Uuid
   paymentAmount   Decimal       @map("payment_amount") @db.Decimal
   paymentStatus   String        @map("payment_status") @db.VarChar(50) //processed or scheduled or declined
+  paymentDate       DateTime      @default(now()) @map("payment_date")
   createdAt       DateTime      @default(now()) @map("created_at")
   createdBy       String        @map("created_by") @db.VarChar(100)
   updatedAt       DateTime      @updatedAt @map("updated_at")

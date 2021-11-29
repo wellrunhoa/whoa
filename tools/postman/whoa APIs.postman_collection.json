@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "982dc84f-67a7-4a0c-ac72-d0cfbd6b9db1",
+		"name": "whoa APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/api/payments/payments/6e504840-6a9b-4bf9-9343-5b891a5212df",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientSecret",
+							"value": "847228de-6c45-4943-a817-320428e92b5e",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "whoa-client",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:4200",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "http://localhost:8090/auth/realms/WHOA/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "http://localhost:8090/auth/realms/WHOA/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/payments/payments/6e504840-6a9b-4bf9-9343-5b891a5212df",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"payments",
+						"payments",
+						"6e504840-6a9b-4bf9-9343-5b891a5212df"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

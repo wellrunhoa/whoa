@@ -19,7 +19,10 @@ export class PaymentsService {
           take,
           cursor,
           where,
-          orderBy
+          orderBy,
+          include: { 
+              paymentSource: true
+          },
         });
       }
 

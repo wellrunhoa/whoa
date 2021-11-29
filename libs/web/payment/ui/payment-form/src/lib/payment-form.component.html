@@ -121,24 +121,27 @@
             <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed">
                 <thead>
                     <tr>
-                        <th nzWidth="25%">Payment Submitted Date</th>
-                        <th nzWidth="15%">Pay Date</th>
-                        <th nzWidth="40%">Payment Type</th>
+                        <th nzWidth="20%">Payment Submitted Date</th>
+                        <th nzWidth="20%">Pay Date</th>
+                        <th nzWidth="10%">Payment Type</th>
+                        <th nzWidth="30%"> Amount</th>
                         <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let data of editRowTable.data">
+                    <tr *ngFor="let data of editRowTable.data" >
                         <ng-container *ngIf="!editCache[data.paymentId].edit; else editTemplate">
                             <td>{{ data.paymentSubmittedDate }}</td>
                             <td>{{ data.paymentDay }}</td>
                             <td>{{ data.paymentType }}</td>
+                            <td>{{ data.amount }}</td>
                             <td><a (click)="startEdit(data.paymentId)">Edit</a></td>
                         </ng-container>
                         <ng-template #editTemplate>
                             <td><input type="text" nz-input [(ngModel)]="editCache[data.paymentId].data.paymentSubmittedDate" /></td>
                             <td><input type="text" nz-input [(ngModel)]="editCache[data.paymentId].data.paymentDay" /></td>
                             <td><input type="text" nz-input [(ngModel)]="editCache[data.paymentId].data.paymentType" />
+                                <td><input type="text" nz-input [(ngModel)]="editCache[data.paymentId].data.amount" />
                             </td>
                             <td>
                                 <a (click)="saveEdit(data.paymentId)" class="save">Save</a>
