@@ -63,7 +63,8 @@ export class AuthService {
       .pipe(filter((a) => a))
       .subscribe(() => {
         this.settings.setUser(this.oauthService.getIdentityClaims());
-        //this.authzService.getAuthorizations("whoa-client", {});
+        //this.authzService.getPermissions(); //load permissions
+        this.eventService.dispatch("whoa:authenticated");
       });
 
     this.authzService.init({ config: this.authConfigService.authzConfig });

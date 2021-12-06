@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 import { AuthLayoutComponent, BasicLayoutComponent } from '@whoa/web/core/ui/layout';
 import { AuthGuard } from '@whoa/web/auth/data-access';
+import { PropertyGuard } from '@whoa/web/property/data-access';
 
 export const HopShellRoutes: Route[] = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -10,10 +11,16 @@ export const HopShellRoutes: Route[] = [
     loadChildren: () => import('@whoa/web/auth/feature/shell').then((m) => m.AuthShellModule)
   },
   {
+    path: 'property',
+    component: AuthLayoutComponent,
+    loadChildren: () => import('@whoa/web/property/feature/shell').then((m) => m.PropertyShellModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'dashboard',
     component: BasicLayoutComponent,
     loadChildren: () => import('@whoa/web/hop/feature/hop-home').then((m) => m.HopHomeModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, PropertyGuard]
     //,
     // data:{permissions:[{
     //   rsname:"hoa-board",

@@ -23,7 +23,7 @@
   </nz-layout>
 </nz-layout> -->
 
-<layout-default [options]="options" [content]="contentTpl">
+<layout-default [asideUser]="asideUserTpl" [options]="options" [content]="contentTpl">
   <layout-default-header-item direction="left" hidden="pc">
     <div layout-default-header-item-trigger (click)="searchToggleStatus = !searchToggleStatus">
       <i nz-icon nzType="search"></i>
@@ -36,5 +36,28 @@
     <nz-spin *ngIf="isFetching" class="fetching" nzSpinning></nz-spin>
     <router-outlet></router-outlet>
     <nz-back-top></nz-back-top>
+  </ng-template>
+  <ng-template #asideUserTpl>
+    <!-- <div nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu" class="alain-default__aside-user">
+      <nz-avatar class="alain-default__aside-user-avatar" [nzSrc]="user.avatar"></nz-avatar>
+      <div class="alain-default__aside-user-info">
+        <strong>{{ user.name }}</strong>
+        <p class="mb0">{{ user.email }}</p>
+      </div>
+    </div> -->
+    <!-- <nz-dropdown-menu #userMenu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item routerLink="/pro/account/center">{{ 'menu.account.center' | i18n }}</li>
+        <li nz-menu-item routerLink="/pro/account/settings">{{ 'menu.account.settings' | i18n }}</li>
+      </ul>
+    </nz-dropdown-menu> -->
+    <div class="alain-default__aside-user">
+    <div class="alain-default__aside-user-info" *ngIf="property">
+      <strong>{{ property.community?.name }}</strong>
+      <p class="mb0">{{ property.addressLine1 }}</p>
+      <p class="mb0">{{ property.city }}</p>
+      <p class="mb0">{{ property.state }}, {{ property.zipCode }}</p>
+    </div>
+  </div>
   </ng-template>
 </layout-default>

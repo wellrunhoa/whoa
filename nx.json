@@ -88,6 +88,18 @@
     "web-payment-ui-payment-form": {
       "tags": ["type:ui"]
     },
+    "web-property-data-access": {
+      "tags": ["type:data-access"]
+    },
+    "web-property-feature-add-property": {
+      "tags": ["type:ui"]
+    },
+    "web-property-feature-shell": {
+      "tags": ["type:feature"]
+    },
+    "web-property-ui-add-property-form": {
+      "tags": ["type:ui"]
+    },
     "web-reservations-data-access": {
       "tags": ["type:data-access"]
     },

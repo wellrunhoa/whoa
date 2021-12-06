@@ -1,9 +1,10 @@
-import { Controller, Body, Param } from '@nestjs/common';
+import { Controller, Body, Param, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Resource, Scopes } from 'nest-keycloak-connect';
 import { HoaBoardDTO } from '../dto/hoa-board.dto';
 import { HoaBoardService } from '../services/hoa-board.service';
-import { ApiGetOne, ApiPatch, ApiPost } from '@whoa/api/core/feature';
+import { ApiGetAll, ApiGetOne, ApiPatch, ApiPost } from '@whoa/api/core/feature';
+import { CommunityDTO } from '../dto/community.dto';
 
 @Controller('hoa-board')
 @Resource('hoa-board')
@@ -27,5 +28,10 @@ export class HoaBoardController {
   @Scopes('manage')
   update(@Param('id') id: string, @Body() boardDto: HoaBoardDTO): Promise<HoaBoardDTO> {
     return this.hoaBoardService.update(id, boardDto);
+  }
+
+  @ApiGetAll(CommunityDTO, 'community/search/name')
+  getCommunitiesBasic(@Query('name') name: string): Promise<CommunityDTO[]> {
+    return this.hoaBoardService.getCommunitiesBasic(name);
   }
 }

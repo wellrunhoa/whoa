@@ -4,8 +4,8 @@ export class User implements Readonly<User> {
   sub: string;
   name: string;
   preferredUsername: string;
-  givenName: string;
-  familyName: string;
+  given_name: string;
+  family_name: string;
   email: string;
   //info
   exp: number;

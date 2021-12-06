@@ -42,7 +42,8 @@ services:
     depends_on:
     - postgres
     volumes:
-    - C:/Users/karth/whoa/tools/whoa-realm-export.json:/tmp/imports/realm-export.json
+    - C:/dev/workspace/whoa/kc-theme:/opt/jboss/keycloak/themes/whoa
+    - C:/dev/workspace/whoa/tools/whoa-realm-export.json:/tmp/imports/realm-export.json
 
 networks:
   whoa-network:

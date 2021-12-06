@@ -38,13 +38,13 @@ export class BasicLayoutComponent implements OnDestroy {
     logoCollapsed: `./assets/whoa-collapsed.png`
   };
   searchToggleStatus = false;
-  // get user(): User {
-  //   return this.settings.user;
-  // }
 
-  //constructor(public settings: SettingsService) {}
   get user(): User {
     return this.settings.user;
+  }
+
+  get property() {
+    return this.settings.getData("defaultProperty");
   }
   
   ngOnDestroy(): void {

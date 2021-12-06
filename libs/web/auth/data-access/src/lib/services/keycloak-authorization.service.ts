@@ -20,6 +20,7 @@ import {
   KeycloakResourcePermissionsCheck
 } from '../models/keycloak-permissions';
 import { OAuthStorage } from 'angular-oauth2-oidc';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 /**
  * Custom parameter codec to correctly handle the plus sign in parameter
@@ -44,6 +45,7 @@ class ParameterCodec implements HttpParameterCodec {
 }
 const PARAMETER_CODEC = new ParameterCodec();
 
+@UntilDestroy()
 @Injectable({
   providedIn: 'root'
 })
@@ -93,7 +95,8 @@ export class KeycloakAuthorizationService {
   /**
    * Checks if user has the required access to a resource and/or scope.
    *
-   * @param authorization-check object
+   * @param authorization
+   * - check object
    * - rsname : Name of the resource
    * - scope : name of the scope
    *
@@ -166,7 +169,6 @@ export class KeycloakAuthorizationService {
    *
    * @param resourceServerId
    * The resource server for which the entitlements of the current user are checked
-   *
    * @param authorizationRequest
    *
    * @returns Authorizations-Object
@@ -176,25 +178,27 @@ export class KeycloakAuthorizationService {
     authorizationRequest: KeycloakAuthorizationRequest
   ): Promise<KeycloakResourcePermission[]> {
     const perm = new Promise<KeycloakResourcePermission[]>((resolve, reject) => {
-      this.getEntitlement(resourceServerId, authorizationRequest).subscribe((res) => {
-        try {
-          let permissions = [];
-          if (res.access_token) {
-            this._rpt = res.access_token;
-            const decoded = this.decodeToken(res.access_token);
-            if (decoded.authorization) {
-              if (decoded.authorization.permissions) {
-                permissions = decoded.authorization.permissions;
+      this.getEntitlement(resourceServerId, authorizationRequest)
+        .pipe(untilDestroyed(this))
+        .subscribe((res) => {
+          try {
+            let permissions = [];
+            if (res.access_token) {
+              this._rpt = res.access_token;
+              const decodedToken = this.decodeToken(res.access_token);
+              if (decodedToken.authorization) {
+                if (decodedToken.authorization.permissions) {
+                  permissions = decodedToken.authorization.permissions;
+                }
               }
             }
-          }
-          this._permissions = permissions;
+            this._permissions = permissions;
 
-          resolve(permissions);
-        } catch (error) {
-          reject(error);
-        }
-      });
+            resolve(permissions);
+          } catch (error) {
+            reject(error);
+          }
+        });
     });
 
     return perm;

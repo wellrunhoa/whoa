@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@whoa/api/core/feature';
+import { CommunityDTO } from '../dto/community.dto';
 import { HoaBoardMemberDTO } from '../dto/hoa-board-member.dto';
 import { HoaBoardDTO } from '../dto/hoa-board.dto';
 
@@ -40,4 +41,12 @@ export class HoaBoardService {
   //     data: memberDto
   //   });
   // }
+
+  async getCommunitiesBasic(name: string): Promise<CommunityDTO[] | undefined> {
+    const communities = await this.prismaService.community.findMany({
+      where: { name: { contains: name, mode: 'insensitive' } }
+    });
+
+    return communities;
+  }
 }

@@ -566,6 +566,106 @@
         }
       }
     },
+    "web-property-data-access": {
+      "projectType": "library",
+      "root": "libs/web/property/data-access",
+      "sourceRoot": "libs/web/property/data-access/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/property/data-access"],
+          "options": {
+            "jestConfig": "libs/web/property/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/property/data-access/src/**/*.ts",
+              "libs/web/property/data-access/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-property-feature-add-property": {
+      "projectType": "library",
+      "root": "libs/web/property/feature/add-property",
+      "sourceRoot": "libs/web/property/feature/add-property/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/property/feature/add-property"],
+          "options": {
+            "jestConfig": "libs/web/property/feature/add-property/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/property/feature/add-property/src/**/*.ts",
+              "libs/web/property/feature/add-property/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-property-feature-shell": {
+      "projectType": "library",
+      "root": "libs/web/property/feature/shell",
+      "sourceRoot": "libs/web/property/feature/shell/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/property/feature/shell"],
+          "options": {
+            "jestConfig": "libs/web/property/feature/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/property/feature/shell/src/**/*.ts",
+              "libs/web/property/feature/shell/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "web-property-ui-add-property-form": {
+      "projectType": "library",
+      "root": "libs/web/property/ui/add-property-form",
+      "sourceRoot": "libs/web/property/ui/add-property-form/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/property/ui/add-property-form"],
+          "options": {
+            "jestConfig": "libs/web/property/ui/add-property-form/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/property/ui/add-property-form/src/**/*.ts",
+              "libs/web/property/ui/add-property-form/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "web-reservations-data-access": {
       "projectType": "library",
       "root": "libs/web/reservations/data-access",
