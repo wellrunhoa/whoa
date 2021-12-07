@@ -1,10 +1,4 @@
-<div class="alain-default__content-title">
-  <h1>
-    Service Request
-    <small>Submit change requests along with any supporting documentation</small>
-  </h1>
-</div>
-<nz-row [nzGutter]="24">
+<ng-template #content>
   <nz-col [nzSpan]="24">
     <nz-card>
       <form nz-form [formGroup]="form" role="form">
@@ -88,4 +82,5 @@
       </form>
     </nz-card>
   </nz-col>
-</nz-row>
+</ng-template>
+<whoa-portlet pageTitle="Service Request" pageSubTitle="Submit change requests along with any supporting documentation" [contentTemplate]="content"></whoa-portlet>
