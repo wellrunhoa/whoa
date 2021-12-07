@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { Property } from '../models/property';
+import { HoaProperty } from '../models/hoa-property';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +9,11 @@ import { Property } from '../models/property';
 export class PropertyService {
   constructor(private http: HttpClient) {}
 
-  getDefaultProperty(): Observable<Property> {
-    return this.http.get<Property>('api/hoa-property/default').pipe(map((res) => res));
+  getDefaultProperty(): Observable<HoaProperty> {
+    return this.http.get<HoaProperty>('api/hoa-property/default').pipe(map((res) => res));
   }
 
-  register(property: Property): Observable<Property> {
-    return this.http.post<Property>('api/hoa-property', property).pipe(map((res) => res));
+  register(property: HoaProperty): Observable<HoaProperty> {
+    return this.http.post<HoaProperty>('api/hoa-property', property).pipe(map((res) => res));
   }
 }

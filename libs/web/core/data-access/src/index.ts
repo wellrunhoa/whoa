@@ -4,4 +4,7 @@ export * from './lib/services/i18n.service';
 export * from './lib/services/startup.service';
 export * from './lib/services/event.service';
 export * from './lib/services/auth-config.service';
+export * from './lib/services/user-context.service';
+export * from './lib/models/property';
+export * from './lib/models/user';
 export * from './lib/app-injector';

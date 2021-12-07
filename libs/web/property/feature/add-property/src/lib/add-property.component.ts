@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SettingsService } from '@delon/theme';
-import { Property, PropertyService } from '@whoa/web/property/data-access';
+import { HoaProperty, PropertyService } from '@whoa/web/property/data-access';
 import { LookupService } from '@whoa/web/shared/data-access';
 
 @Component({
@@ -21,7 +21,7 @@ export class AddPropertyComponent {
     this.propertyService
       .register(property)
       //.pipe()
-      .subscribe((d: Property) => {
+      .subscribe((d: HoaProperty) => {
         this.settings.setData('defaultProperty', d);
         this.router.navigate(['/dashboard']);
       });

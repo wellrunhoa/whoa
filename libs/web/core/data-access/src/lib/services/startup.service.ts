@@ -8,6 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 import { AuthConfigService } from './auth-config.service';
 
 import { I18NService } from './i18n.service';
+import { UserContextService } from './user-context.service';
 
 /**
  * Used for application startup
@@ -19,7 +20,7 @@ export class StartupService {
     iconSrv: NzIconService,
     private menuService: MenuService,
     @Inject(ALAIN_I18N_TOKEN) private i18n: I18NService,
-    private settingService: SettingsService,
+    private userContextService: UserContextService,
     private authConfigService: AuthConfigService,
     //private aclService: ACLService,
     private titleService: TitleService,
@@ -44,7 +45,7 @@ export class StartupService {
         // setting language data
         this.i18n.use(defaultLang, langData);
 
-        this.settingService.setApp(appData.app);
+        this.userContextService.setApp(appData.app);
 
         //this.aclService.setFull(true);
 

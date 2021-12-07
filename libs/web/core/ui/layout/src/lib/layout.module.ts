@@ -18,6 +18,7 @@ import { ZorroProviderModule } from '@whoa/web/shared/ui/zorro-provider';
 import { HeaderUserComponent } from './basic-layout/widgets/header-user.component';
 import { BasicLayoutComponent } from './basic-layout/basic-layout.component';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
+import { PortletComponent } from './portlet/portlet.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,7 @@ import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
     IconsProviderModule,
     CoreDataAccessModule
   ],
-  declarations: [BasicLayoutComponent, AuthLayoutComponent, HeaderUserComponent],
-  exports: [BasicLayoutComponent, AuthLayoutComponent, HeaderUserComponent]
+  declarations: [BasicLayoutComponent, AuthLayoutComponent, HeaderUserComponent, PortletComponent],
+  exports: [BasicLayoutComponent, AuthLayoutComponent, HeaderUserComponent, PortletComponent]
 })
 export class LayoutModule {}

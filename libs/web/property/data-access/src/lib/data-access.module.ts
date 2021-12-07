@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { } from '@whoa/web/shared/data-access';
+import { CoreDataAccessModule } from "@whoa/web/core/data-access";
 
 @NgModule({
-  imports: [CommonModule]
+  imports: [CommonModule, CoreDataAccessModule]
 })
 export class PropertyDataAccessModule {}

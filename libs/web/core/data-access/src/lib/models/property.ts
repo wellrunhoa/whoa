@@ -6,8 +6,11 @@ export interface Property {
   city: string;
   state: string;
   zipCode: string;
-  createdAt: Date;
-  createdBy: string;
-  updatedAt: Date;
-  updatedBy: string;
+  community: Community;
+}
+
+export interface Community {
+  id: string
+  name: string
+  avatar: string
 }

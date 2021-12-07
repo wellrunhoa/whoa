@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Community, LookupService, State } from '@whoa/web/shared/data-access';
-import { Property } from '@whoa/web/property/data-access';
+import { HoaProperty } from '@whoa/web/property/data-access';
 import { debounceTime, distinctUntilChanged, filter, Observable, startWith, switchMap } from 'rxjs';
 
 @Component({
@@ -15,7 +15,7 @@ export class AddPropertyFormComponent implements OnInit {
   form: FormGroup;
   stateList$: Observable<State[]>;
   communities$!: Observable<Community[]>;
-  @Output() submitForm = new EventEmitter<Property>();
+  @Output() submitForm = new EventEmitter<HoaProperty>();
 
   constructor(fb: FormBuilder, private router: Router, private lookupService: LookupService) {
     this.form = fb.group({
@@ -56,6 +56,6 @@ export class AddPropertyFormComponent implements OnInit {
       return;
     }
 
-    this.submitForm.emit(this.form.value as Property);
+    this.submitForm.emit(this.form.value as HoaProperty);
   }
 }

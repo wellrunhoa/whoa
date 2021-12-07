@@ -1,11 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
-import { SettingsService, User } from '@delon/theme';
-//import { User } from '@delon/theme';
+import { User } from '@delon/theme';
 import { LayoutDefaultOptions } from '@delon/theme/layout-default';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { UserContextService } from '@whoa/web/core/data-access';
 
 @Component({
   selector: 'whoa-basic-layout',
@@ -16,7 +16,11 @@ export class BasicLayoutComponent implements OnDestroy {
   private unsubscribe$ = new Subject<void>();
   isFetching = false;
 
-  constructor(private router: Router, msg: NzMessageService, public settings: SettingsService) {
+  constructor(
+    private router: Router,
+    msg: NzMessageService,
+    public userContextService: UserContextService
+  ) {
     router.events.pipe(takeUntil(this.unsubscribe$)).subscribe((evt) => {
       if (!this.isFetching && evt instanceof RouteConfigLoadStart) {
         this.isFetching = true;
@@ -40,13 +44,9 @@ export class BasicLayoutComponent implements OnDestroy {
   searchToggleStatus = false;
 
   get user(): User {
-    return this.settings.user;
+    return this.userContextService.user;
   }
 
-  get property() {
-    return this.settings.getData("defaultProperty");
-  }
-  
   ngOnDestroy(): void {
     const { unsubscribe$ } = this;
     unsubscribe$.next();

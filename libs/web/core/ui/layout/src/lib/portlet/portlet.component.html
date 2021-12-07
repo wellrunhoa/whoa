@@ -1,0 +1,27 @@
+<div class="alain-default__content-title">
+  <h1>
+    {{ pageTitle }}
+    <small>{{ pageSubTitle }}</small>
+  </h1>
+
+  <div class="alain-default__aside-user">
+    <nz-avatar
+      class="alain-default__aside-user-avatar"
+      [nzShape]="'square'"
+      [nzSize]="'large'"
+      [nzSrc]="property.community?.avatar"
+      nzIcon="home"
+    ></nz-avatar>
+    <div class="alain-default__aside-user-info" *ngIf="property">
+      <strong>{{ property.community?.name }}</strong>
+      <p class="mb0">
+        {{ property.addressLine1 }}, {{ property.city }} {{ property.state }},
+        {{ property.zipCode }}
+      </p>
+    </div>
+  </div>
+</div>
+<div nz-row nzGutter="24" cdkTrapFocus>
+  <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+  <ng-container #portletContentContainer></ng-container>
+</div>
