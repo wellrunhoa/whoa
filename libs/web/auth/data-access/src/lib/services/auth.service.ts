@@ -3,9 +3,9 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { Observable, BehaviorSubject, ReplaySubject, combineLatest } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { SettingsService } from '@delon/theme';
+import { User } from '@delon/theme';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { EventService } from '@whoa/web/core/data-access';
+import { EventService, UserContextService } from '@whoa/web/core/data-access';
 import { AuthConfigService } from '@whoa/web/core/data-access';
 import { KeycloakAuthorizationService } from './keycloak-authorization.service';
 
@@ -38,7 +38,7 @@ export class AuthService {
   constructor(
     private oauthService: OAuthService,
     private authzService: KeycloakAuthorizationService,
-    private settings: SettingsService,
+    private userContextService: UserContextService,
     private eventService: EventService,
     private authConfigService: AuthConfigService,
     private router: Router
@@ -55,6 +55,7 @@ export class AuthService {
       .pipe(untilDestroyed(this))
       .subscribe(() => {
         this.oauthService.revokeTokenAndLogout();
+        this.userContextService.setProperty(undefined);
         this.router.navigate(['/']);
       });
 
@@ -62,7 +63,9 @@ export class AuthService {
       .pipe(untilDestroyed(this))
       .pipe(filter((a) => a))
       .subscribe(() => {
-        this.settings.setUser(this.oauthService.getIdentityClaims());
+        const {name, avatar, email} = this.identityClaims() as User;
+
+        this.userContextService.setUser({name, avatar, email});
         //this.authzService.getPermissions(); //load permissions
         this.eventService.dispatch("whoa:authenticated");
       });
@@ -76,6 +79,8 @@ export class AuthService {
       .then(() => this.oauthService.tryLoginCodeFlow())
       .then(() => {
         this.isDoneLoadingSubject$.next(true);
+        
+        this.userContextService.setProperty(undefined);
         // remove query params
         this.router.navigate(['']);
       })
