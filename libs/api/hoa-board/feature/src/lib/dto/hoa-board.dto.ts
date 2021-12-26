@@ -1,7 +1,8 @@
 import { HoaBoard } from '@prisma/client';
-import { IsNotEmpty, MinLength } from '@whoa/api/core/feature';
+import { IsNotEmpty, MinLength, name } from '@whoa/api/core/feature';
 import { HoaBoardMemberDTO } from './hoa-board-member.dto';
 
+@name('HoaBoard')
 export class HoaBoardDTO implements Readonly<HoaBoard> {
   id: string;
 

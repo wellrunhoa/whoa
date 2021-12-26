@@ -17,11 +17,6 @@ export class DetailFormComponent {
 
 
   constructor(private rootFormGroup: FormGroupDirective) {
-    // const amenities = new Array<Amenity>();
-    // amenities.push({ id: 'A1', label: 'Swimming Pool' });
-    // amenities.push({ id: 'A2', label: 'Tennies Court' });
-    // amenities.push({ id: 'A3', label: 'Volleyball' });
-
     this.detailForm = this.rootFormGroup.control.get(this.formGroupName) as FormGroup;
   }
 }

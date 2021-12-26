@@ -1,5 +1,8 @@
-import { Community } from "@prisma/client";
+import { Community } from '@prisma/client';
 
+import { name } from '@whoa/api/core/feature';
+
+@name('Community')
 export class CommunityDTO implements Readonly<Community> {
   id: string;
   name: string;

@@ -55,9 +55,6 @@
         "libs/web/reservations/ui/reservation-list/src/index.ts"
       ],
       "@whoa/web/service-req/data-access": ["libs/web/service-req/data-access/src/index.ts"],
-      "@whoa/web/service-req/data-access/model": [
-        "libs/web/service-req/data-access/model/src/index.ts"
-      ],
       "@whoa/web/service-req/feature/service-request": [
         "libs/web/service-req/feature/service-request/src/index.ts"
       ],

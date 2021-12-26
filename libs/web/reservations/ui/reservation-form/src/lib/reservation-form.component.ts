@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reservation } from '@whoa/web/reservations/data-access';
 import { Amenity } from '@whoa/web/shared/data-access';
 import { Observable } from 'rxjs';
@@ -20,8 +20,8 @@ export class ReservationFormComponent {
   constructor(fb: FormBuilder) {
     this.reservationForm = fb.group({
       details: fb.group({
-        amenity: ['', [Validators.required]],
-        reservationDate: ['', [Validators.required]],
+        amenity: [null, [Validators.required]],
+        reservationDate: [null, [Validators.required]],
         startTime: [null, [Validators.required]],
         endTime: [null, [Validators.required]]
       }),
@@ -39,8 +39,17 @@ export class ReservationFormComponent {
   }
 
   next(): void {
-    this.reservationForm.get('details')?.updateValueAndValidity();
+    const details = this.reservationForm.get('details') as FormGroup;
+    if (details) {
+      details.updateValueAndValidity();
 
+      Object.values(details.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
     if (this.reservationForm.get('details')?.valid) {
       this.current += 1;
     }

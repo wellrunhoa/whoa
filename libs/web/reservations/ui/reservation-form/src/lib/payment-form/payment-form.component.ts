@@ -10,7 +10,7 @@ import { Observable, of } from 'rxjs';
 export class PaymentFormComponent {
   @Input() formGroupName = "payment";
 
-  detailForm: FormGroup;
+  paymentForm: FormGroup;
   dateFormat = 'MM/dd/yyyy';
   time = new Date();
 
@@ -23,6 +23,6 @@ export class PaymentFormComponent {
     amenities.push({ id: 'A3', label: 'Volleyball' });
 
     this.amenities$ = of(amenities);
-    this.detailForm = this.rootFormGroup.control.get(this.formGroupName) as FormGroup;
+    this.paymentForm = this.rootFormGroup.control.get(this.formGroupName) as FormGroup;
   }
 }

@@ -2,6 +2,9 @@ import { Property } from '@prisma/client';
 import { IsNotEmpty } from '@whoa/api/core/feature';
 import { CommunityDTO } from './community.dto';
 
+import { name } from '@whoa/api/core/feature';
+
+@name('Property')
 export class HoaPropertyDTO implements Readonly<Property> {
   id: string;
   communityId: string;

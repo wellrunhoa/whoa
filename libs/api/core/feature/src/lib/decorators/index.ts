@@ -1,3 +1,4 @@
+export * from './typename.decorator';
 export * from './api-get-all.decorator';
 export * from './api-get-one.decorator';
 export * from './api-validation-error-response.decorator';

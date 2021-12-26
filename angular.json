@@ -276,10 +276,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/auth/data-access/src/**/*.ts",
-              "libs/web/auth/data-access/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/auth/data-access/src/**/*.ts", "libs/web/auth/data-access/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -302,10 +299,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/auth/feature/login/src/**/*.ts",
-              "libs/web/auth/feature/login/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/auth/feature/login/src/**/*.ts", "libs/web/auth/feature/login/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -328,10 +322,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/auth/feature/shell/src/**/*.ts",
-              "libs/web/auth/feature/shell/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/auth/feature/shell/src/**/*.ts", "libs/web/auth/feature/shell/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -354,10 +345,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/auth/ui/login-form/src/**/*.ts",
-              "libs/web/auth/ui/login-form/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/auth/ui/login-form/src/**/*.ts", "libs/web/auth/ui/login-form/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -380,10 +368,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/core/data-access/src/**/*.ts",
-              "libs/web/core/data-access/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/core/data-access/src/**/*.ts", "libs/web/core/data-access/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -406,10 +391,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/core/ui/layout/src/**/*.ts",
-              "libs/web/core/ui/layout/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/core/ui/layout/src/**/*.ts", "libs/web/core/ui/layout/src/**/*.html"]
           }
         }
       }
@@ -431,10 +413,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/hop/feature/hop-home/src/**/*.ts",
-              "libs/web/hop/feature/hop-home/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/hop/feature/hop-home/src/**/*.ts", "libs/web/hop/feature/hop-home/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -457,10 +436,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/hop/feature/hop-shell/src/**/*.ts",
-              "libs/web/hop/feature/hop-shell/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/hop/feature/hop-shell/src/**/*.ts", "libs/web/hop/feature/hop-shell/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -483,10 +459,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/payment/data-access/src/**/*.ts",
-              "libs/web/payment/data-access/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/payment/data-access/src/**/*.ts", "libs/web/payment/data-access/src/**/*.html"]
           }
         }
       }
@@ -508,10 +481,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/payment/feature/payment/src/**/*.ts",
-              "libs/web/payment/feature/payment/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/payment/feature/payment/src/**/*.ts", "libs/web/payment/feature/payment/src/**/*.html"]
           }
         }
       }
@@ -533,10 +503,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/payment/feature/shell/src/**/*.ts",
-              "libs/web/payment/feature/shell/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/payment/feature/shell/src/**/*.ts", "libs/web/payment/feature/shell/src/**/*.html"]
           }
         }
       }
@@ -558,10 +525,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/payment/ui/payment-form/src/**/*.ts",
-              "libs/web/payment/ui/payment-form/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/payment/ui/payment-form/src/**/*.ts", "libs/web/payment/ui/payment-form/src/**/*.html"]
           }
         }
       }
@@ -583,10 +547,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/property/data-access/src/**/*.ts",
-              "libs/web/property/data-access/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/property/data-access/src/**/*.ts", "libs/web/property/data-access/src/**/*.html"]
           }
         }
       }
@@ -608,10 +569,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/property/feature/add-property/src/**/*.ts",
-              "libs/web/property/feature/add-property/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/property/feature/add-property/src/**/*.ts", "libs/web/property/feature/add-property/src/**/*.html"]
           }
         }
       }
@@ -633,10 +591,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/property/feature/shell/src/**/*.ts",
-              "libs/web/property/feature/shell/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/property/feature/shell/src/**/*.ts", "libs/web/property/feature/shell/src/**/*.html"]
           }
         }
       }
@@ -658,10 +613,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/property/ui/add-property-form/src/**/*.ts",
-              "libs/web/property/ui/add-property-form/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/property/ui/add-property-form/src/**/*.ts", "libs/web/property/ui/add-property-form/src/**/*.html"]
           }
         }
       }
@@ -683,10 +635,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/reservations/data-access/src/**/*.ts",
-              "libs/web/reservations/data-access/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/reservations/data-access/src/**/*.ts", "libs/web/reservations/data-access/src/**/*.html"]
           }
         }
       }
@@ -708,10 +657,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/reservations/feature/reservation/src/**/*.ts",
-              "libs/web/reservations/feature/reservation/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/reservations/feature/reservation/src/**/*.ts", "libs/web/reservations/feature/reservation/src/**/*.html"]
           }
         }
       }
@@ -733,10 +679,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/reservations/feature/shell/src/**/*.ts",
-              "libs/web/reservations/feature/shell/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/reservations/feature/shell/src/**/*.ts", "libs/web/reservations/feature/shell/src/**/*.html"]
           }
         }
       }
@@ -758,10 +701,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/reservations/ui/reservation-form/src/**/*.ts",
-              "libs/web/reservations/ui/reservation-form/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/reservations/ui/reservation-form/src/**/*.ts", "libs/web/reservations/ui/reservation-form/src/**/*.html"]
           }
         }
       }
@@ -783,10 +723,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/reservations/ui/reservation-list/src/**/*.ts",
-              "libs/web/reservations/ui/reservation-list/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/reservations/ui/reservation-list/src/**/*.ts", "libs/web/reservations/ui/reservation-list/src/**/*.html"]
           }
         }
       }
@@ -808,36 +745,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/service-req/data-access/src/**/*.ts",
-              "libs/web/service-req/data-access/src/**/*.html"
-            ]
-          },
-          "outputs": ["{options.outputFile}"]
-        }
-      }
-    },
-    "web-service-req-data-access-model": {
-      "projectType": "library",
-      "root": "libs/web/service-req/data-access/model",
-      "sourceRoot": "libs/web/service-req/data-access/model/src",
-      "prefix": "whoa",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/web/service-req/data-access/model"],
-          "options": {
-            "jestConfig": "libs/web/service-req/data-access/model/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/web/service-req/data-access/model/src/**/*.ts",
-              "libs/web/service-req/data-access/model/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/service-req/data-access/src/**/*.ts", "libs/web/service-req/data-access/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -886,10 +794,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/service-req/feature/shell/src/**/*.ts",
-              "libs/web/service-req/feature/shell/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/service-req/feature/shell/src/**/*.ts", "libs/web/service-req/feature/shell/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -938,10 +843,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/service-req/utils/src/**/*.ts",
-              "libs/web/service-req/utils/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/service-req/utils/src/**/*.ts", "libs/web/service-req/utils/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -964,10 +866,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/settings/data-access/src/**/*.ts",
-              "libs/web/settings/data-access/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/settings/data-access/src/**/*.ts", "libs/web/settings/data-access/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -990,10 +889,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/settings/feature/src/**/*.ts",
-              "libs/web/settings/feature/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/settings/feature/src/**/*.ts", "libs/web/settings/feature/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -1016,10 +912,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/shared/data-access/src/**/*.ts",
-              "libs/web/shared/data-access/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/shared/data-access/src/**/*.ts", "libs/web/shared/data-access/src/**/*.html"]
           }
         }
       }
@@ -1041,10 +934,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/shared/ui/icons-provider/src/**/*.ts",
-              "libs/web/shared/ui/icons-provider/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/shared/ui/icons-provider/src/**/*.ts", "libs/web/shared/ui/icons-provider/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -1067,10 +957,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/shared/ui/layout/src/**/*.ts",
-              "libs/web/shared/ui/layout/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/shared/ui/layout/src/**/*.ts", "libs/web/shared/ui/layout/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }
@@ -1093,10 +980,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/web/shared/ui/zorro-provider/src/**/*.ts",
-              "libs/web/shared/ui/zorro-provider/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/web/shared/ui/zorro-provider/src/**/*.ts", "libs/web/shared/ui/zorro-provider/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
         }

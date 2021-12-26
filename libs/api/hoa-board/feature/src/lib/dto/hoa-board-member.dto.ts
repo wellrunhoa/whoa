@@ -1,6 +1,8 @@
-import { HoaBoardMember } from "@prisma/client";
-import { HoaBoardDTO } from "./hoa-board.dto";
+import { HoaBoardMember } from '@prisma/client';
+import { HoaBoardDTO } from './hoa-board.dto';
+import { name } from '@whoa/api/core/feature';
 
+@name('HoaBoardMember')
 export class HoaBoardMemberDTO implements Readonly<HoaBoardMember> {
   id: string;
   firstName: string;

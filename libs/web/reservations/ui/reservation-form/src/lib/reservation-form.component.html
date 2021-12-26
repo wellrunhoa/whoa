@@ -6,9 +6,11 @@
   <nz-row [nzGutter]="24">
     <nz-col [nzSpan]="24">
       <nz-card nzType="inner" [nzBorderless]="true">
-        <ng-container [formGroup]="reservationForm">
-          <whoa-reservation-detail-form *ngIf="current === 0" formGroupName="details" [amenities]="amenities"></whoa-reservation-detail-form>
-          <whoa-reservation-payment-form *ngIf="current === 1" formGroupName="payment"></whoa-reservation-payment-form>
+        <ng-container>
+          <form role="form" [formGroup]="reservationForm">
+            <whoa-reservation-detail-form *ngIf="current === 0" formGroupName="details" [amenities]="amenities"></whoa-reservation-detail-form>
+            <whoa-reservation-payment-form *ngIf="current === 1" formGroupName="payment"></whoa-reservation-payment-form>
+          </form>
         </ng-container>
       </nz-card>
     </nz-col>
