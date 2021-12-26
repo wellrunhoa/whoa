@@ -118,9 +118,6 @@
     "web-service-req-data-access": {
       "tags": ["type:data-access"]
     },
-    "web-service-req-data-access-model": {
-      "tags": ["type:data-access"]
-    },
     "web-service-req-feature-service-request": {
       "tags": ["type:feature"]
     },
