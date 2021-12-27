@@ -1,0 +1,29 @@
+<ng-template #content>
+  <nz-col [nzSpan]="24">
+    <nz-card>
+      <nz-tabset nzTabPosition="left">
+        <nz-tab nzTitle="Profile">
+          <ng-template nz-tab>
+            <whoa-profile-form></whoa-profile-form>
+          </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="Property">
+          <ng-template nz-tab>
+            <whoa-property-form></whoa-property-form>
+          </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="Change Password">
+          <ng-template nz-tab>
+            <whoa-password-form></whoa-password-form>
+          </ng-template>
+        </nz-tab>
+      </nz-tabset>
+    </nz-card>
+  </nz-col>
+</ng-template>
+<whoa-portlet
+  pageTitle="Settings"
+  pageSubTitle="Change profile, add property and/or change password"
+  [contentTemplate]="content"
+  [showProperty]="false"
+></whoa-portlet>

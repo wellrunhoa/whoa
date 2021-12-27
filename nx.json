@@ -58,10 +58,22 @@
     "web-auth-feature-login": {
       "tags": ["type:feature"]
     },
+    "web-auth-feature-settings": {
+      "tags": ["type:feature"]
+    },
     "web-auth-feature-shell": {
       "tags": ["type:feature"]
     },
     "web-auth-ui-login-form": {
+      "tags": ["type:ui"]
+    },
+    "web-auth-ui-password-form": {
+      "tags": ["type:ui"]
+    },
+    "web-auth-ui-profile-form": {
+      "tags": ["type:ui"]
+    },
+    "web-auth-ui-property-form": {
       "tags": ["type:ui"]
     },
     "web-core-data-access": {

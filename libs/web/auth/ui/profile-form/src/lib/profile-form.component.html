@@ -1,0 +1,49 @@
+<nz-row [nzGutter]="24">
+  <nz-col [nzXs]="24" [nzSm]="16">
+    <form nz-form>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzNoColon nzRequired nzFor="firstName">First Name</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="First name is required">
+          <input nz-input formControlName="firstName" id="firstName" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzNoColon nzRequired nzFor="lastName">Last Name</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Last name is required">
+          <input nz-input formControlName="lastName" id="lastName" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzNoColon nzRequired nzFor="email">E-mail</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+          <input nz-input formControlName="email" id="email" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzNoColon nzRequired nzFor="phone">Phone #</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Phone #">
+          <input nz-input formControlName="phone" id="phone" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nz-row>
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button nzType="primary">Save</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-col>
+  <nz-col [nzXs]="24" [nzSm]="8">
+    <div class="avatar_title mb-sm">Avatar</div>
+    <div class="avatar mb-sm">
+      <nz-avatar [nzSize]="64" [nzShape]="'square'" nzIcon="user" style="background-color: #1890ff"></nz-avatar>
+    </div>
+    <div class="mt-sm">
+      <nz-upload nzAction="">
+        <button nz-button>
+          <i nz-icon nzType="upload"></i>
+          Upload
+        </button>
+      </nz-upload>
+    </div>
+  </nz-col>
+</nz-row>

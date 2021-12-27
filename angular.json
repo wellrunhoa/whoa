@@ -305,6 +305,28 @@
         }
       }
     },
+    "web-auth-feature-settings": {
+      "projectType": "library",
+      "root": "libs/web/auth/feature/settings",
+      "sourceRoot": "libs/web/auth/feature/settings/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/auth/feature/settings"],
+          "options": {
+            "jestConfig": "libs/web/auth/feature/settings/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/auth/feature/settings/src/**/*.ts", "libs/web/auth/feature/settings/src/**/*.html"]
+          }
+        }
+      }
+    },
     "web-auth-feature-shell": {
       "projectType": "library",
       "root": "libs/web/auth/feature/shell",
@@ -348,6 +370,72 @@
             "lintFilePatterns": ["libs/web/auth/ui/login-form/src/**/*.ts", "libs/web/auth/ui/login-form/src/**/*.html"]
           },
           "outputs": ["{options.outputFile}"]
+        }
+      }
+    },
+    "web-auth-ui-password-form": {
+      "projectType": "library",
+      "root": "libs/web/auth/ui/password-form",
+      "sourceRoot": "libs/web/auth/ui/password-form/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/auth/ui/password-form"],
+          "options": {
+            "jestConfig": "libs/web/auth/ui/password-form/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/auth/ui/password-form/src/**/*.ts", "libs/web/auth/ui/password-form/src/**/*.html"]
+          }
+        }
+      }
+    },
+    "web-auth-ui-profile-form": {
+      "projectType": "library",
+      "root": "libs/web/auth/ui/profile-form",
+      "sourceRoot": "libs/web/auth/ui/profile-form/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/auth/ui/profile-form"],
+          "options": {
+            "jestConfig": "libs/web/auth/ui/profile-form/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/auth/ui/profile-form/src/**/*.ts", "libs/web/auth/ui/profile-form/src/**/*.html"]
+          }
+        }
+      }
+    },
+    "web-auth-ui-property-form": {
+      "projectType": "library",
+      "root": "libs/web/auth/ui/property-form",
+      "sourceRoot": "libs/web/auth/ui/property-form/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/auth/ui/property-form"],
+          "options": {
+            "jestConfig": "libs/web/auth/ui/property-form/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/auth/ui/property-form/src/**/*.ts", "libs/web/auth/ui/property-form/src/**/*.html"]
+          }
         }
       }
     },

@@ -61,7 +61,7 @@
       "children": [
         {
           "text": "Settings",
-          "link": "/pro/account/settings",
+          "link": "/profile/settings",
           "i18n": "menu.account.settings",
           "icon": "anticon-setting"
         }

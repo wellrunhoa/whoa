@@ -4,7 +4,7 @@
     <small>{{ pageSubTitle }}</small>
   </h1>
 
-  <div class="alain-default__aside-user">
+  <div class="alain-default__aside-user" *ngIf="showProperty">
     <nz-avatar
       class="alain-default__aside-user-avatar"
       [nzShape]="'square'"
@@ -21,7 +21,7 @@
     </div>
   </div>
 </div>
-<div nz-row nzGutter="24" cdkTrapFocus>
+<div nz-row nzGutter="24" class="mx-xs" cdkTrapFocus>
   <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
   <ng-container #portletContentContainer></ng-container>
 </div>

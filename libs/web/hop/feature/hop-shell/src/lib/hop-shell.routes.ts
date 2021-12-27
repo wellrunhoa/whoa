@@ -6,7 +6,7 @@ import { PropertyGuard } from '@whoa/web/property/data-access';
 export const HopShellRoutes: Route[] = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
-    path: 'auth',
+    path: 'auth', //login screens
     component: AuthLayoutComponent,
     loadChildren: () => import('@whoa/web/auth/feature/shell').then((m) => m.AuthShellModule)
   },
@@ -24,21 +24,19 @@ export const HopShellRoutes: Route[] = [
     //,
     // data:{permissions:[{
     //   rsname:"hoa-board",
-    //   scope:"view" 
+    //   scope:"view"
     // }]}
   },
   {
     path: 'service-request',
     component: BasicLayoutComponent,
-    loadChildren: () =>
-      import('@whoa/web/service-req/feature/shell').then((m) => m.ServiceRequestShellModule),
+    loadChildren: () => import('@whoa/web/service-req/feature/shell').then((m) => m.ServiceRequestShellModule),
     canActivate: [AuthGuard]
   },
   {
     path: 'reservations',
     component: BasicLayoutComponent,
-    loadChildren: () =>
-      import('@whoa/web/reservations/feature/shell').then((m) => m.ReservationsShellModule),
+    loadChildren: () => import('@whoa/web/reservations/feature/shell').then((m) => m.ReservationsShellModule),
     canActivate: [AuthGuard]
   },
   {
@@ -46,5 +44,10 @@ export const HopShellRoutes: Route[] = [
     component: BasicLayoutComponent,
     loadChildren: () => import('@whoa/web/payment/feature/shell').then((m) => m.PaymentShellModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'profile',
+    component: BasicLayoutComponent,
+    loadChildren: () => import('@whoa/web/auth/feature/shell').then((m) => m.AuthShellModule)
   }
 ];

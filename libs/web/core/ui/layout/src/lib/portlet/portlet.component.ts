@@ -1,12 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  Component,
-  Input,
-  TemplateRef,
-  ViewChild,
-  ViewContainerRef,
-  ViewEncapsulation
-} from '@angular/core';
+import { Component, Input, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { EventService, Property, UserContextService } from '@whoa/web/core/data-access';
 
 @Component({
@@ -18,6 +11,7 @@ import { EventService, Property, UserContextService } from '@whoa/web/core/data-
 export class PortletComponent {
   @Input() pageTitle!: string;
   @Input() pageSubTitle!: string;
+  @Input() showProperty = true;
   @Input() contentTemplate!: TemplateRef<any>;
 
   @ViewChild('portletContentContainer', { read: ViewContainerRef })
