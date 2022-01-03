@@ -13,3 +13,4 @@ export * from './lib/files/file-mimetype-filter';
 export * from './lib/files/file-helper';
 export * from './lib/models/user.model';
 export * from './lib/prisma/prisma.service';
+export * from './lib/context/http-service.interceptor';

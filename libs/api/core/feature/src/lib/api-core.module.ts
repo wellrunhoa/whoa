@@ -1,18 +1,19 @@
 import { MailerModule } from '@nestjs-modules/mailer';
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { Logger, MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { HttpModule } from '@nestjs/axios';
 import { WinstonModule } from '@payk/nestjs-winston';
-import { ApiPublicError } from './models/api-public-error.model';
-import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { join } from 'path';
 import { KeycloakConnectModule, ResourceGuard, RoleGuard, AuthGuard } from 'nest-keycloak-connect';
 import { APP_GUARD } from '@nestjs/core';
+import { ApiPublicError } from './models/api-public-error.model';
+import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { ParseFile } from './files/parse-file.pipe';
 import { RequestContextMiddleware } from './context/request-context.middleware';
+import { PrismaService } from './prisma/prisma.service';
 import logConfig from './config/winston';
 import validationSchema from './config/env-schema';
 import loadConfig from './config/load-config';
-import { PrismaService } from './prisma/prisma.service';
 
 @Module({
   imports: [
@@ -20,10 +21,7 @@ import { PrismaService } from './prisma/prisma.service';
       isGlobal: true,
       cache: true,
       expandVariables: true,
-      envFilePath: [
-        `environments/.env.${process.env.APP_ENV || 'local'}`,
-        join(__dirname, '/environments/.env.defaults')
-      ],
+      envFilePath: [`environments/.env.${process.env.APP_ENV || 'local'}`, join(__dirname, '/environments/.env.defaults')],
       load: loadConfig,
       validationSchema
     }),
@@ -42,7 +40,11 @@ import { PrismaService } from './prisma/prisma.service';
       useFactory: async (configService: ConfigService) => configService.get('keycloak')
     }),
     ApiPublicError,
-    HttpExceptionFilter
+    HttpExceptionFilter,
+    HttpModule.register({
+      timeout: 5000,
+      maxRedirects: 5
+    })
   ],
   controllers: [],
   providers: [
@@ -82,12 +84,14 @@ import { PrismaService } from './prisma/prisma.service';
     },
     ParseFile,
     RequestContextMiddleware,
-    PrismaService
+    HttpExceptionFilter,
+    PrismaService,
+    Logger
   ],
   exports: [PrismaService, ApiPublicError, HttpExceptionFilter, RequestContextMiddleware]
 })
 export class ApiCoreModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(RequestContextMiddleware).forRoutes("*");
+    consumer.apply(RequestContextMiddleware).forRoutes('*');
   }
 }

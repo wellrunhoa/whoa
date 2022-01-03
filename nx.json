@@ -42,6 +42,9 @@
     "api-hoa-property-feature": {
       "tags": []
     },
+    "api-passport-feature": {
+      "tags": []
+    },
     "api-payments-feature": {
       "tags": []
     },

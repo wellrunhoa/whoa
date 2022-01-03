@@ -5,6 +5,7 @@ import { ApiHoaPropertyModule } from '@whoa/api/hoa-property/feature';
 import { ApiHoaBoardModule } from '@whoa/api/hoa-board/feature';
 import { ApiDocumentsModule } from '@whoa/api/documents/feature';
 import { ApiPaymentsFeatureModule } from '@whoa/api/payments/feature';
+import { ApiPassportModule } from '@whoa/api/passport/feature';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { ApiPaymentsFeatureModule } from '@whoa/api/payments/feature';
     ApiAmenitiesModule,
     ApiPaymentsFeatureModule,
     ApiHoaPropertyModule,
-    ApiHoaBoardModule
+    ApiHoaBoardModule,
+    ApiPassportModule
   ],
   controllers: [],
   providers: []

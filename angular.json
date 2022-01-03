@@ -111,6 +111,28 @@
         }
       }
     },
+    "api-passport-feature": {
+      "root": "libs/api/passport/feature",
+      "sourceRoot": "libs/api/passport/feature/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/passport/feature/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/passport/feature"],
+          "options": {
+            "jestConfig": "libs/api/passport/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "api-payments-feature": {
       "root": "libs/api/payments/feature",
       "sourceRoot": "libs/api/payments/feature/src",

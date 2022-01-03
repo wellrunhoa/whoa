@@ -31,6 +31,8 @@
   "app.register-result.back-home": "Back to home",
   "app.register-result.view-mailbox": "View mailbox",
   "app.reservations.reservation": "Reservation",
+  "app.profile.settings": "Settings",
+  "app.dashboard": "Dashboard",
   "validation.email.required": "Please enter your email!",
   "validation.email.wrong-format": "The email address is in the wrong format!",
   "validation.password.required": "Please enter your password!",

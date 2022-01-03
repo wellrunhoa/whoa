@@ -1,6 +1,6 @@
 <nz-row [nzGutter]="24">
   <nz-col [nzXs]="24" [nzSm]="16">
-    <form nz-form>
+    <form nz-form [formGroup]="form" role="form">
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzNoColon nzRequired nzFor="firstName">First Name</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="First name is required">
@@ -20,9 +20,21 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzNoColon nzRequired nzFor="phone">Phone #</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Phone #">
-          <input nz-input formControlName="phone" id="phone" />
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzNoColon nzRequired nzFor="homePhone">Home Phone #</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Home Phone #">
+          <input nz-input formControlName="homePhone" id="homePhone" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzNoColon nzRequired nzFor="mobilePhone">Mobile Phone #</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Mobile Phone #">
+          <input nz-input formControlName="mobilePhone" id="mobilePhone" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzNoColon nzRequired nzFor="workPhone">Work Phone #</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Work Phone #">
+          <input nz-input formControlName="workPhone" id="workPhone" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item nz-row>

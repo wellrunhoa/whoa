@@ -13,8 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    component: SettingsComponent,
-    data: { title: 'Settings', titleI18n: 'app.profile.settings' }
+    component: SettingsComponent
   }
   //   {
   //     path: 'register',
