@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { UserProfile, UserService } from '@whoa/web/auth/data-access';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'whoa-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent {
+  user$: Observable<UserProfile>;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private service: UserService) {
+    this.user$ = this.service.getUser();
   }
-
 }

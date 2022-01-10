@@ -4,7 +4,7 @@
       <nz-tabset nzTabPosition="left">
         <nz-tab nzTitle="Profile">
           <ng-template nz-tab>
-            <whoa-profile-form></whoa-profile-form>
+            <whoa-profile-form [user$]="user$"></whoa-profile-form>
           </ng-template>
         </nz-tab>
         <nz-tab nzTitle="Property">
@@ -16,6 +16,9 @@
           <ng-template nz-tab>
             <whoa-password-form></whoa-password-form>
           </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="Privacy">
+          <ng-template nz-tab> Privacy </ng-template>
         </nz-tab>
       </nz-tabset>
     </nz-card>
