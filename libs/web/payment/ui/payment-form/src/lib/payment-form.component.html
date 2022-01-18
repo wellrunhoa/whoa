@@ -3,12 +3,12 @@
     <nz-row [nzGutter]="24">
       <nz-col [nzSpan]="24">
         <nz-card>
-          <form nz-form [formGroup]="form" role="form">
-            <nz-card nzTitle="Choose Payment Method">
-              <nz-tabset>
-                <nz-row [nzGutter]="64">
-                  <nz-col [nzSpan]="16">
-                    <nz-tab nzTitle="Pay by eCheck">
+          <nz-card nzTitle="Choose Payment Method">
+            <nz-tabset>
+              <nz-row [nzGutter]="64">
+                <nz-col [nzSpan]="16">
+                  <nz-tab nzTitle="Pay by eCheck">
+                    <form nz-form [formGroup]="form" role="form">
                       <nz-form-item>
                         <nz-form-label [nzSpan]="4" nzRequired>Amount </nz-form-label>
                         <nz-form-control [nzSpan]="4" nzErrorTip="Amount">
@@ -37,11 +37,13 @@
                       </nz-form-item>
                       <nz-form-item>
                         <nz-form-control [nzOffset]="4" [nzSpan]="4">
-                          <button nz-button nzType="primary" nzSize="large" (click)="submit()">Submit</button>
+                          <button nz-button nzType="primary" nzSize="large" (click)="submitEcheck()">Submit</button>
                         </nz-form-control>
                       </nz-form-item>
-                    </nz-tab>
-                    <nz-tab nzTitle="Pay by Credit Card">
+                    </form>
+                  </nz-tab>
+                  <nz-tab nzTitle="Pay by Credit Card">
+                    <form nz-form [formGroup]="cardForm" role="form">
                       <nz-form-item>
                         <nz-form-label [nzSpan]="4" nzRequired>Amount </nz-form-label>
                         <nz-form-control [nzSpan]="4" nzErrorTip="amount">
@@ -84,15 +86,15 @@
                       </nz-form-item>
                       <nz-form-item>
                         <nz-form-control [nzOffset]="4" [nzSpan]="4">
-                          <button nz-button nzType="primary" nzSize="large" (click)="submit()">Submit</button>
+                          <button nz-button nzType="primary" nzSize="large" (click)="submitCard()">Submit</button>
                         </nz-form-control>
                       </nz-form-item>
-                    </nz-tab>
-                  </nz-col>
-                </nz-row>
-              </nz-tabset>
-            </nz-card>
-          </form>
+                    </form>
+                  </nz-tab>
+                </nz-col>
+              </nz-row>
+            </nz-tabset>
+          </nz-card>
         </nz-card>
       </nz-col>
     </nz-row>

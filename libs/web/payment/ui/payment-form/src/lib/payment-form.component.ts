@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Payment, PaymentService } from '@whoa/web/payment/data-access';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'whoa-payment-form',
@@ -12,9 +11,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./payment-form.component.less']
 })
 export class PaymentFormComponent {
-
   @Output() submitForm = new EventEmitter<Payment>();
+
   form: FormGroup;
+  cardForm: FormGroup;
 
   accountType = [
     { label: 'Checking', value: 'Checking' },
@@ -32,56 +32,67 @@ export class PaymentFormComponent {
   listOfData: Payment[] = [];
   //scheduledPayments!: Observable<Payment[]>;
 
-  constructor(fb: FormBuilder, private router: Router, private msg: NzMessageService, private message: NzModalService, private paymentService: PaymentService) {
-
+  constructor(
+    fb: FormBuilder,
+    private router: Router,
+    private msg: NzMessageService,
+    private message: NzModalService,
+    private paymentService: PaymentService
+  ) {
     this.form = fb.group({
       amount: [null, [Validators.required]], //, Validators.pattern(/^(user)$/)
       routingNumber: [null, [Validators.required]], //, Validators.pattern(/^(password)$/)
       accountNumber: [null, [Validators.required]],
       accountType: [null, [Validators.required]],
-      accountHolderFirstName: [null, [Validators.required]],
-      accountHolderLastName: [null, [Validators.required]],
-      accountHolderAddress: [null, [Validators.required]],
-      accountHolderCity: [null, [Validators.required]],
-      accountHolderState: [null, [Validators.required]],
-      accountHolderZip: [null, [Validators.required]],
+      // accountHolderFirstName: [null, [Validators.required]],
+      // accountHolderLastName: [null, [Validators.required]],
+      // accountHolderAddress: [null, [Validators.required]],
+      // accountHolderCity: [null, [Validators.required]],
+      // accountHolderState: [null, [Validators.required]],
+      // accountHolderZip: [null, [Validators.required]],
+      remember: [true]
+    });
+
+    this.cardForm = fb.group({
+      amount: [null, [Validators.required]], //, Validators.pattern(/^(user)$/)
       cardNumber: [null, [Validators.required]],
       cardType: [null, [Validators.required]],
       expDate: [null, [Validators.required]],
       cardCode: [null, [Validators.required]],
       remember: [true]
     });
-
   }
 
-  submit(): void {
-    const propamountStreetAddress = this.form.controls.amount;
-    const routingNumber = this.form.controls.routingNumber;
-    const accountNumber = this.form.controls.accountNumber;
-    const accountType = this.form.controls.accountType;
-    const accountHolderFirstName = this.form.controls.accountHolderFirstName;
-    const accountHolderLastName = this.form.controls.accountHolderLastName;
-    const accountHolderAddress = this.form.controls.accountHolderAddress;
-    const accountHolderCity = this.form.controls.accountHolderCity;
-    const accountHolderState = this.form.controls.accountHolderState;
-    const accountHolderZip = this.form.controls.accountHolderZip;
-    const cardNumber = this.form.controls.cardNumber;
-    const cardType = this.form.controls.cardType;
-    const expDate = this.form.controls.expDate;
-    const cardCode = this.form.controls.cardCode;
+  submitEcheck(): void {
+    console.log('before emit');
 
     this.form.markAsDirty();
     this.form.updateValueAndValidity();
 
+    console.log('this.form.invalid', this.form.invalid);
     if (this.form.invalid) {
       return;
     }
 
-    //this.paymentService.createScheduledPayment(this.form.value as Payment); 
-    console.log('before emit');
+    //this.paymentService.createScheduledPayment(this.form.value as Payment);
+
     this.submitForm.emit(this.form.value as Payment);
+  }
+
+  submitCard(): void {
     console.log('before emit');
 
+    this.cardForm.markAsDirty();
+    this.cardForm.updateValueAndValidity();
+
+    console.log('this.form.invalid', this.cardForm.invalid);
+    if (this.cardForm.invalid) {
+      return;
+    }
+
+    //this.paymentService.createScheduledPayment(this.form.value as Payment);
+
+    this.submitForm.emit(this.cardForm.value as Payment);
   }
 
   startEdit(id: string): void {
@@ -89,7 +100,7 @@ export class PaymentFormComponent {
   }
 
   cancelEdit(id: string): void {
-    const index = this.listOfData.findIndex(item => item.paymentId.toString() === id);
+    const index = this.listOfData.findIndex((item) => item.paymentId.toString() === id);
     this.editCache[id] = {
       data: { ...this.listOfData[index] },
       edit: false
@@ -97,13 +108,13 @@ export class PaymentFormComponent {
   }
 
   saveEdit(id: string): void {
-    const index = this.listOfData.findIndex(item => item.paymentId.toString() === id);
+    const index = this.listOfData.findIndex((item) => item.paymentId.toString() === id);
     Object.assign(this.listOfData[index], this.editCache[id].data);
     this.editCache[id].edit = false;
   }
 
   updateEditCache(): void {
-    this.listOfData.forEach(item => {
+    this.listOfData.forEach((item) => {
       this.editCache[item.paymentId.toString()] = {
         edit: false,
         data: { ...item }
@@ -119,7 +130,7 @@ export class PaymentFormComponent {
     //     paymentSubmittedDate: `Edrward ${i}`,
     //     paymentDay: '23',
     //     paymentType: `London Park no. ${i}`,
-    //     routingNumber: '', 
+    //     routingNumber: '',
     //     accountNumber: '',
     //     accountType: '',
     //     cardNumber: '',
@@ -135,8 +146,10 @@ export class PaymentFormComponent {
     //     amount: ''
     //   });
     // }
-    this.paymentService.getScheduledPayments('6e504840-6a9b-4bf9-9343-5b891a5212df').subscribe(listOfData => { console.log(listOfData); this.listOfData = listOfData; this.updateEditCache(); }); //FIXME: this.listOfData = this.paymentService.getScheduledPayments('')
-
+    this.paymentService.getScheduledPayments('6e504840-6a9b-4bf9-9343-5b891a5212df').subscribe((listOfData) => {
+      console.log(listOfData);
+      this.listOfData = listOfData;
+      this.updateEditCache();
+    }); //FIXME: this.listOfData = this.paymentService.getScheduledPayments('')
   }
-
 }
