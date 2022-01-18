@@ -2,10 +2,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Payment, PaymentService } from '@whoa/web/payment/data-access';
-import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzCardModule } from 'ng-zorro-antd/card';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -56,7 +54,7 @@ export class PaymentFormComponent {
 
   }
 
-  submitPayment(): void {
+  submit(): void {
     const propamountStreetAddress = this.form.controls.amount;
     const routingNumber = this.form.controls.routingNumber;
     const accountNumber = this.form.controls.accountNumber;
@@ -79,7 +77,11 @@ export class PaymentFormComponent {
       return;
     }
 
+    //this.paymentService.createScheduledPayment(this.form.value as Payment); 
+    console.log('before emit');
     this.submitForm.emit(this.form.value as Payment);
+    console.log('before emit');
+
   }
 
   startEdit(id: string): void {

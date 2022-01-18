@@ -14,13 +14,17 @@ export class PaymentComponent implements OnInit {
     private paymentService: PaymentService) { }
 
     payments!: Observable<Payment[]>;
+    payment!: Observable<Payment>;
 
   ngOnInit(): void {
-    this.payments = this.paymentService.getScheduledPayments('3a5ee6cc-9e15-4659-9cbb-bb451d3b6871');
+    this.payments = this.paymentService.getScheduledPayments('6e504840-6a9b-4bf9-9343-5b891a5212df');
   }
 
-  submit(authenticate: any) {
-    this.router.navigate([`/dashboard`]);
+  submit(payment: Payment) {
+    console.log('payment obj', payment);
+    this.payment = this.paymentService.createScheduledPayment(payment);
+    this.payments = this.paymentService.getScheduledPayments('6e504840-6a9b-4bf9-9343-5b891a5212df');
+    //this.router.navigate([`/dashboard`]);
   }
 
 }
