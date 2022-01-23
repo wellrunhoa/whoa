@@ -12,7 +12,7 @@
                       <nz-form-item>
                         <nz-form-label [nzSpan]="4" nzRequired>Amount </nz-form-label>
                         <nz-form-control [nzSpan]="4" nzErrorTip="Amount">
-                          <input nz-input formControlName="amount" placeholder="amount" />
+                          <input nz-input formControlName="paymentAmount" placeholder="amount" />
                         </nz-form-control>
                       </nz-form-item>
                       <nz-form-item>
@@ -47,7 +47,7 @@
                       <nz-form-item>
                         <nz-form-label [nzSpan]="4" nzRequired>Amount </nz-form-label>
                         <nz-form-control [nzSpan]="4" nzErrorTip="amount">
-                          <input nz-input formControlName="amount" placeholder="amount" />
+                          <input nz-input formControlName="paymentAmount" placeholder="amount" />
                         </nz-form-control>
                       </nz-form-item>
                       <nz-form-item>
@@ -116,21 +116,21 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let data of editRowTable.data">
-                    <ng-container *ngIf="!editCache[data.paymentId].edit; else editTemplate">
+                    <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
                       <td>{{ data.paymentSubmittedDate }}</td>
-                      <td>{{ data.paymentDay }}</td>
+                      <td>{{ data.paymentDate }}</td>
                       <td>{{ data.paymentType }}</td>
-                      <td>{{ data.amount }}</td>
-                      <td><a (click)="startEdit(data.paymentId)">Edit</a></td>
+                      <td>{{ data.paymentAmount }}</td>
+                      <td><a (click)="startEdit(data.id)">Edit</a></td>
                     </ng-container>
                     <ng-template #editTemplate>
-                      <td><input type="text" nz-input [(ngModel)]="editCache[data.paymentId].data.paymentSubmittedDate" /></td>
-                      <td><input type="text" nz-input [(ngModel)]="editCache[data.paymentId].data.paymentDay" /></td>
-                      <td><input type="text" nz-input [(ngModel)]="editCache[data.paymentId].data.paymentType" /></td>
-                      <td><input type="text" nz-input [(ngModel)]="editCache[data.paymentId].data.amount" /></td>
+                      <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.paymentSubmittedDate" /></td>
+                      <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.paymentDate" /></td>
+                      <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.paymentType" /></td>
+                      <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.paymentAmount" /></td>
                       <td>
-                        <a (click)="saveEdit(data.paymentId)" class="save">Save</a>
-                        <a nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data.paymentId)">Cancel</a>
+                        <a (click)="saveEdit(data.id)" class="save">Save</a>
+                        <a nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data.id)">Cancel</a>
                       </td>
                     </ng-template>
                   </tr>

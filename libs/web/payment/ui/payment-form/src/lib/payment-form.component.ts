@@ -1,15 +1,19 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Payment, PaymentService } from '@whoa/web/payment/data-access';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Observable } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @Component({
   selector: 'whoa-payment-form',
   templateUrl: './payment-form.component.html',
   styleUrls: ['./payment-form.component.less']
 })
+
+@UntilDestroy()
 export class PaymentFormComponent {
   @Output() submitForm = new EventEmitter<Payment>();
 
@@ -30,6 +34,8 @@ export class PaymentFormComponent {
 
   editCache: { [key: string]: { edit: boolean; data: Payment } } = {};
   listOfData: Payment[] = [];
+  @Input() afterSaveEvent!: Observable<void>;
+
   //scheduledPayments!: Observable<Payment[]>;
 
   constructor(
@@ -40,7 +46,7 @@ export class PaymentFormComponent {
     private paymentService: PaymentService
   ) {
     this.form = fb.group({
-      amount: [null, [Validators.required]], //, Validators.pattern(/^(user)$/)
+      paymentAmount: [null, [Validators.required]], //, Validators.pattern(/^(user)$/)
       routingNumber: [null, [Validators.required]], //, Validators.pattern(/^(password)$/)
       accountNumber: [null, [Validators.required]],
       accountType: [null, [Validators.required]],
@@ -50,15 +56,17 @@ export class PaymentFormComponent {
       // accountHolderCity: [null, [Validators.required]],
       // accountHolderState: [null, [Validators.required]],
       // accountHolderZip: [null, [Validators.required]],
+      paymentType: ['ACH'],
       remember: [true]
     });
 
     this.cardForm = fb.group({
-      amount: [null, [Validators.required]], //, Validators.pattern(/^(user)$/)
+      paymentAmount: [null, [Validators.required]], //, Validators.pattern(/^(user)$/)
       cardNumber: [null, [Validators.required]],
       cardType: [null, [Validators.required]],
       expDate: [null, [Validators.required]],
       cardCode: [null, [Validators.required]],
+      paymentType: ['CREDIT CARD'],
       remember: [true]
     });
   }
@@ -100,7 +108,7 @@ export class PaymentFormComponent {
   }
 
   cancelEdit(id: string): void {
-    const index = this.listOfData.findIndex((item) => item.paymentId.toString() === id);
+    const index = this.listOfData.findIndex((item) => item.id.toString() === id);
     this.editCache[id] = {
       data: { ...this.listOfData[index] },
       edit: false
@@ -108,14 +116,14 @@ export class PaymentFormComponent {
   }
 
   saveEdit(id: string): void {
-    const index = this.listOfData.findIndex((item) => item.paymentId.toString() === id);
+    const index = this.listOfData.findIndex((item) => item.id.toString() === id);
     Object.assign(this.listOfData[index], this.editCache[id].data);
     this.editCache[id].edit = false;
   }
 
   updateEditCache(): void {
     this.listOfData.forEach((item) => {
-      this.editCache[item.paymentId.toString()] = {
+      this.editCache[item.id.toString()] = {
         edit: false,
         data: { ...item }
       };
@@ -143,13 +151,17 @@ export class PaymentFormComponent {
     //     accountHolderCity: '',
     //     accountHolderState: '',
     //     accountHolderZip: '',
-    //     amount: ''
+    //     paymentAmount: ''
     //   });
     // }
-    this.paymentService.getScheduledPayments('6e504840-6a9b-4bf9-9343-5b891a5212df').subscribe((listOfData) => {
-      console.log(listOfData);
-      this.listOfData = listOfData;
-      this.updateEditCache();
-    }); //FIXME: this.listOfData = this.paymentService.getScheduledPayments('')
+    
+    this.afterSaveEvent.pipe(untilDestroyed(this)).subscribe(() => {
+      this.paymentService.getScheduledPayments().pipe(untilDestroyed(this)).subscribe((listOfData) => {
+        console.log(listOfData);
+        this.listOfData = listOfData;
+        this.updateEditCache();
+      }); //FIXME: this.listOfData = this.paymentService.getScheduledPayments('')
+    });
+
   }
 }

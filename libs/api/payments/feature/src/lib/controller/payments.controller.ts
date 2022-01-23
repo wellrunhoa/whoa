@@ -10,16 +10,20 @@ import { ApiTags } from '@nestjs/swagger';
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
-  @ApiGetAll(PaymentDTO, 'scheduledPayments/:id')
-  getPayments(@Param('id') proprietorId: string): Promise<Payment[]> {
-    return this.paymentsService.payments({
-      where: { paymentSource: { proprietorId: proprietorId } }
-    });
-  }
-
   @ApiPost(PaymentDTO)
   //@Scopes('manage')
   create(@Body() paymentDto: PaymentDTO, @UserParam() user: User): Promise<PaymentDTO> {
+    console.log('create payment end point invoked');
     return this.paymentsService.create(paymentDto, user);
   }
+
+  @ApiGetAll(PaymentDTO, 'scheduledPayments')
+  //@Scopes('view')
+  getPayments(@UserParam() user: User): Promise<Payment[]> {
+    return this.paymentsService.payments({
+      where: { paymentSource: { proprietor: {userId: user.sub }} }
+    });
+  }
+
+  
 }

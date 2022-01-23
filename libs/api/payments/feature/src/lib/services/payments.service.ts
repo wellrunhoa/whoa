@@ -28,6 +28,7 @@ export class PaymentsService {
   }
 
   async create(payment: PaymentDTO, user: User): Promise<PaymentDTO> {
+    console.log(payment);
     const proprietor = {
       userId: user.sub,
       email: user.email,
@@ -44,8 +45,8 @@ export class PaymentsService {
     const newPayment = await this.prisma.payment.create({
       data: {
         paymentAmount: payment.paymentAmount,
-        paymentStatus: payment.paymentStatus,
-        paymentDate: payment.paymentDate,
+        paymentStatus: 'Scheduled',
+        paymentDate: new Date(),
         paymentSource: {
           create:
           {
@@ -53,8 +54,8 @@ export class PaymentsService {
             accountType: payment.accountType,
             accountNumber: payment.accountNumber,
             routingNumber: payment.routingNumber,
-            accountHolderFirstname: payment.accountHolderFirstName,
-            accountHolderLastname: payment.accountHolderLastName,
+            accountHolderFirstname: user.given_name,
+            accountHolderLastname: user.family_name,
             createdBy: user.sub,
             updatedBy: user.sub,
             proprietor: {

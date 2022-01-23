@@ -9,24 +9,24 @@ import { Payment } from '../model/Payment';
 export class PaymentService {
 
   constructor(private http: HttpClient) { }
-  setupPayment(payment: Payment) {
 
-  }
-
-  getScheduledPayments(proprietorId: string): Observable<Payment[]> {
-    return this.http.get<Payment[]>(`api/payments/scheduledPayments/${proprietorId}`).pipe(mergeMap(res => res),
-      map((payment:any) => ({
-        amount: payment['paymentAmount'],
-        paymentDay: payment['paymentDate'],
-        paymentType: payment['paymentSource']['paymentType'],
-        paymentId: payment['id'],
-        paymentSubmittedDate: payment['createdAt'],
-      } as Payment)), toArray()
-    );
+  getScheduledPayments(): Observable<Payment[]> {
+    return this.http.get<Payment[]>(`api/payments/scheduledPayments`);
+    // .pipe(mergeMap(res => res),
+    //   map((payment:any) => ({
+    //     amount: payment['paymentAmount'],
+    //     paymentDay: payment['paymentDate'],
+    //     paymentType: payment['paymentSource']['paymentType'],
+    //     paymentId: payment['id'],
+    //     paymentSubmittedDate: payment['createdAt'],
+    //   } as Payment)), toArray()
+    // );
   }
 
   createScheduledPayment (payment: Payment): Observable<Payment>{
-    return this.http.post<Payment>('api/hoa-property', payment).pipe(map((res) => res));
+    console.log('calling api/payments');
+    return this.http.post<Payment>('api/payments', payment);
+
   }
 
 }

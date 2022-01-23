@@ -1,1 +1,1 @@
-<whoa-payment-form (submitForm)="submit($event)"></whoa-payment-form>
+<whoa-payment-form [afterSaveEvent]="afterSaveEvent.asObservable()" (submitForm)="submit($event)"></whoa-payment-form>
