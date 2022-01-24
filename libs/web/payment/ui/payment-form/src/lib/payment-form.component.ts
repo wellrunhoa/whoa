@@ -22,7 +22,11 @@ export class PaymentFormComponent {
 
   accountType = [
     { label: 'Checking', value: 'Checking' },
-    { label: 'Savings', value: 'Savings' }
+    { label: 'Savings', value: 'Savings' },
+    { label: 'VS', value: 'visa' },
+    { label: 'MC', value: 'Mastercard' },
+    { label: 'AX', value: 'American Express' },
+    { label: 'DS', value: 'Discover' }
   ];
 
   cardType = [
@@ -62,10 +66,11 @@ export class PaymentFormComponent {
 
     this.cardForm = fb.group({
       paymentAmount: [null, [Validators.required]], //, Validators.pattern(/^(user)$/)
-      cardNumber: [null, [Validators.required]],
-      cardType: [null, [Validators.required]],
+      accountNumber: [null, [Validators.required]],
+      accountType: [null, [Validators.required]], //FIXME: show only CC types & not Account types
       expDate: [null, [Validators.required]],
       cardCode: [null, [Validators.required]],
+      routingNumber: ['NA'], //FIXME: should remove this here and handle 
       paymentType: ['CREDIT CARD'],
       remember: [true]
     });

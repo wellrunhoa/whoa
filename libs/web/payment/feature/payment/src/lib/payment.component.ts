@@ -26,7 +26,7 @@ export class PaymentComponent implements OnInit {
 
   submit(payment: Payment) {
     console.log('payment obj', payment);
-    this.paymentService.createScheduledPayment(payment).pipe(untilDestroyed(this)).subscribe(()=>this.afterSaveEvent.next());
+    this.paymentService.createScheduledPayment(payment).subscribe(()=>this.afterSaveEvent.next());
     console.log('after createScheduledPayment', payment);
     //this.payments = this.paymentService.getScheduledPayments('6e504840-6a9b-4bf9-9343-5b891a5212df');
     //this.router.navigate([`/dashboard`]);

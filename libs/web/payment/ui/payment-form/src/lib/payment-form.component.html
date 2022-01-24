@@ -52,16 +52,16 @@
                       </nz-form-item>
                       <nz-form-item>
                         <nz-form-label [nzSpan]="4" inputmode="input" nzRequired nzNoColon>Card Type </nz-form-label>
-                        <nz-form-control [nzSpan]="4" nzErrorTip="cardType">
-                          <nz-select title="cardType" formControlName="cardType" nzAllowClear nzPlaceHolder="CardType" nzSize="small">
-                            <nz-option *ngFor="let option of cardType" [nzValue]="option.value" [nzLabel]="option.label"> </nz-option>
+                        <nz-form-control [nzSpan]="4" nzErrorTip="accountType">
+                          <nz-select title="cardType" formControlName="accountType" nzAllowClear nzPlaceHolder="AccountType" nzSize="small">
+                            <nz-option *ngFor="let option of accountType" [nzValue]="option.value" [nzLabel]="option.label"> </nz-option>
                           </nz-select>
                         </nz-form-control>
                       </nz-form-item>
                       <nz-form-item>
                         <nz-form-label [nzSpan]="4" nzRequired>Card Number </nz-form-label>
-                        <nz-form-control [nzSpan]="4" nzErrorTip="cardNumber">
-                          <input nz-input formControlName="cardNumber" placeholder="cardNumber" />
+                        <nz-form-control [nzSpan]="4" nzErrorTip="accountNumber">
+                          <input nz-input formControlName="accountNumber" placeholder="accountNumber" />
                         </nz-form-control>
                       </nz-form-item>
                       <nz-form-item>
@@ -69,7 +69,7 @@
                         <nz-form-control [nzSpan]="2" nzErrorTip="expDate">
                           <nz-date-picker
                             formControlName="expDate"
-                            nzFormat="mm/yyyy"
+                            nzFormat="MM/yyyy"
                             nzMode="month"
                             dateWheels="mm - MMMM  YYY"
                             min="today"
@@ -103,29 +103,29 @@
       <nz-col [nzSpan]="24">
         <nz-card>
           <form nz-form [formGroup]="form" role="form">
-            <nz-card nzTitle="Recurring Payments">
+            <nz-card nzTitle="Payment History (Past 12 Months)">
               <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed">
                 <thead>
                   <tr>
-                    <th nzWidth="20%">Payment Submitted Date</th>
-                    <th nzWidth="20%">Pay Date</th>
+                    <th nzWidth="20%">Payment Date</th>
+                    <th nzWidth="20%">Payment Status</th>
                     <th nzWidth="10%">Payment Type</th>
                     <th nzWidth="30%">Amount</th>
-                    <th>Edit</th>
+                    <th>Update Scheduled Payment</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let data of editRowTable.data">
                     <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
-                      <td>{{ data.paymentSubmittedDate }}</td>
-                      <td>{{ data.paymentDate }}</td>
+                      <td>{{ data.paymentDate | date:'shortDate' }}</td>
+                      <td>{{ data.paymentStatus }}</td>
                       <td>{{ data.paymentType }}</td>
                       <td>{{ data.paymentAmount }}</td>
-                      <td><a (click)="startEdit(data.id)">Edit</a></td>
+                      <td><a (click)="startEdit(data.id)">Update</a></td>
                     </ng-container>
                     <ng-template #editTemplate>
-                      <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.paymentSubmittedDate" /></td>
                       <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.paymentDate" /></td>
+                      <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.paymentStatus" /></td>
                       <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.paymentType" /></td>
                       <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.paymentAmount" /></td>
                       <td>
