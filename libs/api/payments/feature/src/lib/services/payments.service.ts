@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { Payment, Prisma } from '@prisma/client';
 import { PrismaService, User } from '@whoa/api/core/feature';
+import { classToPlain, plainToClass } from 'class-transformer';
 import { PaymentDTO } from '../dto/payment.dto';
 
 @Injectable()
 export class PaymentsService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async payments(params: {
     skip?: number;
@@ -13,18 +14,20 @@ export class PaymentsService {
     cursor?: Prisma.PaymentWhereUniqueInput;
     where?: Prisma.PaymentWhereInput;
     orderBy?: Prisma.PaymentOrderByWithAggregationInput;
-  }): Promise<Payment[]> {
+  }): Promise<PaymentDTO[]> {
     const { skip, take, cursor, where, orderBy } = params;
-    return this.prisma.payment.findMany({
-      skip,
-      take,
-      cursor,
-      where,
-      orderBy,
-      include: {
-        paymentSource: true
-      },
-    });
+    return this.prisma.payment
+      .findMany({
+        skip,
+        take,
+        cursor,
+        where,
+        orderBy,
+        include: {
+          paymentSource: true
+        }
+      })
+      .then((payments: Payment[]) => payments.map((e) => new PaymentDTO(e)));
   }
 
   async create(payment: PaymentDTO, user: User): Promise<PaymentDTO> {
@@ -38,9 +41,7 @@ export class PaymentsService {
       updatedBy: user.sub
     };
     //FIXME: Add logic to check if a matching payment source already exists
-    const paymentInputData = {
-
-    };
+    const paymentInputData = {};
 
     const newPayment = await this.prisma.payment.create({
       data: {
@@ -48,8 +49,7 @@ export class PaymentsService {
         paymentStatus: 'Scheduled',
         paymentDate: new Date(),
         paymentSource: {
-          create:
-          {
+          create: {
             paymentType: payment.paymentType,
             accountType: payment.accountType,
             accountNumber: payment.accountNumber,
@@ -73,5 +73,4 @@ export class PaymentsService {
 
     return payment;
   }
-
 }

@@ -13,7 +13,7 @@ export class AppInitializer {
     const globalPrefix = config.get<string>('environment.contextPath');
 
     app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
-    app.useGlobalPipes(new ValidationPipe({ exceptionFactory: ValidationExceptionFactory }));
+    app.useGlobalPipes(new ValidationPipe({ transform: true, exceptionFactory: ValidationExceptionFactory }));
     app.useGlobalFilters(new HttpExceptionFilter(config));
     app.setGlobalPrefix(globalPrefix);
 

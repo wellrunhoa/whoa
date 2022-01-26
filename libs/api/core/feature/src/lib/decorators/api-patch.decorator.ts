@@ -1,4 +1,4 @@
-import { applyDecorators, ClassSerializerInterceptor, Patch, UseInterceptors } from '@nestjs/common';
+import { applyDecorators, Patch } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 
 import { ApiValidateErrorResponse } from './api-validation-error-response.decorator';
@@ -17,7 +17,6 @@ export function ApiPatch(type: any, path?: string | string[]) {
       description: `${getName(type)} not found`
     }),
     ApiBadRequestResponse({ description: 'Invalid identifier supplied' }),
-    ApiValidateErrorResponse(),
-    UseInterceptors(ClassSerializerInterceptor)
+    ApiValidateErrorResponse()
   );
 }

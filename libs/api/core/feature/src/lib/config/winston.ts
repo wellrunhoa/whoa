@@ -7,36 +7,38 @@ import { registerAs } from '@nestjs/config';
 export default registerAs('winston', () => {
   const fiveMegaBytes = getEnvNumber('LOG_FILE_SIZE', 5000000);
   const rootFolder = getEnv('ROOT_FOLDER', __dirname);
+  const logLevel = getEnv('LOG_LEVEL', 'error');
 
   return {
     transports: [
       new winston.transports.Console({
-        level: 'debug',
-        //format: winston.format.combine(winston.format.timestamp(), winston.format.ms())
+        level: logLevel,
         format: winston.format.combine(
           winston.format.colorize({ all: true }),
           winston.format.timestamp({ format: 'MM/DD/YYYY HH:mm:ss' }),
-          winston.format.printf((info) => `[${info.timestamp}] ${info.level}: ${info.message}`)
-        )
+          winston.format.errors({ stack: true }),
+          winston.format.printf(({ level, message, timestamp, stack }) => {
+            if (typeof message === 'object') {
+              message = JSON.stringify(message, null, 2);
+            }
+            if (stack) {
+              // print log trace
+              return `${timestamp} [${level}]: ${message} - ${stack}`;
+            }
+            return `${timestamp} [${level}]: ${message}`;
+          })
+        ),
+        handleExceptions: true
       }),
       new winston.transports.File({
-        level: 'debug',
+        level: logLevel,
         filename: join(rootFolder, '/logs/server.log'),
         maxsize: fiveMegaBytes,
         maxFiles: 5,
-        tailable: true
+        tailable: true,
+        handleExceptions: true
       })
     ],
-    exceptionHandlers: [
-      new winston.transports.File({
-        level: 'debug',
-        filename: join(rootFolder, '/logs/exceptions.log'),
-        maxsize: fiveMegaBytes,
-        maxFiles: 5,
-        tailable: true
-      })
-    ],
-    handleExceptions: true,
     format: winston.format.combine(
       winston.format((info) => {
         info.env = getEnv('APP_ENV', 'dev');
@@ -47,10 +49,13 @@ export default registerAs('winston', () => {
         }
         return info;
       })(),
-      winston.format.timestamp(),
       winston.format.splat(),
-      winston.format.json()
-    )
+      winston.format.errors({ stack: true }),
+      winston.format.timestamp(),
+      winston.format.json(),
+      winston.format.prettyPrint()
+    ),
+    exitOnError: false
   };
 
   function getCallerFile(): string {
@@ -65,12 +70,7 @@ export default registerAs('winston', () => {
       while (err.stack.length) {
         callerfile = (err.stack as any).shift().getFileName();
 
-        if (
-          currentfile !== callerfile &&
-          !callerfile.includes('node_modules') &&
-          !callerfile.includes('internal/process')
-        )
-          return callerfile;
+        if (currentfile !== callerfile && !callerfile.includes('node_modules') && !callerfile.includes('internal/process')) return callerfile;
       }
     } catch (err) {
       //ignore

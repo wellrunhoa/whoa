@@ -1,5 +1,5 @@
 import { Payment } from '.prisma/client';
-import { Body, Controller, Param } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Param, UseInterceptors } from '@nestjs/common';
 import { PaymentsService } from '../services/payments.service';
 import { ApiGetAll, ApiPost, User, UserParam } from '@whoa/api/core/feature';
 import { PaymentDTO } from '../dto/payment.dto';
@@ -19,11 +19,9 @@ export class PaymentsController {
 
   @ApiGetAll(PaymentDTO, 'scheduledPayments')
   //@Scopes('view')
-  getPayments(@UserParam() user: User): Promise<Payment[]> {
+  getPayments(@UserParam() user: User): Promise<PaymentDTO[]> {
     return this.paymentsService.payments({
-      where: { paymentSource: { proprietor: {userId: user.sub }} }
+      where: { paymentSource: { proprietor: { userId: user.sub } } }
     });
   }
-
-  
 }

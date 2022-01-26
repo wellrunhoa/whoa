@@ -1,4 +1,4 @@
-import { applyDecorators, ClassSerializerInterceptor, Post, UseInterceptors } from '@nestjs/common';
+import { applyDecorators, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
 import { ApiValidateErrorResponse } from './api-validation-error-response.decorator';
@@ -14,7 +14,6 @@ export function ApiPost(type: any, path?: string | string[]) {
       type
     }),
     ApiUnauthorizedResponse(),
-    ApiValidateErrorResponse(),
-    UseInterceptors(ClassSerializerInterceptor)
+    ApiValidateErrorResponse()
   );
 }

@@ -1,4 +1,4 @@
-import { applyDecorators, ClassSerializerInterceptor, Delete, UseInterceptors } from '@nestjs/common';
+import { applyDecorators, Delete } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { getName } from './typename.decorator';
 
@@ -13,7 +13,6 @@ export function ApiDelete(type: any, path?: string | string[]) {
     ApiNotFoundResponse({
       description: `${getName(type)} not found`
     }),
-    ApiBadRequestResponse({ description: 'Invalid identifier supplied' }),
-    UseInterceptors(ClassSerializerInterceptor)
+    ApiBadRequestResponse({ description: 'Invalid identifier supplied' })
   );
 }

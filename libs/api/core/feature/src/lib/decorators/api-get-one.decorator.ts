@@ -1,4 +1,4 @@
-import { applyDecorators, ClassSerializerInterceptor, Get, UseInterceptors } from '@nestjs/common';
+import { applyDecorators, Get } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { getName } from './typename.decorator';
 
@@ -9,7 +9,6 @@ export function ApiGetOne(type: any, path?: string | string[]) {
     ApiOperation({ summary: `Get an existing ${getName(type)}` }),
     ApiOkResponse({ description: `Return a single ${getName(type)}`, type }),
     ApiNotFoundResponse({ description: `${getName(type)} not found` }),
-    ApiBadRequestResponse({ description: 'Invalid identifier supplied' }),
-    UseInterceptors(ClassSerializerInterceptor)
+    ApiBadRequestResponse({ description: 'Invalid identifier supplied' })
   );
 }

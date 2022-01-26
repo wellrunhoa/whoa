@@ -1,6 +1,7 @@
 import { Payment } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime';
 import { name } from '@whoa/api/core/feature';
+import { Transform } from 'class-transformer';
 
 @name('Payment')
 export class PaymentDTO implements Readonly<Payment> {
@@ -11,7 +12,6 @@ export class PaymentDTO implements Readonly<Payment> {
   updatedAt: Date;
   updatedBy: string;
   paymentType: string;
-  paymentAmount: Decimal;
   routingNumber: string;
   accountNumber: string;
   accountType: string;
@@ -29,4 +29,10 @@ export class PaymentDTO implements Readonly<Payment> {
   paymentDay: string;
   paymentDate: Date;
   paymentStatus: string;
+  @Transform(({ value }) => value.toFixed(2, Decimal.ROUND_HALF_UP), { toPlainOnly: true })
+  paymentAmount: Decimal;
+
+  constructor(partial: Partial<Payment>) {
+    Object.assign(this, partial);
+  }
 }
