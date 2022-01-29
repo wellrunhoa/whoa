@@ -4,7 +4,7 @@
       <nz-tabset nzTabPosition="left">
         <nz-tab nzTitle="Profile">
           <ng-template nz-tab>
-            <whoa-profile-form [user$]="user$"></whoa-profile-form>
+            <whoa-profile-form [user$]="user$" (submitForm)="updateProfile($event)"></whoa-profile-form>
           </ng-template>
         </nz-tab>
         <nz-tab nzTitle="Property">
@@ -14,7 +14,7 @@
         </nz-tab>
         <nz-tab nzTitle="Change Password">
           <ng-template nz-tab>
-            <whoa-password-form></whoa-password-form>
+            <whoa-password-form (submitForm)="updatePassword($event)"></whoa-password-form>
           </ng-template>
         </nz-tab>
         <nz-tab nzTitle="Privacy">

@@ -8,3 +8,4 @@ export * from './lib/services/user-context.service';
 export * from './lib/models/property';
 export * from './lib/models/user';
 export * from './lib/app-injector';
+export * from './lib/directives/phone-mask.directive';

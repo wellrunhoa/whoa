@@ -4,3 +4,4 @@ export * from './lib/services/auth.service';
 export * from './lib/services/user.service';
 export * from './lib/guards/auth.guard';
 export * from './lib/models/user-profile';
+export * from './lib/models/update-password';

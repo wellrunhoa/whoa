@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SettingsService } from '@delon/theme';
 import { HoaProperty, PropertyService } from '@whoa/web/property/data-access';
-import { LookupService } from '@whoa/web/shared/data-access';
 
 @Component({
   selector: 'whoa-add-property',
@@ -10,12 +9,7 @@ import { LookupService } from '@whoa/web/shared/data-access';
   styleUrls: ['./add-property.component.scss']
 })
 export class AddPropertyComponent {
-  constructor(
-    private router: Router,
-    private propertyService: PropertyService,
-    private settings: SettingsService,
-    private lookupService: LookupService
-  ) {}
+  constructor(private router: Router, private propertyService: PropertyService, private settings: SettingsService) {}
 
   addProperty(property: any) {
     this.propertyService
