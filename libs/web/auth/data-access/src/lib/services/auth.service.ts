@@ -30,10 +30,9 @@ export class AuthService {
    * - the latest known state of whether the user is authorized
    * - whether the ajax calls for initial log in have all been done
    */
-  public canActivateProtectedRoutes$: Observable<boolean> = combineLatest([
-    this.isAuthenticated$,
-    this.isDoneLoading$
-  ]).pipe(map((values) => values.every((b) => b)));
+  public canActivateProtectedRoutes$: Observable<boolean> = combineLatest([this.isAuthenticated$, this.isDoneLoading$]).pipe(
+    map((values) => values.every((b) => b))
+  );
 
   constructor(
     private oauthService: OAuthService,
@@ -63,11 +62,11 @@ export class AuthService {
       .pipe(untilDestroyed(this))
       .pipe(filter((a) => a))
       .subscribe(() => {
-        const {name, avatar, email} = this.identityClaims() as User;
+        const { name, avatar, email } = this.identityClaims() as User;
 
-        this.userContextService.setUser({name, avatar, email});
+        this.userContextService.setUser({ name, avatar, email });
         //this.authzService.getPermissions(); //load permissions
-        this.eventService.dispatch("whoa:authenticated");
+        this.eventService.dispatch('whoa:authenticated');
       });
 
     this.authzService.init({ config: this.authConfigService.authzConfig });
@@ -79,10 +78,16 @@ export class AuthService {
       .then(() => this.oauthService.tryLoginCodeFlow())
       .then(() => {
         this.isDoneLoadingSubject$.next(true);
-        
+
         this.userContextService.setProperty(undefined);
-        // remove query params
-        this.router.navigate(['']);
+        if (this.oauthService.state && this.oauthService.state !== 'undefined' && this.oauthService.state !== 'null') {
+          let stateUrl = this.oauthService.state;
+          if (stateUrl.startsWith('/') === false) {
+            stateUrl = decodeURIComponent(stateUrl);
+          }
+
+          this.router.navigateByUrl(stateUrl);
+        }
       })
       .catch(() => this.isDoneLoadingSubject$.next(true));
   }
@@ -91,8 +96,8 @@ export class AuthService {
     return this.oauthService.getIdentityClaims();
   }
 
-  public login() {
-    this.oauthService.initCodeFlow();
+  public login(targetUrl: string) {
+    this.oauthService.initCodeFlow(targetUrl || this.router.url);
   }
   public logout() {
     this.oauthService.logOut();

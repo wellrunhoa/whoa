@@ -14,20 +14,15 @@ import { KeycloakResourcePermission } from '../models/keycloak-permissions';
 export class AuthGuard implements CanActivate {
   private isAuthenticated = false;
 
-  constructor(
-    private authService: AuthService,
-    protected keycloakAuth: KeycloakAuthorizationService
-  ) {
-    this.authService.isAuthenticated$
-      .pipe(untilDestroyed(this))
-      .subscribe((i: boolean) => (this.isAuthenticated = i));
+  constructor(private authService: AuthService, protected keycloakAuth: KeycloakAuthorizationService) {
+    this.authService.isAuthenticated$.pipe(untilDestroyed(this)).subscribe((i: boolean) => (this.isAuthenticated = i));
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.authService.isDoneLoading$
       .pipe(filter((isDone) => isDone))
-      .pipe(tap(() => this.isAuthenticated || this.authService.login()))
+      .pipe(tap(() => this.isAuthenticated || this.authService.login(state.url)))
       .pipe(map(() => this.isAuthenticated)) //authn
       .pipe(
         switchMap((isAuthenticated) => {
@@ -41,11 +36,7 @@ export class AuthGuard implements CanActivate {
       );
   }
 
-  isAccessAllowed(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-    permissions: KeycloakResourcePermission[]
-  ): boolean {
+  isAccessAllowed(route: ActivatedRouteSnapshot, state: RouterStateSnapshot, permissions: KeycloakResourcePermission[]): boolean {
     const requiredPermissions = route.data.permissions;
     if (!requiredPermissions || requiredPermissions.length === 0) {
       return true;

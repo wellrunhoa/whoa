@@ -109,6 +109,9 @@
     "web-property-feature-add-property": {
       "tags": ["type:ui"]
     },
+    "web-property-feature-settings-property": {
+      "tags": ["type:ui"]
+    },
     "web-property-feature-shell": {
       "tags": ["type:feature"]
     },

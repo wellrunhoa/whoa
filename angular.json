@@ -684,6 +684,31 @@
         }
       }
     },
+    "web-property-feature-settings-property": {
+      "projectType": "library",
+      "root": "libs/web/property/feature/settings-property",
+      "sourceRoot": "libs/web/property/feature/settings-property/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/property/feature/settings-property"],
+          "options": {
+            "jestConfig": "libs/web/property/feature/settings-property/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/web/property/feature/settings-property/src/**/*.ts",
+              "libs/web/property/feature/settings-property/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "web-property-feature-shell": {
       "projectType": "library",
       "root": "libs/web/property/feature/shell",
