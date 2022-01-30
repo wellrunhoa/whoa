@@ -50,6 +50,27 @@ export class HoaPropertyService {
     return board;
   }
 
+  async getPropertiesByEmail(email: string): Promise<Array<HoaPropertyDTO> | undefined> {
+    return await this.prismaService.property.findMany({
+      where: {
+        PropertyOwner: {
+          every: { proprietor: { email: email } }
+        }
+      },
+      include: {
+        community: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      },
+      orderBy: {
+        createdAt: 'asc'
+      }
+    });
+  }
+
   async getDefaultPropertyByOwner(email: string): Promise<HoaPropertyDTO | undefined> {
     let property = await this.prismaService.property.findFirst({
       where: {

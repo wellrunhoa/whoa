@@ -1,6 +1,6 @@
 import { Body, Controller } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { ApiGetOne, ApiPost, User, UserParam } from '@whoa/api/core/feature';
+import { ApiGetAll, ApiGetOne, ApiPost, User, UserParam } from '@whoa/api/core/feature';
 import { HoaPropertyDTO } from '../dto/hoa-property.dto';
 import { HoaPropertyService } from '../services/hoa-property.service';
 
@@ -19,5 +19,11 @@ export class HoaPropertyController {
   //@Scopes('view')
   getDefaultProperty(@UserParam('email') email: string): Promise<HoaPropertyDTO> {
     return this.hoaPropertyService.getDefaultPropertyByOwner(email);
+  }
+
+  @ApiGetAll(HoaPropertyDTO, 'list')
+  //@Scopes('view')
+  getAllProperties(@UserParam('email') email: string): Promise<Array<HoaPropertyDTO>> {
+    return this.hoaPropertyService.getPropertiesByEmail(email);
   }
 }

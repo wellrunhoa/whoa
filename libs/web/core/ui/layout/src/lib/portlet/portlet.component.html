@@ -9,14 +9,14 @@
       class="alain-default__aside-user-avatar"
       [nzShape]="'square'"
       [nzSize]="'large'"
-      [nzSrc]="property.community?.avatar"
+      [nzSrc]="property?.community?.avatar"
       nzIcon="home"
     ></nz-avatar>
     <div class="alain-default__aside-user-info" *ngIf="property">
-      <strong>{{ property.community?.name }}</strong>
+      <strong>{{ property?.community?.name }}</strong>
       <p class="mb0">
-        {{ property.addressLine1 }}, {{ property.city }} {{ property.state }},
-        {{ property.zipCode }}
+        {{ property?.addressLine1 }}, {{ property?.city }} {{ property?.state }},
+        {{ property?.zipCode }}
       </p>
     </div>
   </div>

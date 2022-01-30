@@ -753,6 +753,28 @@
         }
       }
     },
+    "web-property-ui-property-list": {
+      "projectType": "library",
+      "root": "libs/web/property/ui/property-list",
+      "sourceRoot": "libs/web/property/ui/property-list/src",
+      "prefix": "whoa",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/property/ui/property-list"],
+          "options": {
+            "jestConfig": "libs/web/property/ui/property-list/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/property/ui/property-list/src/**/*.ts", "libs/web/property/ui/property-list/src/**/*.html"]
+          }
+        }
+      }
+    },
     "web-reservations-data-access": {
       "projectType": "library",
       "root": "libs/web/reservations/data-access",

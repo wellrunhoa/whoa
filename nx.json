@@ -118,6 +118,9 @@
     "web-property-ui-add-property-form": {
       "tags": ["type:ui"]
     },
+    "web-property-ui-property-list": {
+      "tags": ["type:ui"]
+    },
     "web-reservations-data-access": {
       "tags": ["type:data-access"]
     },

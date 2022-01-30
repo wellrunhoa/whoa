@@ -13,6 +13,10 @@ export class PropertyService {
     return this.http.get<HoaProperty>('api/hoa-property/default').pipe(map((res) => res));
   }
 
+  getProperties(): Observable<Array<HoaProperty>> {
+    return this.http.get<Array<HoaProperty>>('api/hoa-property/list').pipe(map((res) => res));
+  }
+
   register(property: HoaProperty): Observable<HoaProperty> {
     return this.http.post<HoaProperty>('api/hoa-property', property).pipe(map((res) => res));
   }

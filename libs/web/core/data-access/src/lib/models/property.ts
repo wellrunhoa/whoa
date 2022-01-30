@@ -10,7 +10,9 @@ export interface Property {
 }
 
 export interface Community {
-  id: string
-  name: string
-  avatar: string
+  id: string;
+  name: string;
+  avatar: string;
+  city: string;
+  state: string;
 }

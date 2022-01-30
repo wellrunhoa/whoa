@@ -17,6 +17,7 @@
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
     "suppressImplicitAnyIndexErrors": true,
+    "strictPropertyInitialization": false,
     "strict": false,
     "baseUrl": ".",
     "paths": {
@@ -48,6 +49,7 @@
       "@whoa/web/property/feature/settings-property": ["libs/web/property/feature/settings-property/src/index.ts"],
       "@whoa/web/property/feature/shell": ["libs/web/property/feature/shell/src/index.ts"],
       "@whoa/web/property/ui/add-property-form": ["libs/web/property/ui/add-property-form/src/index.ts"],
+      "@whoa/web/property/ui/property-list": ["libs/web/property/ui/property-list/src/index.ts"],
       "@whoa/web/reservations/data-access": ["libs/web/reservations/data-access/src/index.ts"],
       "@whoa/web/reservations/feature/reservation": ["libs/web/reservations/feature/reservation/src/index.ts"],
       "@whoa/web/reservations/feature/shell": ["libs/web/reservations/feature/shell/src/index.ts"],

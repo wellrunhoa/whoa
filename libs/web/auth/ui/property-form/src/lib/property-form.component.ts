@@ -17,8 +17,8 @@ export class PropertyFormComponent implements AfterViewInit {
 
   async initPropertyForm() {
     this.viewContainerRef.clear();
-    const { AddPropertyComponent } = await import('@whoa/web/property/feature/add-property');
-    const component = this.cfr.resolveComponentFactory(AddPropertyComponent);
+    const { SettingsPropertyComponent } = await import('@whoa/web/property/feature/settings-property');
+    const component = this.cfr.resolveComponentFactory(SettingsPropertyComponent);
     const compRef = this.viewContainerRef.createComponent(component, undefined, this.injector);
     // compRef.instance.setData({
     //   workFlowFlag: true,

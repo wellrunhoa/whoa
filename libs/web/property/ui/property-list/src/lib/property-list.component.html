@@ -1,0 +1,30 @@
+<nz-list [nzDataSource]="properties" [nzRenderItem]="property" [nzGrid]="{ gutter: 24, lg: 8, md: 12, sm: 24, xs: 24 }">
+  <ng-template #property let-property>
+    <nz-list-item>
+      <nz-card nzHoverable *ngIf="property !== null" [nzActions]="[actionEdit, actionDelete]">
+        <ng-template #actionEdit>
+          <i nz-icon nzType="edit" (click)="edit(property)"></i>
+        </ng-template>
+        <ng-template #actionDelete>
+          <i nz-icon nzType="delete"></i>
+        </ng-template>
+        <nz-card-meta [nzAvatar]="nzAvatar" [nzTitle]="nzTitle" [nzDescription]="nzDescription">
+          <ng-template #nzAvatar>
+            <nz-avatar [nzSize]="'large'" [nzSrc]="property.community?.avatar" nzIcon="home"></nz-avatar>
+          </ng-template>
+          <ng-template #nzTitle>
+            {{ property.community?.name }}
+          </ng-template>
+          <ng-template #nzDescription>
+            {{ property.addressLine1 }}, {{ property.city }} {{ property.state }},
+            {{ property.zipCode }}
+          </ng-template>
+        </nz-card-meta>
+      </nz-card>
+      <button *ngIf="property === null" nz-button (click)="add()" nzType="dashed" style="width: 100%; height: 144px">
+        <i nz-icon nzType="plus"></i>
+        <span>Add Property</span>
+      </button>
+    </nz-list-item>
+  </ng-template>
+</nz-list>

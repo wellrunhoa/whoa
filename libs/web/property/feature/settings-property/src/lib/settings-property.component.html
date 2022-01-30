@@ -1,0 +1,11 @@
+<whoa-property-list [properties]="properties" (addProperty)="addProperty()" (editProperty)="editProperty($event)"></whoa-property-list>
+<nz-drawer
+  [nzBodyStyle]="{ overflow: 'auto' }"
+  [nzMaskClosable]="false"
+  [nzWidth]="580"
+  [nzTitle]="title"
+  [nzVisible]="visible"
+  (nzOnClose)="close()"
+>
+  <whoa-add-property-form (submitForm)="saveProperty($event)" [property]="property" *nzDrawerContent></whoa-add-property-form>
+</nz-drawer>
