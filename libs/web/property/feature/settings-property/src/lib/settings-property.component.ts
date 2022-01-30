@@ -15,6 +15,11 @@ export class SettingsPropertyComponent {
   property: HoaProperty | null;
 
   constructor(private propertyService: PropertyService) {
+    this.loadProperties();
+  }
+
+  loadProperties() {
+    this.properties = [];
     this.propertyService
       .getProperties()
       .pipe(untilDestroyed(this))
@@ -37,7 +42,23 @@ export class SettingsPropertyComponent {
   }
 
   saveProperty(property: HoaProperty) {
-    //
+    if (property.id) {
+      this.propertyService
+        .update(property)
+        .pipe(untilDestroyed(this))
+        .subscribe(() => {
+          this.loadProperties();
+          this.close();
+        });
+    } else {
+      this.propertyService
+        .register(property)
+        .pipe(untilDestroyed(this))
+        .subscribe(() => {
+          this.loadProperties();
+          this.close();
+        });
+    }
   }
 
   open(): void {

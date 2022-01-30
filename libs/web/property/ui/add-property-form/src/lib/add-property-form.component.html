@@ -14,6 +14,13 @@
           <ng-container *ngIf="control.hasError('autocompleteValueNotFound')"> Select valid Community </ng-container>
         </ng-template>
         <nz-autocomplete #auto>
+          <nz-auto-option
+            *ngIf="property?.community && !communitySearch"
+            [nzValue]="property?.community?.id"
+            [nzLabel]="communityName(property?.community)"
+          >
+            {{ communityName(property?.community) }}
+          </nz-auto-option>
           <nz-auto-option *ngFor="let option of communities$ | async" [nzValue]="option.id" [nzLabel]="communityName(option)">
             {{ communityName(option) }}
           </nz-auto-option>

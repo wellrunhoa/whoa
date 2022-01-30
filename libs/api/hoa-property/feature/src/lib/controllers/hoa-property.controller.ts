@@ -1,6 +1,6 @@
 import { Body, Controller } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { ApiGetAll, ApiGetOne, ApiPost, User, UserParam } from '@whoa/api/core/feature';
+import { ApiGetAll, ApiGetOne, ApiPost, ApiPut, User, UserParam } from '@whoa/api/core/feature';
 import { HoaPropertyDTO } from '../dto/hoa-property.dto';
 import { HoaPropertyService } from '../services/hoa-property.service';
 
@@ -13,6 +13,12 @@ export class HoaPropertyController {
   //@Scopes('manage')
   create(@Body() propertyDto: HoaPropertyDTO, @UserParam() user: User): Promise<HoaPropertyDTO> {
     return this.hoaPropertyService.create(propertyDto, user);
+  }
+
+  @ApiPut(HoaPropertyDTO)
+  //@Scopes('manage')
+  update(@Body() propertyDto: HoaPropertyDTO, @UserParam() user: User): Promise<HoaPropertyDTO> {
+    return this.hoaPropertyService.update(propertyDto, user);
   }
 
   @ApiGetOne(HoaPropertyDTO, 'default')

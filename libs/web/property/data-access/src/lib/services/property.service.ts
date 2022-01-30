@@ -20,4 +20,8 @@ export class PropertyService {
   register(property: HoaProperty): Observable<HoaProperty> {
     return this.http.post<HoaProperty>('api/hoa-property', property).pipe(map((res) => res));
   }
+
+  update(property: HoaProperty): Observable<HoaProperty> {
+    return this.http.put<HoaProperty>('api/hoa-property', property).pipe(map((res) => res));
+  }
 }

@@ -1,9 +1,9 @@
-import { AfterContentInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Community, LookupService, State } from '@whoa/web/shared/data-access';
 import { HoaProperty } from '@whoa/web/property/data-access';
-import { debounceTime, distinctUntilChanged, filter, Observable, of, startWith, switchMap, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, Observable, startWith, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'whoa-add-property-form',
@@ -17,6 +17,7 @@ export class AddPropertyFormComponent implements OnInit {
   communities$!: Observable<Community[]>;
   communities!: Community[];
   @Input() property: HoaProperty | null;
+  communitySearch = false;
 
   @Output() submitForm = new EventEmitter<HoaProperty>();
 
@@ -42,23 +43,26 @@ export class AddPropertyFormComponent implements OnInit {
         distinctUntilChanged(),
         filter((v) => v?.length > 2),
         switchMap((v: string) => {
-          if (this.property) {
-            if (v === this.property.community.id) {
-              this.communities = [this.property.community];
-            }
-          }
-          return this.lookupService.communities(v).pipe(tap((o) => (this.communities = o)));
+          return this.lookupService.communities(v).pipe(
+            tap((o) => {
+              this.communitySearch = true;
+              this.communities = o;
+            })
+          );
         })
       );
     }
 
     setTimeout(() => {
-      if (this.property) this.form.patchValue(this.property);
+      if (this.property) {
+        this.communities = [this.property.community];
+        this.form.patchValue(this.property);
+      }
     }, 1);
   }
 
-  communityName(option: Community): string {
-    return `${option.name}, ${option.city}, ${option.state}`;
+  communityName(option: Community | undefined): string {
+    return `${option?.name}, ${option?.city}, ${option?.state}`;
   }
 
   resetForm(): void {
@@ -67,7 +71,11 @@ export class AddPropertyFormComponent implements OnInit {
 
   submit(): void {
     if (this.form.valid) {
-      this.submitForm.emit(this.form.value as HoaProperty);
+      let saveProperty = this.form.value as HoaProperty;
+      if (this.property) {
+        saveProperty = { ...this.property, ...saveProperty };
+      }
+      this.submitForm.emit(saveProperty);
     } else {
       Object.values(this.form.controls).forEach((control) => {
         if (control.invalid) {

@@ -1,5 +1,7 @@
-<nz-card nzTitle="Register Property">
-  <nz-card-meta [nzDescription]="nzDescription">
-    <ng-template #nzDescription> <whoa-add-property-form (submitForm)="addProperty($event)"></whoa-add-property-form></ng-template>
-  </nz-card-meta>
-</nz-card>
+<div nz-row nzJustify="center">
+  <nz-card nzTitle="Register Property" nz-col [nzSm]="10" [nzXs]="24">
+    <nz-card-meta [nzDescription]="nzDescription">
+      <ng-template #nzDescription> <whoa-add-property-form (submitForm)="addProperty($event)"></whoa-add-property-form></ng-template>
+    </nz-card-meta>
+  </nz-card>
+</div>

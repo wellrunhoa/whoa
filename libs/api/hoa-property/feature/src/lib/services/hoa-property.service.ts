@@ -40,6 +40,16 @@ export class HoaPropertyService {
     return newProperty;
   }
 
+  async update(propertyDto: HoaPropertyDTO, user: User): Promise<HoaPropertyDTO> {
+    delete propertyDto.community;
+    const newProperty = await this.prismaService.property.update({
+      where: { id: propertyDto.id },
+      data: propertyDto as Property
+    });
+
+    return newProperty;
+  }
+
   async getById(id: string): Promise<HoaPropertyDTO | undefined> {
     const board = await this.prismaService.property.findFirst({ where: { id } });
 
@@ -61,7 +71,9 @@ export class HoaPropertyService {
         community: {
           select: {
             id: true,
-            name: true
+            name: true,
+            city: true,
+            state: true
           }
         }
       },
@@ -115,15 +127,6 @@ export class HoaPropertyService {
 
     return property;
   }
-
-  // async update(id: string, updateBoardDto: HoaPropertyDTO): Promise<HoaPropertyDTO> {
-  //   const savedBoard = await this.prismaService.hoaBoard.update({
-  //     data: updateBoardDto,
-  //     where: { id }
-  //   });
-
-  //   return savedBoard;
-  // }
 
   // async addMember(memberDto: HoaBoardMemberDTO): Promise<HoaBoardMemberDTO> {
   //   return await this.prismaService.hoaBoardMember.create({
