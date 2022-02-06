@@ -1,8 +1,13 @@
 export interface ServiceRequest {
-    propStreetAddress: string;
-    propCity: string;
-    propState: string;
-    propZip: string;
+    id: string;
     requestedService: string;
     comments: string;
+    docsId: string;
+    status: string;
+    propertyOwnerId: string;
+    createdAt: Date;
+    createdBy: string;
+    updatedAt: Date;
+    updatedBy: string;
+   // documents: 
 }

@@ -1,10 +1,13 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ServiceRequest } from '@whoa/web/service-req/data-access';
+import { ServiceRequest, ServiceReqService } from '@whoa/web/service-req/data-access';
+import { Property, UserContextService } from '@whoa/web/core/data-access'
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'whoa-service-request-form',
@@ -15,30 +18,47 @@ export class ServiceRequestFormComponent {
 
   @Output() submitForm = new EventEmitter<ServiceRequest>();
   form: FormGroup;
+  serReqListForm: FormGroup;
   loading = false;
-  stateList = [
-    { label: 'KS', value: 'KS' },
-    { label: 'NC', value: 'NC' },
-    { label: 'TX', value: 'TX' },
-    { label: 'AL', value: 'AL' },
-    { label: 'AK', value: 'AK' }
-  ];
+
+  editCache: { [key: string]: { edit: boolean; data: ServiceRequest } } = {};
+  listOfData: ServiceRequest[] = [];
+  @Input() afterSaveEvent!: Observable<void>;
+
+  // stateList = [
+  //   { label: 'KS', value: 'KS' },
+  //   { label: 'NC', value: 'NC' },
+  //   { label: 'TX', value: 'TX' },
+  //   { label: 'AL', value: 'AL' },
+  //   { label: 'AK', value: 'AK' }
+  // ];
   UPLOAD_FILE = 'file://C:/Downloads'; // File upload path - must be rest call
 
-  constructor(fb: FormBuilder, private router: Router, private msg: NzMessageService, private message: NzModalService) {
+  constructor(fb: FormBuilder,
+    private router: Router,
+    private msg: NzMessageService,
+    private message: NzModalService,
+    private userContextService: UserContextService,
+    private serviceRequest: ServiceReqService) {
 
     this.form = fb.group({
-      propStreetAddress: [null, [Validators.required]], //, Validators.pattern(/^(user)$/)
-      propCity: [null, [Validators.required]], //, Validators.pattern(/^(password)$/)
-      propState: [null, [Validators.required]],
-      propZip: [null, [Validators.required]],
+      // propStreetAddress: [null, [Validators.required]], //, Validators.pattern(/^(user)$/)
+      // propCity: [null, [Validators.required]], //, Validators.pattern(/^(password)$/)
+      // propState: [null, [Validators.required]],
+      // propZip: [null, [Validators.required]],
       requestedService: [null, [Validators.required]],
       comments: [null, [Validators.maxLength(100)]],
       attachements: [null, null],
       remember: [true]
     });
-  }
 
+    this.serReqListForm = fb.group({
+      requestedService: [null, [Validators.required]],
+      status: [null, [Validators.required]],
+      updatedAt: [null, [Validators.required]]
+    });
+  }
+  
   fileList: NzUploadFile[] = [];
   beforeUpload = (file: NzUploadFile): boolean => {
     // Judgment on the upload file type
@@ -68,9 +88,9 @@ export class ServiceRequestFormComponent {
     // When the type and size meet the requirements, upload directly; if return false, then you need to call the upload method manually
     return true;
   }
-  
+
   // Method to get the path when the file upload is finished     	 
-  getFileUrl( info: NzUploadChangeParam ): void {
+  getFileUrl(info: NzUploadChangeParam): void {
     const status = info.file.status;
     if (status === 'done') {
       //this.zizhi_prove = info.file.response.data
@@ -79,12 +99,20 @@ export class ServiceRequestFormComponent {
     }
   }
 
+  updateEditCache(): void {
+    this.listOfData.forEach((item) => {
+      this.editCache[item.id.toString()] = {
+        edit: false,
+        data: { ...item }
+      };
+    });
+  }
 
   serviceReq(): void {
-    const propStreetAddress = this.form.controls.propStreetAddress;
-    const propCity = this.form.controls.propCity;
-    const propState = this.form.controls.propState;
-    const propZip = this.form.controls.propZip;
+    // const propStreetAddress = this.form.controls.propStreetAddress;
+    // const propCity = this.form.controls.propCity;
+    // const propState = this.form.controls.propState;
+    // const propZip = this.form.controls.propZip;
     const requestedService = this.form.controls.requestedService;
     const comments = this.form.controls.comments;
 
@@ -96,6 +124,28 @@ export class ServiceRequestFormComponent {
       return;
     }
 
+    // get property(): Property {
+    //   return this.userContextService.property;
+    // }
+
+    this.userContextService.property;
+
     this.submitForm.emit(this.form.value as ServiceRequest);
   }
+
+  cancelServiceReq() {
+    this.updateEditCache();
+
+  }
+
+  ngOnInit(): void {
+    this.afterSaveEvent.pipe(untilDestroyed(this)).subscribe(() => {
+      this.serviceRequest.getAllServiceReq().pipe(untilDestroyed(this)).subscribe((listOfData) => {
+        console.log(listOfData);
+        this.listOfData = listOfData;
+        this.updateEditCache();
+      }); //FIXME: this.listOfData = this.paymentService.getScheduledPayments('')
+    });
+  }
+
 }

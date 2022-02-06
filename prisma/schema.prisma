@@ -212,6 +212,24 @@ model PropertyOwner {
   updatedAt       DateTime   @updatedAt @map("updated_at")
   updatedBy       String     @map("updated_by") @db.VarChar(100)
 
+  ServiceRequest ServiceRequest[]
   @@index([proprietorId, propertyId])
   @@map("property_owner")
+}
+
+model ServiceRequest {
+  id               String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  requestedService String        @map("requestedService") @db.Uuid
+  comments         String        @map("comments") @db.Uuid
+  status           String        @map("status") @db.Uuid
+  docsId           String        @map("docsId") @db.Uuid
+  propertyOwner    PropertyOwner @relation(fields: [propertyOwnerId], references: [id])
+  propertyOwnerId  String        @map("propertyOwnerId") @db.Uuid
+  createdAt        DateTime      @default(now()) @map("created_at")
+  createdBy        String        @map("created_by") @db.VarChar(100)
+  updatedAt        DateTime      @updatedAt @map("updated_at")
+  updatedBy        String        @map("updated_by") @db.VarChar(100)
+
+  @@index([propertyOwnerId, docsId])
+  @@map("service_request")
 }

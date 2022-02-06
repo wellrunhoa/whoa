@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {ServiceReqService} from '@whoa/web/service-req/data-access'
+import {ServiceReqService, ServiceRequest} from '@whoa/web/service-req/data-access'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'whoa-service-request',
@@ -14,14 +15,19 @@ export class ServiceRequestComponent {
     private serviceReqService: ServiceReqService,
   ) {}
 
+  serviceReq!: Observable<ServiceRequest>;
   // ngOnInit(): void {
   // }
 
-  submit(authenticate: any) {
+  submit(serviceReq: ServiceRequest) {
     // this.serviceReqService.(authenticate).subscribe(user => {
     //   this.settingService.setUser(user);
     // });
+    this.serviceReqService.createServcRequest(serviceReq);
+    //this.router.navigate([`/dashboard`]);
+  }
+
+  cancelServiceReq(){
     
-    this.router.navigate([`/dashboard`]);
   }
 }

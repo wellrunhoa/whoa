@@ -5,38 +5,6 @@
         <nz-row [nzGutter]="64">
           <nz-col [nzSpan]="16">
             <nz-form-item>
-              <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Property Address</nz-form-label>
-              <nz-form-control [nzSpan]="12" nzErrorTip="Street Address">
-                <input nz-input formControlName="propStreetAddress" />
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-label [nzSpan]="7" nzRequired nzNoColon>City</nz-form-label>
-              <nz-form-control [nzSpan]="12" nzErrorTip="City">
-                <input nz-input formControlName="propCity" />
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-label [nzSpan]="7" inputmode="input" nzRequired nzNoColon
-                >State</nz-form-label
-              >
-              <nz-form-control [nzSpan]="12" nzErrorTip="State">
-                <nz-select title="State" formControlName="propState" nzAllowClear>
-                  <nz-option
-                    *ngFor="let option of stateList"
-                    [nzValue]="option.value"
-                    [nzLabel]="option.label"
-                  ></nz-option>
-                </nz-select>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Zip</nz-form-label>
-              <nz-form-control [nzSpan]="12" nzErrorTip="Zip">
-                <input nz-input formControlName="propZip" />
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
               <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Service Type</nz-form-label>
               <nz-form-control [nzSpan]="12" nzErrorTip="Service Type">
                 <input nz-input formControlName="requestedService" />
@@ -50,14 +18,9 @@
             </nz-form-item>
             <nz-form-item>
               <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Attachments</nz-form-label>
-              <nz-upload
-                nzAccept="application/pdf,image/jpeg,image/jpg,image/png"
-                [(nzFileList)]="fileList"
-                [nzAction]="UPLOAD_FILE"
-                [nzShowButton]="fileList.length < 1"
-                [nzBeforeUpload]="beforeUpload"
-                (nzChange)="getFileUrl($event)"
-              >
+              <nz-upload nzAccept="application/pdf,image/jpeg,image/jpg,image/png" [(nzFileList)]="fileList"
+                [nzAction]="UPLOAD_FILE" [nzShowButton]="fileList.length < 1" [nzBeforeUpload]="beforeUpload"
+                (nzChange)="getFileUrl($event)">
                 <button nz-button>
                   <i nz-icon nzType="upload"></i>
                   <span>upload files</span>
@@ -66,13 +29,7 @@
             </nz-form-item>
             <nz-form-item>
               <nz-form-control [nzOffset]="7" [nzSpan]="12">
-                <button
-                  nz-button
-                  nzType="primary"
-                  [nzLoading]="loading"
-                  nzBlock
-                  (click)="serviceReq()"
-                >
+                <button nz-button nzType="primary" [nzLoading]="loading" nzBlock (click)="serviceReq()">
                   Submit
                 </button>
               </nz-form-control>
@@ -82,5 +39,38 @@
       </form>
     </nz-card>
   </nz-col>
+
+
+  <nz-row [nzGutter]="24">
+    <nz-col [nzSpan]="24">
+      <nz-card>
+        <form nz-form [formGroup]="serReqListForm" role="form">
+          <nz-card nzTitle="ServiceRequest Status (Past 12 Months)">
+            <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed">
+              <thead>
+                <tr>
+                  <th nzWidth="20%">Requested Date</th>
+                  <th nzWidth="40%">Service Type</th>
+                  <th nzWidth="20%">Status</th>
+                  <th>Cancel</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of editRowTable.data">
+                  <ng-container>
+                    <td>{{ data.updatedAt | date:'shortDate' }}</td>
+                    <td>{{ data.requestedService }}</td>
+                    <td>{{ data.status }}</td>
+                    <td><a (click)="cancelServiceReq()">Cancel</a></td>
+                  </ng-container>
+                </tr>
+              </tbody>
+            </nz-table>
+          </nz-card>
+        </form>
+      </nz-card>
+    </nz-col>
+  </nz-row>
 </ng-template>
-<whoa-portlet pageTitle="Service Request" pageSubTitle="Submit change requests along with any supporting documentation" [contentTemplate]="content"></whoa-portlet>
+<whoa-portlet pageTitle="Service Request" pageSubTitle="Submit change requests along with any supporting documentation"
+  [contentTemplate]="content"></whoa-portlet>

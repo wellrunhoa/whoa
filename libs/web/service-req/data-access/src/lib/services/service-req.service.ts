@@ -8,8 +8,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class ServiceReqService {
 
-  constructor(private httpClient: HttpClient) {}
-  servcRequest(serviceReq : ServiceRequest) {
+  constructor(private http: HttpClient) {}
 
+  createServcRequest(serviceReq : ServiceRequest): Observable<ServiceRequest> {
+    return this.http.post<ServiceRequest>('api/service-request', serviceReq);
+  }
+
+  getAllServiceReq (): Observable<ServiceRequest[]>{
+    return this.http.get<ServiceRequest[]>('api/service-request');
   }
 }
