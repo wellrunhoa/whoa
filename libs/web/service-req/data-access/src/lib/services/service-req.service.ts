@@ -2,19 +2,24 @@ import { Injectable } from '@angular/core';
 import { ServiceRequest} from '../model/service-request';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { UserContextService } from '@whoa/web/core/data-access';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceReqService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private userContext: UserContextService) {}
 
   createServcRequest(serviceReq : ServiceRequest): Observable<ServiceRequest> {
-    return this.http.post<ServiceRequest>('api/service-request', serviceReq);
+    const propertyId = this.userContext.property.id;
+    console.log('serviceReq in UI service layer', serviceReq);
+    return this.http.post<ServiceRequest>(`api/service-request/${propertyId}`, serviceReq);
   }
 
   getAllServiceReq (): Observable<ServiceRequest[]>{
-    return this.http.get<ServiceRequest[]>('api/service-request');
+    const propertyId = this.userContext.property.id;
+    return this.http.get<ServiceRequest[]>(`api/service-request/list/${propertyId}`);
   }
 }

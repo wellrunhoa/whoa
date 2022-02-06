@@ -19,7 +19,7 @@ export class PaymentComponent implements OnInit {
     afterSaveEvent: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.afterSaveEvent.next();
+    // this.afterSaveEvent.next();
     setTimeout(() => this.afterSaveEvent.next(), 1);
    // this.payments = this.paymentService.getScheduledPayments('6e504840-6a9b-4bf9-9343-5b891a5212df');
   }

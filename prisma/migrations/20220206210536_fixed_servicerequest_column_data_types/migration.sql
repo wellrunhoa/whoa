@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "service_request" ALTER COLUMN "requestedService" SET DATA TYPE VARCHAR(64),
+ALTER COLUMN "comments" SET DATA TYPE VARCHAR(512),
+ALTER COLUMN "status" SET DATA TYPE VARCHAR(50);

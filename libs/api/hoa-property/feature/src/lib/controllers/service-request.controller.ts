@@ -1,6 +1,6 @@
-import { Body, Controller } from '@nestjs/common';
+import { Body, Controller, Param } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { ApiGetOne, ApiPost, User, UserParam } from '@whoa/api/core/feature';
+import { ApiGetAll, ApiGetOne, ApiPost, User, UserParam } from '@whoa/api/core/feature';
 import { ServiceRequestDTO } from '../dto/service-request.dto';
 import { ServiceRequestService } from '../services/service-request.service';
 
@@ -9,15 +9,16 @@ import { ServiceRequestService } from '../services/service-request.service';
 export class ServiceRequestController {
   constructor(private readonly serviceRequestService: ServiceRequestService) {}
 
-  @ApiPost(ServiceRequestDTO)
+  @ApiPost(ServiceRequestDTO, ':propertyId')
   //@Scopes('manage')
-  create(@Body() serviceRequestDto: ServiceRequestDTO, @UserParam() user: User): Promise<ServiceRequestDTO> {
-    return this.serviceRequestService.create(serviceRequestDto, user);
+  create(@Body() serviceRequestDto: ServiceRequestDTO, @UserParam() user: User, @Param('propertyId') propertyId: string): Promise<ServiceRequestDTO> {
+    console.log('serviceReq in controller', serviceRequestDto);
+    return this.serviceRequestService.create(serviceRequestDto, user, propertyId);
   }
 
-  @ApiGetOne(ServiceRequestDTO, 'list')
+  @ApiGetAll(ServiceRequestDTO, 'list/:propertyId')
   //@Scopes('view')
-  getServiceRequestHistory(@UserParam('email') email: string, @UserParam('email') propertyId: string): Promise<Array<ServiceRequestDTO>> {
-    return this.serviceRequestService.getById(email);
+  getServiceRequestHistory(@UserParam('email') email: string, @Param('propertyId') propertyId: string): Promise<Array<ServiceRequestDTO>> {
+    return this.serviceRequestService.getById(email, propertyId);
   }
 }

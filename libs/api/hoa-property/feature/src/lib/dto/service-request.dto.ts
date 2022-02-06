@@ -8,7 +8,6 @@ export class ServiceRequestDTO implements Readonly<ServiceRequest>{
     id: string;
     requestedService: string;
     comments: string;
-    docsId: string;
     status: string;
     propertyOwnerId: string;
     createdAt: Date;

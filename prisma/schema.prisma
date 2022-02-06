@@ -219,10 +219,9 @@ model PropertyOwner {
 
 model ServiceRequest {
   id               String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  requestedService String        @map("requestedService") @db.Uuid
-  comments         String        @map("comments") @db.Uuid
-  status           String        @map("status") @db.Uuid
-  docsId           String        @map("docsId") @db.Uuid
+  requestedService String        @map("requestedService") @db.VarChar(64)
+  comments         String        @map("comments") @db.VarChar(512)
+  status           String        @map("status") @db.VarChar(50)
   propertyOwner    PropertyOwner @relation(fields: [propertyOwnerId], references: [id])
   propertyOwnerId  String        @map("propertyOwnerId") @db.Uuid
   createdAt        DateTime      @default(now()) @map("created_at")
@@ -230,6 +229,21 @@ model ServiceRequest {
   updatedAt        DateTime      @updatedAt @map("updated_at")
   updatedBy        String        @map("updated_by") @db.VarChar(100)
 
-  @@index([propertyOwnerId, docsId])
+  ServiceRequestDocuments ServiceRequestDocuments[]
+  @@index([propertyOwnerId])
   @@map("service_request")
+}
+
+model ServiceRequestDocuments {
+  id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  serviceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id])
+  serviceRequestId String         @map("serviceRequestId") @db.Uuid
+  documentTitle    String         @map("document_title") @db.VarChar(50)
+  documentType     String         @map("document_type") @db.VarChar(50)
+  documentPath     String         @map("document_path") @db.VarChar(1000)
+  uploadedAt       DateTime       @updatedAt @map("uploaded_at")
+  uploadedBy       String         @map("uploaded_by") @db.VarChar(100)
+
+  @@index([serviceRequestId])
+  @@map("service_request_documents")
 }

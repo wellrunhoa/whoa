@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {ServiceReqService, ServiceRequest} from '@whoa/web/service-req/data-access'
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'whoa-service-request',
@@ -16,14 +16,17 @@ export class ServiceRequestComponent {
   ) {}
 
   serviceReq!: Observable<ServiceRequest>;
-  // ngOnInit(): void {
-  // }
+  afterSaveEvent: Subject<void> = new Subject<void>();
+
+  ngOnInit(): void {
+    setTimeout(() => this.afterSaveEvent.next(), 1);
+  }
 
   submit(serviceReq: ServiceRequest) {
     // this.serviceReqService.(authenticate).subscribe(user => {
     //   this.settingService.setUser(user);
     // });
-    this.serviceReqService.createServcRequest(serviceReq);
+    this.serviceReqService.createServcRequest(serviceReq).subscribe(()=>this.afterSaveEvent.next());;
     //this.router.navigate([`/dashboard`]);
   }
 

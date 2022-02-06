@@ -9,6 +9,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 
+@UntilDestroy()
 @Component({
   selector: 'whoa-service-request-form',
   templateUrl: './service-request-form.component.html',
@@ -48,8 +49,7 @@ export class ServiceRequestFormComponent {
       // propZip: [null, [Validators.required]],
       requestedService: [null, [Validators.required]],
       comments: [null, [Validators.maxLength(100)]],
-      attachements: [null, null],
-      remember: [true]
+      status: 'Submitted'
     });
 
     this.serReqListForm = fb.group({
@@ -58,7 +58,7 @@ export class ServiceRequestFormComponent {
       updatedAt: [null, [Validators.required]]
     });
   }
-  
+
   fileList: NzUploadFile[] = [];
   beforeUpload = (file: NzUploadFile): boolean => {
     // Judgment on the upload file type
@@ -119,7 +119,8 @@ export class ServiceRequestFormComponent {
 
     this.form.markAsDirty();
     this.form.updateValueAndValidity();
-
+    
+    console.log('this.form.invalid', this.form.invalid);
     if (this.form.invalid) {
       return;
     }
@@ -142,9 +143,10 @@ export class ServiceRequestFormComponent {
     this.afterSaveEvent.pipe(untilDestroyed(this)).subscribe(() => {
       this.serviceRequest.getAllServiceReq().pipe(untilDestroyed(this)).subscribe((listOfData) => {
         console.log(listOfData);
-        this.listOfData = listOfData;
+        if (listOfData) 
+          this.listOfData = listOfData;
         this.updateEditCache();
-      }); //FIXME: this.listOfData = this.paymentService.getScheduledPayments('')
+      }); //FIXME: 
     });
   }
 

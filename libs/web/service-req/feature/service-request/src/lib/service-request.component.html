@@ -1,1 +1,1 @@
-<whoa-service-request-form (submitForm)="submit($event)"></whoa-service-request-form>
+<whoa-service-request-form  [afterSaveEvent]="afterSaveEvent.asObservable()" (submitForm)="submit($event)"></whoa-service-request-form>

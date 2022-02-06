@@ -5,16 +5,29 @@ import { ServiceRequestDTO } from '../dto/service-request.dto';
 
 @Injectable()
 export class ServiceRequestService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) { }
 
-  async create(serviceRequestDto: ServiceRequest, user: User): Promise<ServiceRequestDTO> {
-   
-   //FIXME: Add logic to check if property exists with address
+  async create(serviceRequestDto: ServiceRequest, user: User, propertyId:string): Promise<ServiceRequestDTO> {
+
+    const propertyOwner = await this.prismaService.propertyOwner.findFirst({
+      where: {
+         propertyId: propertyId, proprietor: { email: user.email } 
+      },
+      orderBy: {
+        createdAt: 'asc'
+      }
+    });
+    
+    serviceRequestDto.propertyOwnerId = propertyOwner.id;
+    serviceRequestDto.createdBy = user.sub;
+    serviceRequestDto.updatedBy = user.sub;
+    //FIXME: Add logic to check if a similar service request was created very recently maybe with in last 1-2 mins
+    console.log('serviceReq in ORM layer', serviceRequestDto);
     const newServiceRequest = await this.prismaService.serviceRequest.create({
       data: {
         ...serviceRequestDto,
-        }
-      });
+      }
+    });
 
     return newServiceRequest;
   }
@@ -28,18 +41,17 @@ export class ServiceRequestService {
     return newProperty;
   }
 
-  async getById(email: string): Promise<Array<ServiceRequestDTO> | undefined> {
+  async getById(email: string, propertyId: string): Promise<Array<ServiceRequestDTO> | undefined> {
 
     //FIXME: rename propertyowner ref name in prisma file for servicerequest table
-    const serviceRequests = await this.prismaService.serviceRequest.findMany({ 
-        where: {
-          proprietor: {
-            every: { Proprietor: { email: email } }
-          }
+    const serviceRequests = await this.prismaService.serviceRequest.findMany({
+      where: {
+        propertyOwner: { propertyId: propertyId, proprietor: { email: email } }
       },
       orderBy: {
         createdAt: 'asc'
-      } });
+      }
+    });
 
     if (!serviceRequests) {
       throw new NotFoundException(`No ServiceRequest for property owner: ${email}`);
@@ -49,7 +61,7 @@ export class ServiceRequestService {
   }
 
   // async getServiceRequestByEmail(email: string): Promise<Array<ServiceRequestDTO> | undefined> {
-  
+
   // }
 
 
