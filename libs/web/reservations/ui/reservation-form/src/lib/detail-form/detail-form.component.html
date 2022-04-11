@@ -3,8 +3,8 @@
     <nz-col [nzSpan]="24">
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired nzNoColon nzFor="amenity">Select Amenity</nz-form-label>
-        <nz-form-control [nzSpan]="10" nzErrorTip="Amenity is required"  id="amenity">
-          <nz-select nzShowSearch nzAllowClear formControlName="amenity">
+        <nz-form-control [nzSpan]="10" nzErrorTip="Amenity is required" id="amenity">
+          <nz-select nzShowSearch nzAllowClear formControlName="amenityId">
             <nz-option *ngFor="let a of amenities | async" [nzValue]="a.id" [nzLabel]="a.amenityName"></nz-option>
           </nz-select>
         </nz-form-control>
@@ -18,7 +18,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Time</nz-form-label>
         <nz-form-control [nzSpan]="10" nzErrorTip="Start & End Time is required">
-          <nz-time-picker nzFormat="HH:mm" formControlName="startTime" nzPlaceHolder="Start Time"></nz-time-picker> - 
+          <nz-time-picker nzFormat="HH:mm" formControlName="startTime" nzPlaceHolder="Start Time"></nz-time-picker> -
           <nz-time-picker nzFormat="HH:mm" formControlName="endTime" nzPlaceHolder="End Time"></nz-time-picker>
         </nz-form-control>
       </nz-form-item>

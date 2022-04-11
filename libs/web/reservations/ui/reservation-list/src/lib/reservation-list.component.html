@@ -1,7 +1,6 @@
-<nz-card nzTitle="Upcoming" >
-  <nz-card nzType="inner" nzTitle="Clubhouse" [nzActions]="[actionEdit, actionDelete]">
-    12/01/2021
-    5:00PM to 9:00PM
+<nz-card nzTitle="Upcoming">
+  <nz-card nzType="inner" [nzTitle]="r.community?.amenity?.amenityName" [nzActions]="[actionEdit, actionDelete]" *ngFor="let r of reservations">
+    {{ r.startTime | date: 'MM/dd/yyyy' }} {{ r.startTime | date: 'hh:mm a' }} to {{ r.endTime | date: 'hh:mm a' }}
   </nz-card>
   <ng-template #actionEdit>
     <i nz-icon nzType="edit"></i>
