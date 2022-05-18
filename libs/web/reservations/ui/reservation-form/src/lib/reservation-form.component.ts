@@ -20,7 +20,7 @@ export class ReservationFormComponent {
   constructor(fb: FormBuilder) {
     this.reservationForm = fb.group({
       details: fb.group({
-        amenity: [null, [Validators.required]],
+        amenityId: [null, [Validators.required]],
         reservationDate: [null, [Validators.required]],
         startTime: [null, [Validators.required]],
         endTime: [null, [Validators.required]]
@@ -56,6 +56,18 @@ export class ReservationFormComponent {
   }
 
   done(): void {
-    console.log('done');
+    if (this.reservationForm.invalid) return;
+    const reservation = { ...this.reservationForm.value.details };
+    const [month, day, year] = [
+      reservation.reservationDate.getMonth(),
+      reservation.reservationDate.getDate(),
+      reservation.reservationDate.getFullYear()
+    ];
+    const startTime = new Date(year, month, day, reservation.startTime.getHours(), reservation.startTime.getMinutes(), 0);
+    const endTime = new Date(year, month, day, reservation.endTime.getHours(), reservation.endTime.getMinutes(), 0);
+    reservation.startTime = startTime;
+    reservation.endTime = endTime;
+    delete reservation.reservationDate;
+    this.submitForm.emit(reservation);
   }
 }

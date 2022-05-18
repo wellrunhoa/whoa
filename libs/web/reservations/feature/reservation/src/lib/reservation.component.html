@@ -2,7 +2,7 @@
   <nz-col [nzSpan]="24">
     <nz-row [nzGutter]="24">
       <nz-col [nzXs]="24" [nzSm]="8">
-        <whoa-reservation-list></whoa-reservation-list>
+        <whoa-reservation-list [reservations]="reservations | async"></whoa-reservation-list>
       </nz-col>
       <nz-col [nzXs]="24" [nzSm]="16">
         <nz-card>

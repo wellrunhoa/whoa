@@ -113,16 +113,19 @@ model CommunityAmenity {
 
 model Reservation {
   id                 String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  community          CommunityAmenity @relation(fields: [communityAmenityId], references: [id])
+  communityAmenity   CommunityAmenity @relation(fields: [communityAmenityId], references: [id])
   communityAmenityId String           @map("communityAmenityId") @db.Uuid
   startTime          DateTime         @map("start_time")
   endTime            DateTime         @map("end_time")
-  paymentToken       String           @map("payment_token") @db.VarChar(200)
+  paymentToken       String?          @map("payment_token") @db.VarChar(200)
+  proprietor         Proprietor       @relation(fields: [proprietorId], references: [id])
+  proprietorId       String           @map("proprietorId") @db.Uuid
   createdAt          DateTime         @default(now()) @map("created_at")
   createdBy          String           @map("created_by") @db.VarChar(100)
   updatedAt          DateTime         @updatedAt @map("updated_at")
   updatedBy          String           @map("updated_by") @db.VarChar(100)
 
+  @@index([proprietorId])
   @@index([communityAmenityId])
   @@map("reservation")
 }
@@ -195,6 +198,7 @@ model Proprietor {
 
   PropertyOwner PropertyOwner[]
   PaymentSource PaymentSource[]
+  Reservation   Reservation[]
   @@index([email])
   @@map("proprietor")
 }
