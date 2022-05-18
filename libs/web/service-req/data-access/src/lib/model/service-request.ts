@@ -1,3 +1,5 @@
+import { ServiceRequestDoc } from "./service-request-doc";
+
 export interface ServiceRequest {
     id: string;
     requestedService: string;
@@ -8,5 +10,5 @@ export interface ServiceRequest {
     createdBy: string;
     updatedAt: Date;
     updatedBy: string;
-   // documents: 
+    documents: ServiceRequestDoc[]
 }

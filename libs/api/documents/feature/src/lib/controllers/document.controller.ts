@@ -22,7 +22,8 @@ export class DocumentController {
   }
 
   @ApiFiles('uploads', 'files', true)
-  uploadFiles(@UploadedFiles(ParseFile) files: Array<Express.Multer.File>) {
+  uploadFiles(@UploadedFiles(ParseFile) files: Array<Express.Multer.File>): Promise<Document[]> {
     console.log(files);
+    return null;
   }
 }

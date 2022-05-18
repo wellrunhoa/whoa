@@ -17,10 +17,9 @@
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-              <nz-form-label [nzSpan]="7" nzRequired nzNoColon>Attachments</nz-form-label>
+              <nz-form-label [nzSpan]="7" nzNoColon>Attachments</nz-form-label>
               <nz-upload nzAccept="application/pdf,image/jpeg,image/jpg,image/png" [(nzFileList)]="fileList"
-                [nzAction]="UPLOAD_FILE" [nzShowButton]="fileList.length < 1" [nzBeforeUpload]="beforeUpload"
-                (nzChange)="getFileUrl($event)">
+                [nzBeforeUpload]="beforeUpload">
                 <button nz-button>
                   <i nz-icon nzType="upload"></i>
                   <span>upload files</span>
@@ -72,5 +71,5 @@
     </nz-col>
   </nz-row>
 </ng-template>
-<whoa-portlet pageTitle="Service Request" pageSubTitle="Submit change requests along with any supporting documentation"
+<whoa-portlet pageTitle="Service Request" pageSubTitle="Submit Service Requests to your HOA"
   [contentTemplate]="content"></whoa-portlet>

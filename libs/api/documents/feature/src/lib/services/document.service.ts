@@ -12,6 +12,14 @@ export class DocumentService {
     });
   }
 
+  async createDocs(documents: Document[]): Promise<Document[]  | undefined> {
+    let uploadedDocs : Document[] = [];
+    uploadedDocs : await this.prisma.document.createMany({
+      data: documents,
+    });
+   return uploadedDocs;
+  }
+
   async getById(id: string): Promise<Document | undefined> {
     const document = await this.prisma.document.findUnique({
       where: { id }

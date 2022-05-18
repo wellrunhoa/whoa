@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ServiceRequest, ServiceReqService } from '@whoa/web/service-req/data-access';
+import { ServiceRequest, ServiceRequestDoc, ServiceReqService } from '@whoa/web/service-req/data-access';
 import { Property, UserContextService } from '@whoa/web/core/data-access'
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
 
 @UntilDestroy()
 @Component({
@@ -33,7 +34,7 @@ export class ServiceRequestFormComponent {
   //   { label: 'AL', value: 'AL' },
   //   { label: 'AK', value: 'AK' }
   // ];
-  UPLOAD_FILE = 'file://C:/Downloads'; // File upload path - must be rest call
+  UPLOAD_FILE = 'http://localhost:3000/api/documents/upload/file'; //'file://C:/Downloads'; // File upload path - must be rest call
 
   constructor(fb: FormBuilder,
     private router: Router,
@@ -75,11 +76,11 @@ export class ServiceRequestFormComponent {
 
     if (file.size != null) {
       // Limit on upload file size
-      const isLt20M = file.size / 1024 / 1024 < 30;
+      const isLt20M = file.size / 1024 / 1024 < 5;
       if (!isLt20M) {
         this.message.warning({
           nzTitle: 'Warning',
-          nzContent: 'The file must be less than 30M'
+          nzContent: 'The file must be less than 5M'
         });
         return false;
       }
@@ -89,15 +90,40 @@ export class ServiceRequestFormComponent {
     return true;
   }
 
-  // Method to get the path when the file upload is finished     	 
-  getFileUrl(info: NzUploadChangeParam): void {
-    const status = info.file.status;
-    if (status === 'done') {
-      //this.zizhi_prove = info.file.response.data
-    } else if (status === 'error') {
-      this.msg.error(`${info.file.name} file upload failed.`);
-    }
-  }
+  // getBase64(img: File, callback: (img: string) => void): void {
+  //   const reader = new FileReader();
+  //   reader.addEventListener('load', () => callback(reader.result!.toString()));
+  //   reader.readAsDataURL(img);
+  // }
+
+  // // Method to get the path when the file upload is finished     	 
+  // getFileUrl(info: NzUploadChangeParam): void {
+  //   const status = info.file.status;
+  //   if (status === 'done') {
+  //     //this.zizhi_prove = info.file.response.data
+  //   } else if (status === 'error') {
+  //     this.msg.error(`${info.file.name} file upload failed.`);
+  //   }
+
+  //   switch (info.file.status) {
+  //     case 'uploading':
+  //       this.loading = true;
+  //       break;
+  //     case 'done':
+  //       // Get this url from response in real world.
+  //       this.getBase64(info.file!.originFileObj!, (img: string) => {
+  //         this.loading = false;
+  //         //this.avatarUrl = img;
+  //       });
+  //       break;
+  //     case 'error':
+  //       console.log('Network error');
+  //       this.loading = false;
+  //       break;
+  //   }
+  // }
+
+
 
   updateEditCache(): void {
     this.listOfData.forEach((item) => {
@@ -129,9 +155,38 @@ export class ServiceRequestFormComponent {
     //   return this.userContextService.property;
     // }
 
-    this.userContextService.property;
+    const formData = new FormData();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.fileList.forEach((file: any) => {
+      formData.append('files', file);
+    });
+    //this.uploading = true;
+    
+ 
 
-    this.submitForm.emit(this.form.value as ServiceRequest);
+    this.serviceRequest.uploadDocs(formData).pipe(untilDestroyed(this)).pipe(catchError( (error) => {
+      //this.uploading = false;
+      this.msg.error('upload failed.');
+      throw error;
+    }))
+      .subscribe(
+        (serviceReqDocs : ServiceRequestDoc[]) => {
+         // this.uploading = false;
+          this.fileList = [];
+          //this.userContextService.property;
+          const serviceRequest = this.form.value;
+          serviceRequest.documents = serviceReqDocs;
+          this.submitForm.emit(serviceRequest);
+        }
+        // ,
+        // () => {
+        //   //this.uploading = false;
+        //   this.msg.error('upload failed.');
+        // }
+      );
+  
+
+    
   }
 
   cancelServiceReq() {
